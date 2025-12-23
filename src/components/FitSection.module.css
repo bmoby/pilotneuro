@@ -1,0 +1,145 @@
+.section {
+  padding: clamp(68px, 10vw, 120px) 0 clamp(78px, 12vw, 140px);
+}
+
+.wrap {
+  width: min(1240px, 100% - clamp(32px, 6vw, 88px));
+  margin-inline: auto;
+}
+
+.lead {
+  display: grid;
+  gap: 14px;
+  margin-bottom: clamp(28px, 5vw, 44px);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 46px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+}
+
+.scrollTitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.titleChar {
+  display: inline-block;
+  opacity: 0.2;
+  transition: opacity 0.35s ease;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.78;
+  max-width: 62ch;
+}
+
+.stack {
+  display: grid;
+  gap: 32px;
+}
+
+.fitBlock {
+  display: grid;
+}
+
+.carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(240px, 78vw, 320px);
+  gap: 16px;
+  background: transparent;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: clamp(32px, 6vw, 88px);
+  padding: 2px clamp(32px, 6vw, 88px) 18px;
+  margin-inline: calc(clamp(32px, 6vw, 88px) * -1);
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .carousel {
+    gap: 18px;
+  }
+}
+
+.card {
+  scroll-snap-align: start;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent 32%);
+  box-shadow: 0 6px 16px rgba(15, 17, 34, 0.04);
+  background: color-mix(in srgb, var(--card) 92%, #ffffff 8%);
+  padding: 28px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 12px;
+  min-height: 150px;
+  max-width: 320px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: none;
+  box-shadow: 0 6px 16px rgba(15, 17, 34, 0.04);
+  border-color: color-mix(in srgb, var(--line) 68%, transparent 32%);
+}
+
+.iconBox {
+  margin-bottom: 4px;
+  width: 120px;
+  height: 120px;
+  opacity: 0.85;
+}
+
+.cardText {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.cardTitle {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--text);
+  max-width: 32ch;
+}
+
+.cardDetail {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 36ch;
+}
+
+.voiceArea {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+@media (min-width: 960px) {
+  .stack {
+    gap: 36px;
+  }
+}

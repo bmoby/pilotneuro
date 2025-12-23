@@ -4,6 +4,7 @@
 
 import styles from "./page.module.css";
 import HeroSection from "../components/HeroSection";
+import FitSection from "../components/FitSection";
 
 /* Этот компонент выводит только HERO с логотипом и голосовым сообщением. */
 export default function Home() {
@@ -11,6 +12,8 @@ export default function Home() {
     <main className={styles.page}>
       {/* Этот блок вставляет готовую HERO-секцию с анимированным логотипом. */}
       <HeroSection />
+      {/* Этот блок добавляет секцию «Это для вас?» с карточками и голосовым. */}
+      <FitSection />
     </main>
   );
 }
