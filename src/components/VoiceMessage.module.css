@@ -1,0 +1,160 @@
+.shell {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 86%, #ffffff 14%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(15, 17, 33, 0.06);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label {
+  display: grid;
+  gap: 2px;
+}
+
+.title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 16px;
+}
+
+.note {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 140ms ease;
+}
+
+.icon {
+  font-size: 15px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control:hover {
+  transform: scale(1.03);
+}
+
+.control:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.controlPlaying {
+  background: var(--text);
+  color: var(--accent-contrast);
+}
+
+.wave {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  min-height: 60px;
+  position: relative;
+}
+
+.bar {
+  width: 4px;
+  border-radius: 999px;
+  background: var(--text);
+  opacity: 0.95;
+  transform-origin: center bottom;
+  transition: opacity 120ms ease;
+}
+
+.barIntro {
+  animation: introBounce 1.1s ease forwards;
+}
+
+.barActive {
+  opacity: 0.85;
+  animation: playPulse var(--dur, 1.35s) ease-in-out infinite;
+}
+
+.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--text);
+  border-top-color: transparent;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes playPulse {
+  0% {
+    transform: translateY(0) scaleY(0.85);
+  }
+  40% {
+    transform: translateY(-3px) scaleY(1.2);
+  }
+  70% {
+    transform: translateY(-1px) scaleY(0.95);
+  }
+  100% {
+    transform: translateY(0) scaleY(0.9);
+  }
+}
+
+@keyframes introBounce {
+  0% {
+    transform: scaleY(0.15);
+    opacity: 0.1;
+  }
+  55% {
+    transform: scaleY(1.25);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

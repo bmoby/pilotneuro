@@ -1,0 +1,332 @@
+/* Этот файл создаёт блок голосового сообщения.
+   Он умеет запускать звук, ставить его на паузу и показывать состояние загрузки.
+   Он рисует живые полоски, чтобы человек захотел нажать и послушать. */
+
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import styles from "./VoiceMessage.module.css";
+
+type VoiceMessageProps = {
+  src: string;
+  title?: string;
+};
+
+/* Этот помощник создаёт воспроизводимый поток псевдослучайных чисел по строке. */
+function createSeededRandom(seedSource: string) {
+  let seed = 0;
+  for (let i = 0; i < seedSource.length; i += 1) {
+    seed = (seed + seedSource.charCodeAt(i) * (i + 11)) >>> 0;
+  }
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/* В этом помощнике заранее придумываем высоту и ритм для каждой полоски. */
+function buildWave(count: number, seedSource: string) {
+  const rand = createSeededRandom(seedSource);
+  const baseHeights = [
+    12, 24, 18, 30, 10, 26, 16, 32, 14, 28, 20, 34, 12, 22, 16, 30, 18, 26, 14,
+    20,
+  ];
+  return Array.from({ length: count }).map((_, index) => {
+    const pattern = baseHeights[index % baseHeights.length];
+    const jitter = (rand() - 0.5) * 6;
+    const height = Math.max(8, pattern + jitter);
+    const width = 3;
+    const delay = (index * 0.03 + rand() * 0.12).toFixed(2);
+    const duration = (1 + rand() * 0.35).toFixed(2);
+    return {
+      height,
+      width,
+      delay: Number(delay),
+      duration: Number(duration),
+    };
+  });
+}
+
+export default function VoiceMessage({
+  src,
+  title = "Message vocal",
+}: VoiceMessageProps) {
+  /* В этой константе храним количество полосок для аудио-визуализации. */
+  const barCount = 26;
+  /* В этом объекте лежит аудио-элемент, чтобы управлять им напрямую. */
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  /* Здесь храним, идёт ли сейчас загрузка. */
+  const [isLoading, setIsLoading] = useState(true);
+  /* Здесь храним, идёт ли сейчас воспроизведение. */
+  const [isPlaying, setIsPlaying] = useState(false);
+  /* Этот флаг показывает, что файл уже готов к запуску. */
+  const [isReady, setIsReady] = useState(false);
+  /* Этот флаг сообщает, что воспроизведение не удалось. */
+  const [hasError, setHasError] = useState(false);
+  /* Этот флаг отвечает за короткую приветственную анимацию полосок. */
+  const [intro, setIntro] = useState(true);
+  /* В этом массиве лежат случайные параметры полосок, чтобы они не повторялись. */
+  const bars = useMemo(() => buildWave(barCount, src), [barCount, src]);
+  /* В этом массиве храним «живые» уровни громкости для каждой полоски. */
+  const [levels, setLevels] = useState<number[]>(() =>
+    Array.from({ length: barCount }).map(() => 0)
+  );
+  /* В этом списке задаём палитру, которая дружит с светло-бежевым фоном. */
+  const palette = useMemo(
+    () => [
+      { h: 210, s: 16, l: 26 }, // bleu gris
+      { h: 192, s: 32, l: 34 }, // teal doux
+      { h: 32, s: 42, l: 48 }, // ambre doux
+      { h: 16, s: 30, l: 40 }, // ocre chaud
+    ],
+    []
+  );
+  /* Эти ссылки держат аудио-контекст и анализатор, чтобы извлекать громкость. */
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const freqDataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const smoothLevelsRef = useRef<number[] | null>(
+    Array.from({ length: barCount }).map(() => 0)
+  );
+
+  /* Этот эффект создаёт аудио-элемент, следит за событиями и убирает его при уходе. */
+  useEffect(() => {
+    const audio = new Audio(src);
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    const handleLoadStart = () => {
+      setIsLoading(true);
+      setIsPlaying(false);
+      setIsReady(false);
+      setHasError(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleCanPlay = () => {
+      setIsReady(true);
+      setIsLoading(false);
+    };
+    const handlePlay = () => {
+      setIsPlaying(true);
+      setIsLoading(false);
+    };
+    const handlePause = () => {
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleWaiting = () => setIsLoading(true);
+    const handleError = () => {
+      setHasError(true);
+      setIsLoading(false);
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+
+    audio.addEventListener("loadstart", handleLoadStart);
+    audio.addEventListener("canplaythrough", handleCanPlay);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("waiting", handleWaiting);
+    audio.addEventListener("error", handleError);
+    audio.load();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.removeEventListener("loadstart", handleLoadStart);
+      audio.removeEventListener("canplaythrough", handleCanPlay);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("waiting", handleWaiting);
+      audio.removeEventListener("error", handleError);
+      audioRef.current = null;
+    };
+  }, [src]);
+
+  /* Этот таймер отключает вступительную анимацию через секунду. */
+  useEffect(() => {
+    const timer = setTimeout(() => setIntro(false), 1300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  /* Эта функция запускает извлечение громкости и обновляет полоски в ритме аудио. */
+  const startAnalyser = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!audioCtxRef.current) {
+      const ctx = new AudioContext();
+      const source = ctx.createMediaElementSource(audio);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 128;
+      analyser.smoothingTimeConstant = 0.75;
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      audioCtxRef.current = ctx;
+      analyserRef.current = analyser;
+      freqDataRef.current = new Uint8Array(
+        analyser.frequencyBinCount
+      ) as Uint8Array<ArrayBuffer>;
+    }
+
+    const ctx = audioCtxRef.current;
+    if (ctx?.state === "suspended") {
+      ctx.resume().catch(() => {});
+    }
+
+    const analyser = analyserRef.current;
+    const freqData = freqDataRef.current;
+    if (!analyser || !freqData || freqData.length === 0) return;
+
+    const tick = () => {
+      analyser.getByteFrequencyData(freqData);
+      const slice = freqData;
+      const count = barCount;
+      const smoothed = smoothLevelsRef.current;
+      const next: number[] = [];
+      if (!smoothed || smoothed.length !== count) {
+        smoothLevelsRef.current = Array.from({ length: count }).map(() => 0);
+      }
+      const currentSmooth = smoothLevelsRef.current as number[];
+      for (let i = 0; i < count; i += 1) {
+        const start = Math.floor((i / count) * slice.length);
+        const end = Math.floor(((i + 1) / count) * slice.length);
+        let sum = 0;
+        let n = 0;
+        for (let j = start; j < end; j += 1) {
+          sum += slice[j];
+          n += 1;
+        }
+        const avg = n ? sum / n : 0;
+        const level = Math.min(1, avg / 255);
+        const prev = currentSmooth[i] ?? 0;
+        const eased = prev + (level - prev) * 0.42;
+        currentSmooth[i] = eased;
+        next.push(eased);
+      }
+      setLevels(next);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  /* Этот эффект включает или выключает обновление волн при старте/остановке звука. */
+  useEffect(() => {
+    if (isPlaying) {
+      startAnalyser();
+      return () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      };
+    }
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    return undefined;
+  }, [isPlaying, bars.length]);
+
+  /* Эта функция запускает звук или ставит его на паузу. */
+  const handleToggle = async () => {
+    const audio = audioRef.current;
+    if (!audio || hasError) return;
+
+    if (isPlaying) {
+      audio.pause();
+      return;
+    }
+
+    if (!isReady) {
+      setIsLoading(true);
+    }
+
+    try {
+      await audio.play();
+    } catch {
+      setHasError(true);
+      setIsLoading(false);
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div className={styles.shell} role="group" aria-label={title}>
+      {/* Этот блок показывает название сообщения и короткий статус при загрузке/ошибке. */}
+      <div className={styles.header}>
+        <div className={styles.label}>
+          <span className={styles.title}>{title}</span>
+        </div>
+        {isLoading && !hasError ? (
+          <div className={styles.loading} aria-live="polite">
+            <span className={styles.dot} aria-hidden="true" />
+          </div>
+        ) : null}
+        {hasError ? (
+          <div className={styles.note}>Lecture impossible</div>
+        ) : null}
+      </div>
+
+      {/* Этот блок объединяет кнопку и визуализацию волн. */}
+      <div className={styles.player}>
+        <button
+          type="button"
+          className={styles.control}
+          onClick={handleToggle}
+          disabled={hasError}
+          aria-pressed={isPlaying}
+          aria-label={isPlaying ? "Mettre sur pause" : "Lire le message vocal"}
+        >
+          <span aria-hidden="true" className={styles.icon}>
+            {isPlaying ? "⏸" : "▶"}
+          </span>
+        </button>
+
+        <div className={styles.wave} aria-hidden="true">
+          {bars.map((bar, index) => {
+            const level = levels[index] ?? 0;
+            const hasLiveLevel = level > 0.01 && isPlaying;
+            const scale = hasLiveLevel ? 0.9 + level * 0.5 : 1;
+            const tone = palette[index % palette.length];
+            const sat = hasLiveLevel
+              ? Math.min(tone.s + 16 + level * 18, 90)
+              : tone.s;
+            const light = hasLiveLevel
+              ? Math.min(tone.l + 10 + level * 18, 82)
+              : tone.l;
+            const bgColor = hasLiveLevel
+              ? `hsl(${tone.h}, ${sat}%, ${light}%)`
+              : undefined;
+            return (
+              <span
+                key={index}
+                className={`${styles.bar} ${
+                  intro && !isPlaying ? styles.barIntro : ""
+                } ${isPlaying && !hasLiveLevel ? styles.barActive : ""}`}
+                style={{
+                  height: `${bar.height}px`,
+                  width: `${bar.width}px`,
+                  transform: `scaleY(${scale.toFixed(3)})`,
+                  background: bgColor,
+                  animationDelay:
+                    (!isPlaying && intro) || (!isPlaying && !hasLiveLevel)
+                      ? `${bar.delay}s`
+                      : undefined,
+                  ["--dur" as string]: `${bar.duration}s`,
+                  transition: hasLiveLevel
+                    ? "transform 140ms ease"
+                    : "transform 240ms ease",
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
