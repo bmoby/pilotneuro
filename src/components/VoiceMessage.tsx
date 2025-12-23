@@ -73,14 +73,9 @@ export default function VoiceMessage({
   const [levels, setLevels] = useState<number[]>(() =>
     Array.from({ length: barCount }).map(() => 0)
   );
-  /* В этом списке задаём палитру, которая дружит с светло-бежевым фоном. */
+  /* Здесь лежат четыре мягких тона синего, чтобы цвет выглядел светлее. */
   const palette = useMemo(
-    () => [
-      { h: 210, s: 16, l: 26 }, // bleu gris
-      { h: 192, s: 32, l: 34 }, // teal doux
-      { h: 32, s: 42, l: 48 }, // ambre doux
-      { h: 16, s: 30, l: 40 }, // ocre chaud
-    ],
+    () => ["#5a8af3ff", "#477ed5ff", "#60a5fa", "#93c5fd"],
     []
   );
   /* Эти ссылки держат аудио-контекст и анализатор, чтобы извлекать громкость. */
@@ -168,7 +163,7 @@ export default function VoiceMessage({
       const source = ctx.createMediaElementSource(audio);
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 128;
-      analyser.smoothingTimeConstant = 0.75;
+      analyser.smoothingTimeConstant = 0.4;
       source.connect(analyser);
       analyser.connect(ctx.destination);
       audioCtxRef.current = ctx;
@@ -291,17 +286,10 @@ export default function VoiceMessage({
           {bars.map((bar, index) => {
             const level = levels[index] ?? 0;
             const hasLiveLevel = level > 0.01 && isPlaying;
-            const scale = hasLiveLevel ? 0.9 + level * 0.5 : 1;
+            const dynamic = Math.min(1, level * 1.35 + 0.08);
+            const scale = hasLiveLevel ? 0.6 + dynamic * 1.4 : 1;
             const tone = palette[index % palette.length];
-            const sat = hasLiveLevel
-              ? Math.min(tone.s + 16 + level * 18, 90)
-              : tone.s;
-            const light = hasLiveLevel
-              ? Math.min(tone.l + 10 + level * 18, 82)
-              : tone.l;
-            const bgColor = hasLiveLevel
-              ? `hsl(${tone.h}, ${sat}%, ${light}%)`
-              : undefined;
+            const bgColor = isPlaying ? tone : undefined;
             return (
               <span
                 key={index}
