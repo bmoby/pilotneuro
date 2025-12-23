@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  padding: clamp(42px, 9vw, 88px) 0 clamp(110px, 14vw, 180px);
+  padding: clamp(80px, 12vw, 140px) 0 clamp(120px, 16vw, 200px);
 }
 
 .wrap {
@@ -10,7 +10,7 @@
 
 .heroBody {
   display: grid;
-  gap: clamp(24px, 5vw, 42px);
+  gap: clamp(32px, 6vw, 60px);
   align-items: center;
   justify-items: center;
   text-align: center;
@@ -18,7 +18,7 @@
 
 .heroHead {
   display: grid;
-  gap: 14px;
+  gap: 18px;
   align-items: center;
 }
 
