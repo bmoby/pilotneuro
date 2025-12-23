@@ -1,47 +1,18 @@
 .page {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(28px, 6vw, 64px);
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   background: radial-gradient(
-      circle at 20% 20%,
-      color-mix(in srgb, var(--bg) 85%, #ffffff 15%),
+      circle at 18% 18%,
+      color-mix(in srgb, var(--bg) 82%, #ffffff 18%),
       transparent 40%
     ),
     radial-gradient(
-      circle at 80% 30%,
+      circle at 78% 28%,
       color-mix(in srgb, var(--bg) 78%, #ffffff 22%),
       transparent 46%
     ),
-    var(--bg);
-}
-
-.content {
-  display: grid;
-  gap: 18px;
-  padding: clamp(26px, 5vw, 38px);
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 82%, #ffffff 18%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 0 rgba(15, 17, 33, 0.05);
-  text-align: center;
-  max-width: 760px;
-}
-
-.title {
-  font-size: clamp(44px, 9vw, 72px);
-  line-height: 1.1;
-}
-
-.subtitle {
-  font-size: 16px;
-  color: var(--muted);
-}
-
-.voiceZone {
-  display: flex;
-  justify-content: center;
-  margin-top: 6px;
+    linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, #fff 8%) 50%, var(--bg) 100%);
 }
