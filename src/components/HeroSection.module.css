@@ -40,7 +40,7 @@
 }
 
 .heroDraw {
-  --stroke: #161616;
+  --stroke: #0f1722;
   --stroke-width: 1.6;
   display: block;
   width: clamp(260px, 90vw, 780px);
@@ -103,7 +103,7 @@
     stroke: #00a0ff;
   }
   100% {
-    stroke: #161616;
+    stroke: #0f1722;
   }
 }
 
