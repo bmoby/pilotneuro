@@ -1,0 +1,3195 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PilotNeuro — Живой курс на 3 месяца</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #e8e7e4;
+        --bg-start: #f7f5ef;
+        --text: #0f1722;
+        --muted: #5a6473;
+        --line: #d6d9df;
+        --accent: #0f1722;
+        --accent-contrast: #e4e5e8;
+        --wrap: 1240px;
+        --pad: 28px;
+        --card: color-mix(in srgb, var(--bg) 82%, #ffffff 18%);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Manrope", system-ui, -apple-system, Segoe UI, sans-serif;
+        background: var(--bg-dynamic, var(--bg));
+        color: var(--text);
+        line-height: 1.75;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(var(--wrap), 100% - var(--pad) * 2);
+        margin-inline: auto;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(44px, 9vw, 68px);
+        line-height: 1.14;
+        letter-spacing: -0.02em;
+        max-width: 18ch;
+        font-weight: 800;
+      }
+
+      h2 {
+        font-size: clamp(32px, 6vw, 46px);
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        max-width: 26ch;
+        font-weight: 800;
+      }
+
+      h3 {
+        font-size: clamp(22px, 4.5vw, 30px);
+        line-height: 1.28;
+        letter-spacing: -0.01em;
+        font-weight: 800;
+      }
+
+      p,
+      li {
+        font-size: 15px;
+      }
+
+      .lede {
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.78;
+        max-width: 62ch;
+      }
+
+      .hero .lede {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero .voice-wrap {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .hero .voice-content {
+        align-items: center;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: start;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background: color-mix(
+          in srgb,
+          var(--bg-dynamic, var(--bg)) 92%,
+          rgba(255, 255, 255, 0.85) 8%
+        );
+        z-index: 10;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 0;
+        gap: 10px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .brand-logo {
+        width: 24px;
+        height: 24px;
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      nav {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .nav-cta {
+        padding: 14px 22px;
+        border: 1px solid var(--text);
+        border-radius: 12px;
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(96px, 18vw, 190px);
+        padding-bottom: clamp(110px, 16vw, 200px);
+      }
+
+      section {
+        padding-top: clamp(20px, 3vw, 36px);
+      }
+
+      .stack {
+        display: grid;
+        gap: 16px;
+      }
+
+      .space {
+        gap: 24px;
+      }
+
+      .section-lead {
+        display: grid;
+        gap: 14px;
+        margin-bottom: clamp(28px, 5vw, 44px);
+      }
+
+      .scroll-title {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      .scroll-title .title-char {
+        display: inline-block;
+        opacity: 0.2;
+        transition: opacity 0.35s ease;
+      }
+
+      #resultats .section-lead {
+        text-align: center;
+        justify-items: center;
+        margin-bottom: 80px;
+      }
+
+      #faq .section-lead {
+        text-align: center;
+        justify-items: center;
+      }
+
+      .grid-two {
+        display: grid;
+        gap: 32px;
+      }
+
+      .grid-three {
+        display: grid;
+        gap: 22px;
+      }
+
+      .process-carousel {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: clamp(260px, 78vw, 360px);
+        gap: 16px;
+        background: transparent;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--pad);
+        padding: 2px var(--pad) 18px;
+        margin-inline: calc(var(--pad) * -1);
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .process-carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media (min-width: 720px) {
+        .process-carousel {
+          gap: 18px;
+        }
+      }
+
+      .process-card {
+        scroll-snap-align: start;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55),
+          inset 0 -1px 0 rgba(15, 17, 21, 0.06);
+        background: var(--card);
+        padding: 34px;
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        min-height: 310px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .process-card > .process-icon {
+        margin-bottom: 22px;
+      }
+
+      .process-card > p.muted {
+        margin-top: 18px;
+      }
+
+      .process-icon {
+        width: 50px;
+        height: 50px;
+        display: block;
+        color: var(--muted);
+        opacity: 1;
+      }
+
+      .process-icon path {
+        fill: currentColor;
+      }
+
+      /* Deroule cards: icon/text all black, hide labels */
+      #deroule .process-card h3 {
+        display: none;
+      }
+
+      #deroule .process-card .process-main,
+      #deroule .process-card .muted {
+        color: var(--text);
+      }
+
+      #deroule .process-icon {
+        color: var(--text);
+      }
+
+      .process-card h3 {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--muted);
+      }
+
+      .process-card p {
+        margin: 0;
+      }
+
+      .process-main {
+        font-size: 18px;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .fit-block {
+        display: grid;
+        gap: 12px;
+      }
+
+      .fit-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .fit-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .fit-label img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        display: inline-block;
+        opacity: 0.75;
+      }
+
+      .fit-sub {
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 52ch;
+      }
+
+      .fit-carousel {
+        margin-top: 2px;
+        grid-auto-columns: clamp(240px, 78vw, 320px);
+      }
+
+      .fit-card {
+        background: var(--card);
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+        align-content: center;
+        text-align: center;
+        gap: 12px;
+        min-height: 150px;
+        max-width: 320px;
+        aspect-ratio: auto;
+      }
+
+      .fit-card .process-main {
+        font-size: 20px;
+        line-height: 1.45;
+        max-width: 32ch;
+      }
+
+      .fit-detail {
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        max-width: 36ch;
+      }
+
+      .fit-icon-large {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        display: block;
+        opacity: 0.8;
+      }
+
+      .fit-text {
+        display: grid;
+        gap: 6px;
+        justify-items: center;
+      }
+
+      .criteria-card {
+        display: grid;
+        gap: 14px;
+        padding-bottom: 18px;
+        border-bottom: 1.5px solid var(--line);
+      }
+
+      .criteria {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .criteria-block {
+        display: grid;
+        gap: 12px;
+        padding-bottom: 18px;
+        border-bottom: 1.5px solid var(--line);
+      }
+
+      .criteria li {
+        font-size: 16px;
+        line-height: 1.72;
+        letter-spacing: -0.005em;
+      }
+
+      .criteria li strong {
+        display: inline-block;
+        font-weight: 800;
+        font-size: 15px;
+        padding: 3px 8px 4px;
+        margin: 0 6px 0 0;
+        position: relative;
+        isolation: isolate;
+        color: var(--text);
+        background: linear-gradient(
+          98deg,
+          rgba(245, 245, 165, 0.82) 0%,
+          rgba(238, 243, 150, 0.86) 55%,
+          rgba(245, 245, 175, 0.82) 100%
+        );
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .criteria li strong::after {
+        content: "";
+        position: absolute;
+        inset: -4px -8px -6px;
+        background: repeating-linear-gradient(
+          -6deg,
+          rgba(245, 245, 165, 0.32) 0px,
+          rgba(238, 243, 150, 0.48) 9px,
+          rgba(245, 245, 135, 0.28) 17px,
+          rgba(245, 245, 175, 0.48) 24px
+        );
+        border-radius: 2px;
+        mix-blend-mode: multiply;
+        opacity: 0.82;
+        transform: rotate(-2.4deg) skewX(-1deg);
+        z-index: -1;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 12px;
+        border: 1px solid var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+        transition: transform 140ms ease;
+        min-width: 0;
+      }
+
+      .btn.primary,
+      .btn.ghost {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--text);
+      }
+
+      .btn:focus-visible {
+        outline: 2px solid rgba(15, 17, 21, 0.25);
+        outline-offset: 4px;
+      }
+
+      .btn:hover {
+        transform: scale(1.03);
+        box-shadow: none;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: clamp(42px, 9vw, 80px);
+      }
+
+      .hero-body {
+        display: grid;
+        gap: clamp(24px, 5vw, 40px);
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero-head {
+        display: grid;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .hero-proof {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 12px 0 0;
+        list-style: none;
+        color: var(--muted);
+      }
+
+      .micro {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      .hero-title {
+        font-size: clamp(56px, 12vw, 96px);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        max-width: 14ch;
+        font-weight: 800;
+      }
+
+      .hero-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: center;
+      }
+
+      .hero-logo-wrap {
+        position: relative;
+        display: inline-block;
+      }
+
+      .hero-filled {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.35s ease-out 0.05s;
+      }
+
+      .hero-logo-wrap.is-filled .hero-filled {
+        opacity: 1;
+      }
+
+      .hero-logo-wrap.is-filled .hero-draw {
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .hero-logo img,
+      .hero-logo svg {
+        display: block;
+        width: clamp(260px, 90vw, 720px); /* mobile: presque pleine largeur */
+        max-width: 100%;
+        height: auto;
+      }
+
+      @media (min-width: 960px) {
+        .hero-logo img,
+        .hero-logo svg {
+          min-width: 500px; /* desktop: minimum 500px */
+          width: clamp(500px, 38vw, 780px);
+        }
+      }
+
+      .hero-draw {
+        --stroke: #161616;
+        --stroke-width: 1.6;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.05));
+      }
+
+      .hero-draw .cls-1 {
+        fill: transparent;
+        stroke: var(--stroke);
+        stroke-width: var(--stroke-width);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: var(--len, 1200);
+        stroke-dashoffset: var(--len, 1200);
+        opacity: 0.9;
+        animation: hero-stroke var(--dur, 0.9s)
+            cubic-bezier(0.77, 0, 0.18, 1) forwards var(--delay, 0s),
+          hero-fade 1.05s ease-out forwards var(--delay, 0s),
+          hero-color var(--color-dur, 1.25s) ease-in-out forwards
+            var(--delay, 0s);
+      }
+
+      @keyframes hero-stroke {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes hero-fade {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes hero-color {
+        0% {
+          stroke: #ff0050;
+        }
+        30% {
+          stroke: #ffd500;
+        }
+        60% {
+          stroke: #00d08a;
+        }
+        85% {
+          stroke: #00a0ff;
+        }
+        100% {
+          stroke: #161616;
+        }
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .hero .lede {
+        max-width: 48ch;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      /* Hero voice line: perfectly centered/harmonic */
+      .hero .voice-wrap {
+        justify-content: center;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .hero .voice-content {
+        align-items: center;
+        text-align: center;
+        width: auto;
+      }
+
+      .hero .voice-note {
+        justify-content: center;
+      }
+
+      .voice-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        max-width: 540px;
+      }
+
+      .voice-wrap.wide {
+        max-width: 640px;
+      }
+
+      .voice-content {
+        display: grid;
+        gap: 8px;
+        width: 100%;
+        padding-top: 4px;
+      }
+
+      .voice-meta {
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: -0.005em;
+        color: var(--text);
+      }
+
+      .voice-note {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        flex: 0 1 420px;
+      }
+
+      .voice-wave {
+        max-width: 220px;
+      }
+
+      .voice-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        aspect-ratio: 1 / 1;
+        flex: 0 0 64px;
+        display: block;
+        object-fit: cover;
+        object-position: center 15%;
+        border: 1.5px solid var(--line);
+        display: none;
+      }
+
+      .voice-body {
+        display: grid;
+        gap: 8px;
+      }
+
+      .voice-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .voice-play {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid var(--text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1;
+        background: transparent;
+      }
+
+      .voice-wave {
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+        flex: 1 1 auto;
+        min-height: 40px;
+        max-width: 240px;
+        width: 100%;
+      }
+
+      /* Testimonials */
+      .voice-showcase {
+        display: grid;
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .voice-card {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .voice-bubble {
+        border-radius: 14px;
+        padding: 10px 12px;
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+        flex: 1;
+      }
+
+      .voice-card .voice-meta {
+        color: var(--muted);
+      }
+
+      .voice-card .voice-wrap {
+        max-width: none;
+        width: 100%;
+        flex: 1;
+      }
+
+      .voice-name {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .voice-age {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .voice-card-shell {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 0 24px;
+        position: relative;
+      }
+
+      .voice-card-head {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 0 4px;
+      }
+
+      .voice-head-meta {
+        display: grid;
+        gap: 2px;
+      }
+
+      .voice-avatar-thumb {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        flex-shrink: 0;
+      }
+
+      .voice-card-shell::after {
+        content: "";
+        position: absolute;
+        left: 70px;
+        right: 0;
+        bottom: 8px;
+        height: 1px;
+        background: color-mix(in srgb, var(--line) 18%, transparent 82%);
+        pointer-events: none;
+      }
+
+      .voice-card-shell:last-child {
+        padding-bottom: 0;
+      }
+
+      .voice-card-shell:last-child::after {
+        display: none;
+      }
+
+      .voice-extra {
+        display: none;
+        margin-top: 10px;
+        gap: 20px;
+      }
+
+      .voice-extra.show {
+        display: grid;
+      }
+
+      .voice-toggle {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .voice-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: none;
+        background: transparent;
+        padding: 6px 8px;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .voice-toggle-btn:hover {
+        color: var(--text);
+      }
+
+      .voice-toggle-btn:focus-visible {
+        outline: 2px solid rgba(15, 17, 21, 0.25);
+        outline-offset: 3px;
+      }
+
+      .voice-toggle-btn .chevron {
+        display: inline-block;
+        transition: transform 160ms ease;
+      }
+
+      .voice-toggle-btn.open .chevron {
+        transform: rotate(180deg);
+      }
+
+      .wave-bar {
+        width: 3px;
+        flex: 0 0 3px;
+        border-radius: 999px;
+        background: var(--text);
+        opacity: 0.92;
+      }
+
+      .wave-bar:nth-child(1) {
+        height: 12px;
+      }
+
+      .wave-bar:nth-child(2) {
+        height: 24px;
+      }
+
+      .wave-bar:nth-child(3) {
+        height: 18px;
+      }
+
+      .wave-bar:nth-child(4) {
+        height: 30px;
+      }
+
+      .wave-bar:nth-child(5) {
+        height: 10px;
+      }
+
+      .wave-bar:nth-child(6) {
+        height: 26px;
+      }
+
+      .wave-bar:nth-child(7) {
+        height: 16px;
+      }
+
+      .wave-bar:nth-child(8) {
+        height: 32px;
+      }
+
+      .wave-bar:nth-child(9) {
+        height: 14px;
+      }
+
+      .wave-bar:nth-child(10) {
+        height: 28px;
+      }
+
+      .wave-bar:nth-child(11) {
+        height: 20px;
+      }
+
+      .wave-bar:nth-child(12) {
+        height: 34px;
+      }
+
+      .wave-bar:nth-child(13) {
+        height: 12px;
+      }
+
+      .wave-bar:nth-child(14) {
+        height: 22px;
+      }
+
+      .wave-bar:nth-child(15) {
+        height: 16px;
+      }
+
+      .wave-time {
+        font-weight: 700;
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      .price-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0 4px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .badge {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        font-size: 14px;
+      }
+
+      .media-frame {
+        width: min(220px, 55vw);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 16px 60px rgba(15, 17, 21, 0.08);
+      }
+
+      .media {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .media video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      ol {
+        padding-left: 20px;
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      /* Steps Container */
+      .steps-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-top: 40px;
+        min-height: 500px;
+        /* Reduced since no massive video stack */
+      }
+
+      /* Navigation Icons (Top) */
+      .steps-nav {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin-bottom: 60px;
+        /* Increased from 40px to push content down */
+        position: relative;
+        z-index: 2;
+      }
+
+      .step-nav-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        opacity: 0.35;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: scale(1);
+        /* Remove tap highlight */
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .step-nav-btn.active {
+        opacity: 1 !important;
+        transform: scale(1.22) !important;
+        /* Leads to ~110px */
+        /* Bigger active state */
+      }
+
+      /* Fix for mobile: Hover only on devices that support it */
+      @media (hover: hover) {
+        .step-nav-btn:hover {
+          /* No transparency change on hover */
+          opacity: 0.35;
+          transform: scale(1.05);
+        }
+      }
+
+      .nav-icon-wrapper {
+        width: 90px;
+        height: 90px;
+        /* Soft rounded corners 16px */
+        --nav-corner-cut: 16px;
+        --nav-corner-softness: 10px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: transparent;
+        position: relative;
+        /* Transparent, adjustable corners */
+        clip-path: polygon(
+          var(--nav-corner-cut) 0,
+          calc(100% - var(--nav-corner-cut)) 0,
+          100% var(--nav-corner-cut),
+          100% calc(100% - var(--nav-corner-cut)),
+          calc(100% - var(--nav-corner-cut)) 100%,
+          var(--nav-corner-cut) 100%,
+          0 calc(100% - var(--nav-corner-cut)),
+          0 var(--nav-corner-cut)
+        );
+        -webkit-mask-image: radial-gradient(
+            circle at 0 0,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 100% 0,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 100% 100%,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 0 100%,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          );
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        -webkit-mask-composite: source-in, source-in, source-in;
+        mask-image: radial-gradient(
+            circle at 0 0,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 100% 0,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 100% 100%,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          ),
+          radial-gradient(
+            circle at 0 100%,
+            transparent 0,
+            transparent var(--nav-corner-cut),
+            black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
+            black 120%
+          );
+        mask-repeat: no-repeat;
+        mask-size: 100% 100%;
+        mask-mode: alpha;
+        mask-composite: intersect, intersect, intersect;
+      }
+
+      .step-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: -0.01em;
+      }
+
+      .step-nav-btn.active .step-label {
+        color: var(--text);
+      }
+
+      /* Optional Ring for active state logic if we wanted, but minimalist is better */
+
+      .nav-video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        /* Assure que toute la vidéo est visible sans coupe */
+        display: block;
+        /* Inactive videos are black & white */
+        filter: grayscale(100%);
+        transition: filter 0.4s ease, opacity 0.3s ease;
+        opacity: 0;
+      }
+
+      .step-nav-btn.active .nav-video {
+        /* Active video restores color */
+        filter: none;
+        opacity: 1;
+      }
+
+      .nav-placeholder {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: grayscale(100%);
+        transition: opacity 0.3s ease;
+        opacity: 1;
+      }
+
+      .step-nav-btn.active .nav-placeholder {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Steps Display Area - Clean & Centered */
+      .steps-display {
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-template-areas: "stack";
+      }
+
+      .step-slide {
+        grid-area: stack;
+        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+        pointer-events: none;
+      }
+
+      .step-slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+        z-index: 1;
+      }
+
+      .results-cta {
+        display: grid;
+        justify-items: center;
+        gap: 18px;
+        margin-top: 44px;
+      }
+
+      .nav-cta,
+      .btn,
+      .result-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: 12px;
+        border: 1px solid var(--text);
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        background: transparent;
+        transition: transform 140ms ease;
+        min-width: 0;
+        font-size: 16px;
+      }
+
+      .nav-cta:hover,
+      .btn:hover,
+      .result-cta-btn:hover {
+        transform: scale(1.03);
+        box-shadow: none;
+      }
+
+      .nav-cta:focus-visible,
+      .btn:focus-visible,
+      .result-cta-btn:focus-visible {
+        outline: 2px solid rgba(15, 17, 21, 0.25);
+        outline-offset: 4px;
+      }
+
+      /* Inner Layout */
+      .step-header-row {
+        /* Empty or minimal if we add decorative elements later */
+        display: none;
+      }
+
+      .step-label {
+        font-family: monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .step-content-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 600px;
+      }
+
+      .step-content-body h3 {
+        font-size: clamp(48px, 8vw, 84px);
+        line-height: 1;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .step-content-body p {
+        font-size: 20px;
+        color: var(--muted);
+        max-width: 45ch;
+      }
+
+      /* Voice Styling reused but centered */
+      .step-content-body .voice-wrap {
+        margin-top: 12px;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .timeline-step .voice-avatar {
+        display: none;
+      }
+
+      /* Fix Play Icon Deformation */
+      .voice-play {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid var(--text);
+      }
+
+      /* Controls */
+      .timeline-controls {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 60px;
+        margin-top: 10px;
+      }
+
+      .big-next-btn {
+        background: transparent;
+        border: none;
+        font-family: inherit;
+        font-size: clamp(24px, 4vw, 32px);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 40px;
+        transition: transform 0.2s, opacity 0.2s;
+        color: var(--text);
+      }
+
+      .big-next-btn:hover {
+        transform: translateX(10px);
+        opacity: 0.7;
+      }
+
+      .big-next-btn[disabled] {
+        opacity: 0.2;
+        pointer-events: none;
+        display: none;
+        /* Hide when done */
+      }
+
+      @media (max-width: 960px) {
+        .timeline {
+          /* Use Slider on Mobile too? User said "utiliser toute l'écran sur desktop et mobile".
+            Usually sliders are hard on mobile vertical flow.
+            But "Toute l'écran" implies "Screen by Screen".
+            Let's TRY making mobile a Vertical List of Full Screens.
+            Or Horizontal Slider? Horizontal slider is very app-like.
+            User previously complained about "mess".
+            Let's stick to Vertical Stack but CENTERED and FULL HEIGHT (min-height: 80vh).
+         */
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          overflow-x: visible;
+          scroll-snap-type: none;
+          margin-top: 0;
+        }
+
+        .timeline-controls {
+          display: none;
+          /* No button on mobile, just scroll */
+        }
+
+        .timeline-step {
+          min-height: 55vh;
+          /* Comfortable breathing room but not full screen */
+          padding: 80px 20px;
+          justify-content: center;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-step:last-child {
+          border-bottom: none;
+        }
+
+        .timeline-media {
+          width: 120px;
+          margin-bottom: 24px;
+        }
+
+        .timeline-step h3 {
+          font-size: 36px;
+        }
+
+        .timeline-step p.muted {
+          font-size: 16px;
+        }
+      }
+
+      .faq {
+        display: grid;
+        gap: 14px;
+        margin: 12px auto 0;
+        max-width: 820px;
+      }
+
+      .faq details {
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+      }
+
+      .faq summary {
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        list-style: none;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq p {
+        color: var(--muted);
+        margin-top: 10px;
+      }
+
+      .faq-cta {
+        margin-top: 32px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .cta-block {
+        padding: clamp(36px, 7vw, 56px);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        display: grid;
+        gap: 16px;
+        background: var(--card);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 0 42px;
+        color: var(--muted);
+      }
+
+      @media (min-width: 960px) {
+        nav a.hide-desktop {
+          display: none;
+        }
+
+        .voice-showcase {
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .voice-card-shell {
+          padding: 0 24px 0 0;
+        }
+
+        .voice-card-shell::after {
+          left: auto;
+          right: -6px;
+          top: 12%;
+          bottom: 12%;
+          height: auto;
+          width: 1px;
+          background: color-mix(in srgb, var(--line) 15%, transparent 85%);
+        }
+
+        .voice-extra.show {
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .voice-card-shell:last-child {
+          padding-right: 0;
+        }
+
+        .faq {
+          max-width: 760px;
+        }
+
+        .grid-two {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-three {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          column-gap: 28px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+      }
+
+      @media (min-width: 720px) {
+        .hero-head {
+          grid-template-columns: 1fr auto;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .actions .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .faq {
+          gap: 18px;
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        .faq details {
+          padding-top: 16px;
+        }
+
+        .faq details[open] p {
+          margin-top: 12px;
+          line-height: 1.7;
+        }
+
+        #faq .section-lead {
+          text-align: left;
+          justify-items: start;
+        }
+
+        nav {
+          gap: 12px;
+          width: 100%;
+          justify-content: center;
+        }
+
+        .timeline-step {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "left"
+            "right"
+            "voice";
+          gap: 20px;
+          width: 100%;
+          padding: 14px 0 12px;
+          text-align: left;
+        }
+
+        .timeline-left {
+          justify-items: center;
+          grid-auto-flow: row;
+        }
+
+        .timeline-icon {
+          width: 130px;
+        }
+
+        .timeline-right {
+          text-align: center;
+        }
+
+        .timeline-voice {
+          justify-content: center;
+          width: 100%;
+          text-align: center;
+          margin-inline: auto;
+        }
+
+        .voice-inline {
+          justify-content: center;
+          align-items: center;
+          max-width: 100%;
+          gap: 10px;
+        }
+
+        .voice-inline .voice-content {
+          align-items: center;
+        }
+
+        .voice-inline .voice-avatar {
+          width: 50px;
+          height: 50px;
+          flex: 0 0 50px;
+        }
+
+        .voice-inline .voice-wave {
+          max-width: 110px;
+        }
+
+        .voice-play {
+          width: 36px;
+          height: 36px;
+          font-size: 12px;
+        }
+
+        .voice-meta {
+          font-size: 12px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="wrap topbar">
+        <nav aria-label="Основная навигация">
+          <a href="#pourvous">Для кого</a>
+          <a href="#resultats">Результаты</a>
+          <a href="#deroule">Как проходит</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="offre">
+        <div class="wrap hero-body">
+          <div class="stack space">
+            <div class="hero-head">
+              <h1 class="hero-title hero-logo">
+                <span class="sr-only">Пилот Нейро</span>
+                <div class="hero-logo-wrap" data-hero-logo>
+                  <svg
+                    aria-hidden="true"
+                    class="hero-draw"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 738.15 97.96"
+                  >
+                    <defs>
+                      <style>
+                        .cls-1 {
+                          fill: none;
+                          stroke: #161616;
+                          stroke-miterlimit: 10;
+                        }
+                      </style>
+                    </defs>
+                    <path
+                      class="cls-1"
+                      d="M75.24,78.22V9.02c0-4.53-5.07-8.89-8.89-8.89H10.9C5.62.12,0,3.61,0,11.03v67.2h16.51V14.62c0-2.3,1.64-3.17,3.17-3.17h35.82c2.49,0,3.9,2.01,3.9,3.9v62.87h15.84Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M87.91,19.49h14.86v41.67s25.01-34.27,30.7-39.96c4.71-4.71,16.57-3.42,16.57,7.55v49.47h-15.11v-41.67s-21.52,29.68-29.15,39.69c-4.93,6.48-18.14,2.74-17.89-8.26.27-11.68,0-48.49,0-48.49Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M155.65,78.22l23.88-53.61s2.67-6.34,10.72-6.34c7.34,0,9.8,5.24,9.8,5.24l25.53,54.71h-16.81l-18.15-46.54-19.37,46.54h-15.6Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M260.2,18.28c-28.89,0-32.9,20.46-32.9,31.92,0,19.23,9.65,28.02,32.9,28.02,8,0,33.63,2.22,33.63-29.97,0-16.26-7.78-29.97-33.63-29.97ZM260.56,68.48c-15.05,0-18.4-8.52-18.4-19.62,0-14.69,6.81-18.89,18.4-18.89,12.82,0,18.15,6.02,18.15,19.25s-6.06,19.25-18.15,19.25Z"
+                    />
+                    <polygon
+                      class="cls-1"
+                      points="296.99 29.97 296.99 19.49 355.23 19.49 355.23 29.97 333.79 29.97 333.55 78.22 318.92 78.22 318.92 29.97 296.99 29.97"
+                    />
+                    <polygon
+                      class="cls-1"
+                      points="382.04 0 397.63 0 397.63 30.95 439.55 30.95 439.55 0 454.9 0 454.9 78.22 438.33 78.22 438.09 43.38 397.88 43.62 397.39 78.22 382.04 78.22 382.04 0"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M521.13,53.37s3.63-4.82,4.12-8.75c.5-4,1.03-7.24-2.02-14.64-1.73-4.19-8.98-10.72-17.28-10.72h-20.83c-7.23,0-13.11,4.88-16.57,10.23-3,4.65-4.99,16.19-4.39,21.69.61,5.52.58,15.21,6.58,21.2,3.71,3.71,11.16,5.85,16.81,5.85h36.07v-9.75h-30.7c-15.14,0-14.13-15.11-14.13-15.11h42.35ZM480.49,36.8c1.18-3.25,4.33-6.82,8.29-6.82h11.94c4.11,0,7.26,3.37,8.53,6.09.66,1.42,1.46,6.57,1.46,6.57h-31.44s.38-3.52,1.22-5.84Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M534.1,19.25h14.62v42.65s24.59-33.66,29.97-40.94c3.87-5.22,15.69-3.47,15.6,6.61s0,50.65,0,50.65h-14.62v-42.16s-25.44,34.44-30.22,40.94c-3.48,4.74-15.35,1.97-15.35-6.09V19.25Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M542.14,0h10.97s1.47,7.61,11.09,7.61c9.01,0,10.84-7.61,10.84-7.61h11.21s-3.15,16.33-22.05,16.33c-20.51,0-22.05-16.33-22.05-16.33Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M663.13,32.44c-2.55-4.85-10.58-13.19-18.4-13.19h-28.75c-5.6,0-10.72,4.87-10.72,10.72v67.99h15.35v-19.74h22.66c10.83,0,15.7-7.57,18.82-12.93,3.91-6.74,4.67-25.94,1.04-32.85ZM649.74,56.04c0,3.55-3.75,10.97-12.32,10.97h-16.81V29.97h18.52c6.76,0,10.8,10.13,10.8,14.46,0,4.92-.18,7.43-.18,11.61Z"
+                    />
+                    <path
+                      class="cls-1"
+                      d="M704.52,18.46c-28.89,0-32.9,20.46-32.9,31.92,0,19.23,9.65,28.02,32.9,28.02,8,0,33.63,2.22,33.63-29.97,0-16.26-7.78-29.97-33.63-29.97ZM704.88,68.66c-15.05,0-18.4-8.52-18.4-19.62,0-14.69,6.81-18.89,18.4-18.89,12.82,0,18.15,6.02,18.15,19.25s-6.06,19.25-18.15,19.25Z"
+                    />
+                  </svg>
+                  <img
+                    class="hero-filled"
+                    src="assets/filledLogo.svg"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </h1>
+            </div>
+            <p class="lede" style="margin-bottom: 12px">
+              вы поймёте, как работает веб, научитесь создавать сайты полностью
+              под заказ с любым функционалом и освоите ИИ как инструмент —
+              понимая, проверяя и улучшая то, что он выдаёт, вместо того чтобы
+              слепо ему доверять
+            </p>
+            <div
+              class="voice-wrap"
+              aria-label="Голосовое сообщение"
+              style="margin-top: 6px"
+            >
+              <img
+                class="voice-avatar"
+                src="assets/avatar.png"
+                alt="Avatar"
+                loading="lazy"
+              />
+              <div class="voice-content">
+                <div class="voice-meta">Tsarag · голосовое · 0:18</div>
+                <div class="voice-note">
+                  <span class="voice-play" aria-hidden="true">▶</span>
+                  <div class="voice-wave" aria-hidden="true">
+                    <span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span
+                    ><span class="wave-bar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pourvous">
+        <div class="wrap">
+          <div class="section-lead">
+            <h2>Это для вас?</h2>
+            <p class="lede" style="margin-bottom: 12px">
+              Внимательно прочитайте, если не хотите потерять деньги и время
+            </p>
+            <div
+              class="voice-wrap wide"
+              aria-label="Голосовое сообщение"
+              style="margin-top: 6px"
+            >
+              <img
+                class="voice-avatar"
+                src="assets/avatar.png"
+                alt="Avatar"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="stack space" style="gap: 32px">
+            <div class="fit-block fit-yes">
+              <div
+                class="process-carousel fit-carousel"
+                role="list"
+                aria-label="Подходит, если"
+              >
+                <article class="process-card fit-card" role="listitem">
+                  <img
+                    class="fit-icon-large"
+                    src="assets/goodsvg.svg"
+                    alt=""
+                    aria-hidden="true"
+                    style="width: 120px; height: 120px; opacity: 0.85"
+                  />
+                  <div class="fit-text">
+                    <p class="process-main">ДА, ЕСЛИ</p>
+                    <p class="fit-detail">Готовы включиться всерьёз.</p>
+                  </div>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы хотите перейти в сферу IT</p>
+                  <p class="fit-detail">
+                    Вам это действительно интересно, и вам нравится работать за
+                    компьютером.
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы хотите работать на себя</p>
+                  <p class="fit-detail">
+                    Вы умеете общаться с клиентами, слушать и адаптироваться под
+                    их потребности
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы готовы адаптироваться</p>
+                  <p class="fit-detail">
+                    Вы готовы менять свои привычки, чтобы подстраиваться к ИИ, и
+                    хотите быть среди тех, кого ИИ не сможет заменить
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы доступны</p>
+                  <p class="fit-detail">
+                    Вы можете уделять работе минимум 10–14 часов в неделю на
+                    протяжении 3 месяцев
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вам нравится создавать</p>
+                  <p class="fit-detail">
+                    Вы смешиваете идеи, сравниваете и создаёте новое с помощью
+                    ИИ
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="fit-block fit-no">
+              <div
+                class="process-carousel fit-carousel"
+                role="list"
+                aria-label="Не подойдёт, если"
+              >
+                <article class="process-card fit-card" role="listitem">
+                  <img
+                    class="fit-icon-large"
+                    src="assets/bad.svg"
+                    alt=""
+                    aria-hidden="true"
+                    style="width: 120px; height: 120px; opacity: 0.85"
+                  />
+                  <div class="fit-text">
+                    <p class="process-main">НЕТ, ЕСЛИ</p>
+                    <p class="fit-detail">
+                      Нет времени или «просто посмотреть»
+                    </p>
+                  </div>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">У вас нет времени</p>
+                  <p class="fit-detail">
+                    Недостаточно просто приходить на занятия: обучение
+                    интенсивное и требует работы и внимательного слушания
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы хотите диплом</p>
+                  <p class="fit-detail">
+                    Вы хотите получить диплом, чтобы устроиться на работу в
+                    компанию? Здесь мы учимся конкурировать с компаниями.
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы не общительны</p>
+                  <p class="fit-detail">
+                    Вам не нравится общение, работа в команде, и вы не хотите
+                    это менять
+                  </p>
+                </article>
+
+                <article class="process-card fit-card" role="listitem">
+                  <p class="process-main">Вы не терпеливы</p>
+                  <p class="fit-detail">
+                    Когда мы работаем с ИИ, нам нужно итеративно улучшать
+                    результат и часто переделывать всё заново. Если вы не готовы
+                    начинать сначала, тестировать и улучшать, это не для вас
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div
+              class="voice-wrap wide"
+              aria-label="Голосовое сообщение"
+              style="margin-top: 6px"
+            >
+              <img
+                class="voice-avatar"
+                src="assets/avatar.png"
+                alt="Avatar"
+                loading="lazy"
+              />
+              <div class="voice-content">
+                <div class="voice-meta">Tsarag · голосовое · 0:18</div>
+                <div class="voice-note">
+                  <span class="voice-play" aria-hidden="true">▶</span>
+                  <div class="voice-wave" aria-hidden="true">
+                    <span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span
+                    ><span class="wave-bar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultats">
+        <div class="wrap">
+          <div class="section-lead">
+            <h2>Ожидаемые результаты</h2>
+            <p class="muted">Только индивидуальные решения, никаких шаблонов</p>
+          </div>
+
+          <div class="steps-container">
+            <!-- Navigation (The "Helmet" etc) -->
+            <div
+              class="steps-nav"
+              role="tablist"
+              aria-label="Étapes du process"
+            >
+              <button
+                class="step-nav-btn active"
+                role="tab"
+                aria-selected="true"
+                aria-controls="step-panel-1"
+                id="step-tab-1"
+                onclick="switchStep(1)"
+              >
+                <div class="nav-icon-wrapper">
+                  <img
+                    class="nav-placeholder"
+                    src="assets/moto-icon.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <video
+                    class="nav-video scrub-video"
+                    muted
+                    playsinline
+                    preload="metadata"
+                  >
+                    <source src="assets/moto-icon-h264.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <span class="step-label">4 недели</span>
+              </button>
+              <button
+                class="step-nav-btn"
+                role="tab"
+                aria-selected="false"
+                aria-controls="step-panel-2"
+                id="step-tab-2"
+                onclick="switchStep(2)"
+              >
+                <div class="nav-icon-wrapper">
+                  <img
+                    class="nav-placeholder"
+                    src="assets/formula-icon.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <video
+                    class="nav-video scrub-video"
+                    muted
+                    playsinline
+                    preload="metadata"
+                  >
+                    <source
+                      src="assets/formula-icon-h264.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                </div>
+                <span class="step-label">8 недель</span>
+              </button>
+              <button
+                class="step-nav-btn"
+                role="tab"
+                aria-selected="false"
+                aria-controls="step-panel-3"
+                id="step-tab-3"
+                onclick="switchStep(3)"
+              >
+                <div class="nav-icon-wrapper">
+                  <img
+                    class="nav-placeholder"
+                    src="assets/avion-icon.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <video
+                    class="nav-video scrub-video"
+                    muted
+                    playsinline
+                    preload="metadata"
+                  >
+                    <source src="assets/avion-icon-h264.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <span class="step-label">12 недель</span>
+              </button>
+            </div>
+
+            <!-- Display Area -->
+            <div class="steps-display">
+              <!-- Step 1 -->
+              <div
+                class="step-slide active"
+                id="step-panel-1"
+                role="tabpanel"
+                aria-labelledby="step-tab-1"
+              >
+                <div class="step-header-row">
+                  <!-- Visual Removed as requested -->
+                </div>
+                <div class="step-content-body">
+                  <h3>Вы за рулём</h3>
+                  <p class="muted">
+                    Вы понимаете, как работает веб, и больше не боитесь
+                    технических терминов. Вы можете делать простые сайты с
+                    помощью ИИ, но у вас ещё нет полного мастерства.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div
+                class="step-slide"
+                id="step-panel-2"
+                role="tabpanel"
+                aria-labelledby="step-tab-2"
+              >
+                <div class="step-header-row">
+                  <!-- Visual Removed -->
+                </div>
+                <div class="step-content-body">
+                  <h3>Вы пилот</h3>
+                  <p class="muted">
+                    Вы прекрасно понимаете, как создавать сайт со всеми
+                    инструментами, которыми пользуются разработчики. Кроме того,
+                    вы владеете ИИ и умеете работать чисто и структурно, не
+                    теряясь независимо от масштаба проекта.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div
+                class="step-slide"
+                id="step-panel-3"
+                role="tabpanel"
+                aria-labelledby="step-tab-3"
+              >
+                <div class="step-header-row">
+                  <!-- Visual Removed -->
+                </div>
+                <div class="step-content-body">
+                  <h3>Вы боевой пилот</h3>
+                  <p class="muted">
+                    Вы умеете видеть проблемы в жизни и в бизнесе, предлагать
+                    решения, от которых сложно отказаться, и создавать
+                    индивидуальные продукты. Вы не просто делаете инструмент, вы
+                    точно знаете, что и для кого нужно создать.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-cta">
+            <div class="voice-wrap" aria-label="Голосовое сообщение">
+              <div class="voice-content">
+                <div class="voice-meta">Tsarag · голосовое · 0:20</div>
+                <div class="voice-note">
+                  <span class="voice-play" aria-hidden="true">▶</span>
+                  <div class="voice-wave" aria-hidden="true">
+                    <span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span><span class="wave-bar"></span
+                    ><span class="wave-bar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="result-cta-btn" href="#deroule"
+              >Посмотреть программу подробно</a
+            >
+          </div>
+        </div>
+      </section>
+      <section id="deroule">
+        <div class="wrap">
+          <div class="section-lead">
+            <h2>Как это проходит</h2>
+            <p class="muted">
+              Живой курс с понятным ритмом: занятия, практика и поддержка в
+              Discord.
+            </p>
+          </div>
+
+          <div class="process-carousel" aria-label="Формат курса">
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 128.13 133.96"
+              >
+                <path
+                  d="M108.43,68.89v-4.46c0-.24.56-1.45.75-1.67,1.04-1.17,2.99-1.05,4,.09.13.14.54.84.54.97v4.84l.23.23h6.81c2.81,0,6.9,4.26,7.12,7.1.51,16.43.07,32.95.23,49.42-.46,4.75-3.75,8.18-8.56,8.54h-47.67c-4.46-.27-7.89-3.24-8.68-7.66-.22-16.72-.39-33.56.08-50.27.64-3.02,3.02-5.78,5.96-6.75,2.72-.89,5.1-.09,7.64-.37.22-.02.39-.02.52-.24v-4.69c0-.4.72-1.26,1.07-1.5,1.25-.86,2.9-.67,3.75.62.09.13.48.97.48,1.03v4.54l25.72.23ZM77.41,74.03h-6.13c-1.03,0-2.95,2.03-2.95,3.1v7.94h54.4l.23-.23v-6.51c0-.17-.17-1.21-.22-1.45-.17-.76-.82-1.73-1.46-2.17-.18-.13-1.31-.69-1.43-.69h-5.98c-.2,1.59.36,4.08-.54,5.44-.96,1.44-3.06,1.65-4.22.3-.22-.25-.69-1.31-.69-1.58v-4.16h-25.72v4.61c0,.06-.46.86-.54.97-1.11,1.47-3.36,1.37-4.33-.19-.07-.12-.42-.89-.42-.94v-4.46ZM122.8,90.22h-54.47v35.33c0,.06.36.96.42,1.09.59,1.14,1.73,1.82,2.98,2.01,16.17-.13,32.4.26,48.53-.19,1.83-.65,2.56-2.09,2.7-3.96-.44-10.77.56-21.98,0-32.7-.03-.54-.2-1.04-.16-1.58Z"
+                />
+                <path
+                  d="M49.99.09c30.89-1.76,56.82,23.28,57.09,54.05.02,2.11-1.32,3.55-3.5,3.04-2.34-.55-1.68-3.31-1.81-5-1.57-21.93-16.6-41.21-38.43-45.85C35.01.3,8.81,20.83,5.56,49.01c-3.15,27.27,16.79,53.22,44.54,55.13,1.13.08,2.37-.11,3.48,0,3.73.37,3.55,5.45-.45,5.46-27.58.02-50.34-22.59-52.88-49.57C-2.57,30.2,19.51,1.82,49.99.09Z"
+                />
+                <path
+                  d="M56.1,49.5c4.06,1.97,4.13,7.79.33,10.13-1.64,1.01-3.04.82-4.89.7l-10.37,10.67c-2.83,2.02-5.74-1.81-3.26-4.16l10.06-10.2c-.83-3.07.17-5.79,2.93-7.37l.02-21.62c.87-3.46,5.27-2.59,5.15.91l.02,20.94Z"
+                />
+                <path
+                  d="M84.92,22.79c1.06,1.13.81,2.54-.1,3.66-.54.67-3.83,4.03-4.4,4.37-2.15,1.28-4.68-.98-3.65-3.35.28-.65,4.35-4.76,5.01-5.12,1.07-.58,2.29-.46,3.13.44Z"
+                />
+                <path
+                  d="M23.35,22.02c.71-.11,1.41.1,2,.5.64.44,4.18,4,4.59,4.64,1.43,2.24-.94,4.85-3.26,3.72-.68-.33-4.52-4.17-4.95-4.89-.94-1.58-.19-3.69,1.63-3.98Z"
+                />
+                <path
+                  d="M27.44,78.31c2.07-.28,3.54,1.97,2.59,3.8-.34.65-4.44,4.77-5.07,5.06-2.35,1.08-4.66-1.32-3.33-3.63.34-.59,4.57-4.79,5.11-5.03.21-.09.48-.17.71-.2Z"
+                />
+                <path
+                  d="M55.26,99.55c-1.38,1.31-3.97.68-4.3-1.27-.19-1.12-.19-5.62,0-6.74.46-2.71,4.62-2.85,5.07.31.18,1.26.18,5.86-.25,6.93-.08.19-.37.63-.52.77Z"
+                />
+                <path
+                  d="M11.4,52.13c1.23-.19,4.75-.18,6.01-.04,3.15.35,3.34,4.72.29,5.13-1.27.17-4.89.16-6.19.01-3.15-.35-3.05-4.65-.11-5.11Z"
+                />
+                <path
+                  d="M89.33,52.13c1.3-.19,4.37-.16,5.72-.05,3.54.31,3.53,4.82.3,5.15-1.47.15-4.43.14-5.91,0-3.09-.27-3.27-4.64-.11-5.11Z"
+                />
+                <path
+                  d="M52.7,9.46c2.25-.41,3.21.82,3.37,2.92.09,1.16.11,3.72,0,4.84-.38,3.81-4.82,3.44-5.14.46-.14-1.28-.17-5.11.04-6.32.13-.78.95-1.75,1.74-1.89Z"
+                />
+                <path
+                  d="M89.87,112.56c.32.33,1.33,1.51,1.61,1.65.12.06.19.1.3,0l14.3-15.67c2.38-1.75,5.69,1.15,3.25,4.16-4.68,5.78-10.5,11.06-15.2,16.88-1.17,1.36-2.97,1.68-4.39.45-2.12-2.93-6.22-5.72-8.16-8.64-1.71-2.58,1.06-5.36,3.59-3.75,1.17.75,3.56,3.74,4.7,4.91Z"
+                />
+              </svg>
+              <h3>Длительность</h3>
+              <p class="process-main">3 месяца, 12 недель</p>
+              <p class="muted">
+                Важно убедиться, что вы сможете присутствовать на занятиях, а
+                также выполнять задания и упражнения между сессиями.
+              </p>
+            </article>
+
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 122.95 137.13"
+              >
+                <path
+                  d="M58.81,0l14.93,13.39c1.07,1.05,2.28,1.99.93,3.48l-15.47,14.12c-.65.37-1.51.32-2.07-.2-.08-.07-.47-.56-.47-.6v-5.02c-23.58,2.57-40.65,25.02-37.21,48.52,2.06,14.07,11.34,26.83,24.26,32.78,1.27.58,2.73.99,3.93,1.56,1.95.93,1.06,3.48-.79,3.21-2.01-.29-6.93-2.93-8.79-4.07-22.06-13.45-29.12-42.47-15.01-64.4,6.97-10.83,18.66-18.89,31.56-20.67,1.07-.15,4.08-.66,4.79.12.06.07.48.81.48.86v2.75l11.24-10.26-11.24-10.23v2.61c0,.12-.34.75-.46.88-.72.78-1.91.45-2.82.53C17.4,13.04-7.88,53.53,8.17,90.21c6.19,14.14,17.66,25.4,31.83,31.51,1.32,1.32.37,3.32-1.55,2.88-1.06-.24-3.48-1.58-4.55-2.14C4.84,107.19-8.53,71.7,5.76,41.42,15.08,21.68,34.64,7.82,56.54,6.1c.64-1.86-.86-5.02,1.2-6.1h1.07Z"
+                />
+                <path
+                  d="M60.82,127.54c.09-.63.66-1.38,1.3-1.51,27.87-.35,52.28-22.45,56.78-49.68,4.7-28.43-12.95-56.24-40.27-64.64-1.03-.32-4.49-.97-5.05-1.58-.89-.98-.05-2.78,1.33-2.74,1.58.05,5.47,1.43,7.1,2.01,30.54,10.91,47.87,43.89,38.3,75.32-7.44,24.45-30.44,43.44-56.27,44.49v6.76s-.38.62-.45.69c-.59.59-1.57.61-2.22.1l-17.82-15.65c-.81-.86-.93-1.76-.13-2.69l18.23-15.79c.71-.72,2.4.27,2.4,1.06v6.63c17.22-.91,32.24-13.72,37.63-29.79,7.97-23.77-6.78-48.68-30.6-54.7-1.14-.92-.49-2.88.95-2.94,1.03-.05,4.84,1.32,5.98,1.76,18.93,7.34,31.11,27.28,28.87,47.55s-19.14,38.67-39.84,41.18c-1.12.14-4.22.51-5.15.23-.38-.12-1.06-.99-1.06-1.35v-4.62l-13.78,12,13.78,12.23c.14-1.34-.19-3.06,0-4.35Z"
+                />
+                <path
+                  d="M100.28,69.72c-.73.82-3.78.3-4.97.45s-1.91.97-2.45,1.97c-2.17,4.04-2.66,12.79-9.02,11.75-2.74-.45-3.74-2.76-4.4-5.1-1.36-4.78-2.26-9.72-3.56-14.52-.67-1.71-2.36-1.67-3.21-.14-2.15,6.66-3.68,13.71-5.92,20.32-1.3,3.83-3.65,7.72-7.93,8.54-5.86,1.12-9.81-3.14-11.38-8.32-2.91-9.59-4.59-19.89-7.41-29.55-.58-2.16-2.96-4.01-4.49-1.48-1.66,2.73-2.7,8.6-3.94,11.86-.98,2.57-2.94,4.46-5.79,4.66-1.23.09-3.68.26-3.69-1.54-.02-2.27,2.76-1.45,4.02-1.74,1.84-.42,2.42-2.62,2.95-4.15,1.08-3.12,1.82-6.58,3.11-9.61,2.58-6.07,9.27-4.63,11.01,1.11,1.94,7.72,3.77,15.46,5.76,23.17,1.05,4.07,1.98,11.32,6.87,12.41,4.29.96,6.66-2.97,7.83-6.42,2.18-6.45,3.52-13.67,5.85-19.99,1.8-4.88,7.82-4.91,9.45-.06,1.77,5.27,2.3,11.34,4.35,16.54,1.06,1.3,2.5.9,3.27-.48,2.25-4.03,2.47-11.75,8.33-12.43.91-.11,3.65-.14,4.51.02,1.24.22,1.67,1.83.86,2.74Z"
+                />
+              </svg>
+              <h3>Ритм</h3>
+              <p class="process-main">Два занятия, 4 часа в неделю</p>
+              <p class="muted">
+                Точные дни и часы занятий в течение недели определяются
+                коллективным голосованием после начала обучения.
+              </p>
+            </article>
+
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 83.52 122.67"
+              >
+                <path
+                  d="M4.82,106.15c-2.59-.37-4.74-3.36-4.82-5.89v-51.39c.27-3.12,2.4-5.59,5.58-5.88h21.94c.92-5.4,5.44-9.96,10.71-11.24,8.16-1.99,16.12,3.14,17.92,11.22l22.06.04c2.91.36,5.17,2.75,5.3,5.71v52.16c.04,1.96-2.76,5.28-4.67,5.28h-26.84l1.6,7.65c.19.28,1.93.11,2.43.17,3.02.31,5.59,2.07,6.41,5.06.48,1.74.27,3.38-1.8,3.64l-38.43-.12c-2.76-1.4-.69-5.37,1.03-6.84,1.88-1.62,4.32-1.82,6.72-1.77l1.7-7.78H4.82ZM52.36,45.98c0-5.83-4.73-10.56-10.56-10.56s-10.56,4.73-10.56,10.56,4.73,10.56,10.56,10.56,10.56-4.73,10.56-10.56ZM4.13,48.57v45.35h75.4v-45.04c0-.48-.7-1.54-1.26-1.64l-21.73-.1-.23.23c-.36,5.7-4.41,10.6-9.73,12.45-9.03,3.13-18.67-3.24-19.35-12.7H5.74c-.61-.05-1.5.96-1.6,1.45ZM79.53,98.05H4.13v2.52c0,.46.89,1.43,1.4,1.5h72.59c.59-.07,1.4-1.16,1.4-1.66v-2.37ZM34.11,113.95h15.29l-1.56-7.62c-.3-.18-.63-.17-.96-.19-2.87-.17-7.27-.22-10.11,0-.33.03-.65.07-.95.19l-1.72,7.61ZM27,118.54h30.36l-.61-.38-29.95.03-.64.51c.3.13.67-.14.84-.15Z"
+                />
+                <path
+                  d="M66.29,15.25c-.74-.75-1.41-1.59-2.2-2.32-12.64-11.55-31.53-11.73-44.28-.23-1.17,1.06-2.33,2.66-3.43,3.6-1.99,1.71-4.7-.68-3.04-3.04,1.83-2.59,6.14-5.96,8.86-7.66,15.12-9.47,35.36-6.75,47.17,6.64,1.01,1.14,2.4,2.75.76,4.13s-2.8-.07-3.84-1.13Z"
+                />
+                <path
+                  d="M25.45,21.78c-1.01.95-1.71,2.57-3.34,2.4-1.34-.14-2.14-1.33-1.87-2.65.24-1.18,4.08-4.56,5.18-5.37,10.89-8.15,26.33-7.03,35.86,2.66.39.39,1.39,1.45,1.67,1.85,1.27,1.85-.18,4.07-2.34,3.41-.82-.25-2.9-2.81-3.78-3.56-9.47-8.18-22.46-7.08-31.37,1.27Z"
+                />
+                <path
+                  d="M40.5,19.64c5.71-.44,12.8,2.4,16.15,7.16,1.73,2.46-1.11,4.81-3.13,2.98-.78-.7-1.49-1.78-2.37-2.53-5.64-4.77-14.08-4.45-19.42.61-1.19,1.12-2.17,3.49-4.26,2.27s-.72-3.09.36-4.33c3.09-3.53,7.99-5.79,12.66-6.15Z"
+                />
+                <path
+                  d="M50.21,45.99c0,4.64-3.76,8.4-8.4,8.4s-8.4-3.76-8.4-8.4,3.76-8.4,8.4-8.4,8.4,3.76,8.4,8.4ZM41.85,42.89c0-1.64-1.33-2.96-2.96-2.96s-2.96,1.33-2.96,2.96,1.33,2.96,2.96,2.96,2.96-1.33,2.96-2.96Z"
+                />
+              </svg>
+              <h3>Формат</h3>
+              <p class="process-main">Live в Discord</p>
+              <p class="muted">
+                Убедитесь, что Discord работает в вашей стране или что вы
+                знаете, как его настроить и заставить работать. Это незаменимый
+                инструмент для обучения.
+              </p>
+            </article>
+
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 128.46 128.61"
+              >
+                <path
+                  d="M21.96,17.04l-1.51,15.07,15.29-2.73c-.67-.81-2.35-1.38-2.66-2.43-.22-.75-.06-1.7.45-2.29,2.64-3.05,8.28-6.82,11.92-8.61,26.95-13.21,58.73,4.92,61.63,34.5,2.78,28.46-23.23,51.83-51.24,46.22-19.14-3.83-34.09-21.31-34.59-40.9-.04-1.53.34-3.25,2.23-3.25,2.73,0,2.09,3,2.22,4.68,2.62,34.16,45.46,48.75,67.97,22.32s.16-67.97-34.72-63.28c-7.55,1.01-14.63,4.6-20.33,9.53,0,.33,2.54,1.93,3,2.31.83.67,1.62,1.14,1.71,2.33.06.77-.54,1.79-1.26,2.11l-23.92,4.36c-.95.09-1.92-.39-2.28-1.27-.57-1.37.2-4.37.36-5.96.53-5.21.97-10.44,1.58-15.64.1-.81.22-2.6.5-3.23.49-1.09,1.78-1.6,2.9-1.18.71.27,3.59,3.67,4.28,4.48.29.34.53.72.78,1.08l.21.06C34.37,7.76,44.53,2.52,55.38.73c30.13-4.97,58.78,16.16,63.01,46.27,5.43,38.54-30.87,70.61-68.47,60.29-17.27-4.74-32.15-18.76-37.68-35.81-1.44-4.43-3.26-12.63-2.61-17.17.34-2.38,3.86-2.69,4.66-.38.05,17.42,9.07,33.66,23.76,42.84,35.43,22.13,81.01-7.39,75.61-48.48C108.43,8.41,60.89-9.06,30.71,17.98c-.83.74-2.22,2.55-3.16,2.87-2.66.93-3.82-2.56-5.6-3.8Z"
+                />
+                <path
+                  d="M54.08,33.3c.91-.12,1.77-.02,2.62.32l28.41,17.38c2.43,1.91,2.51,5.64.29,7.73l-27.88,17.33c-3.41,2.05-7.37,0-7.71-3.97v-33.45c.09-2.64,1.5-4.97,4.28-5.35ZM54.69,38.36v33.3l.34.2,26.93-17-26.93-16.71-.34.2Z"
+                />
+                <path
+                  d="M45.57,118.52h80.67s.8.31.92.37c1.68.88,1.74,3.46.12,4.39-.16.09-.93.4-1.04.4H45.57l-.22-.22v-4.74l.22-.22Z"
+                />
+                <path
+                  d="M34.88,118.52v5.17H2.22c-.08,0-.81-.28-.94-.35-1.64-.87-1.71-3.36-.18-4.36.12-.08.92-.45.98-.45h32.8Z"
+                />
+                <path
+                  d="M39.58,113.68c2-.29,3.02.87,3.19,2.76.2,2.21.26,7.58-.03,9.72-.46,3.33-4.81,3.12-5.13.18-.36-3.35.26-7.34.01-10.75.24-1.04.89-1.76,1.96-1.91Z"
+                />
+              </svg>
+              <h3>Записи</h3>
+              <p class="process-main">Каждое занятие в записи</p>
+              <p class="muted">
+                Вы сможете пересматривать записи занятий через Google Drive. Но
+                это не решение для тех, кто не может присутствовать на уроках:
+                это вариант для тех, кто хочет посмотреть ещё раз.
+              </p>
+            </article>
+
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 132.73 120.63"
+              >
+                <path
+                  d="M110.56,41.13h5.48c2.54,0,6.02,3.62,6.02,6.15v3.04h4.8c2.82,0,5.76,2.77,5.88,5.61-.45,4.63-1.8,9.33-2.88,13.88-3.64,15.32-7.51,30.62-11.29,45.9-1.29,3.01-3.85,4.69-7.12,4.92H20.86c-3.2-.32-5.63-2.03-6.66-5.11L.1,49.05c-.75-3.17,2.83-7.91,6.02-7.91h3.38l.2-.2v-5.81c0-2.15,2.3-4.62,4.23-5.36.39-.15,1.76-.4,1.83-.6l.02-22.15c.21-3.31,1.54-5.8,4.86-6.77,16.75-.45,33.58-.07,50.37-.19,3.31.28,5.59,2.76,5.89,6.01l.02,12.96c.15.52,3.04,2.74,3.62,3.54.38.52.31.92.61,1.42l12.8-19.37c.48-.7,1.21-1.04,2.07-.89,8.74,5.8,17.54,11.65,26.11,17.7.54.77.39,1.46-.1,2.21l-11.47,17.53ZM73.52,15.58V6.32s-.17-.78-.2-.88c-.45-1.41-1.74-1.92-3.11-2.03H22.75c-2.03.15-3.21.92-3.45,3.04v69.1c.04,1.26,1.03,2.58,2.3,2.77l1.22-5.74.1-63.58c.6-.92,1.64-1.35,2.59-.63.18.14.68.78.68.94v47.25l1.11-2.48,2.41-2.6V13.48c.27-3.07,2.5-5.63,5.61-6.02h29.47c.27.06.54.31.75.48,2.08,1.66,4.19,4.16,6.15,6.02.58.55,1.24,1.06,1.83,1.62ZM95.91,7.48l-1.82,2.88,2.48,1.82,1.95-3-2.61-1.7ZM77.58,25.45h-9.26c-1.41,0-3.31-1.09-4.24-2.12-2.39-2.66-1.45-7.13-1.5-10.39,0-.58-.32-1.2-.06-1.81l-.15-.28h-26.63c-.92,0-2.64,1.58-2.64,2.5v36.98h44.62l-.14-24.88ZM101.24,10.96l-5.45,8.05,12.27,8.3,5.45-8.05-12.27-8.3ZM90.3,16.24l2.48,1.64,1.95-2.89-2.69-1.84c-.11.58-1.96,2.71-1.74,3.09ZM74.87,21.93l-8.92-8.65v6.15c0,.39.52,1.47.81,1.76.17.17,1.26.74,1.42.74h6.69ZM88.26,18.96l-1.75,3.01,2.49,1.69,1.94-2.86-2.68-1.84ZM116.91,25.71l1.74-2.76c-.01-.17-.86-.78-1.06-.93s-1.38-.93-1.52-.88l-1.83,2.88c.3.35,2.41,1.89,2.68,1.7ZM94.06,21.88l-7.08,10.62,12.28,8.18,7.08-10.62-12.28-8.18ZM84.47,24.77l-1.89,2.91,2.63,1.8,1.95-2.88c-.27-.3-2.55-1.92-2.69-1.82ZM113.12,31.52l1.77-2.89-2.62-1.69-1.97,2.9c.46.19,2.51,1.9,2.82,1.68ZM81.09,30.72v4.26l.34.2c.21-.04,1.71-2.5,1.95-2.89l-2.29-1.57ZM109.21,37.34l1.87-2.91-2.6-1.82-1.94,2.91,2.67,1.82ZM15.79,32.75c-1.54.3-2.57,1.63-2.71,3.17-.19,2.19.23,4.72,0,6.9-.25,2.51-3.92,1.51-5.6,1.59-2.18.1-3.88,1.61-4,3.82.94,5.54,2.16,11.06,3.31,16.57,2.85,13.58,5.8,27.15,8.79,40.69l5.21-23.72c-2.94-.77-4.87-3.49-5-6.5v-42.52ZM81.09,41.74v8.59h11.8s4.41-6.81,4.41-6.81l-11.96-8.06-.24.17-4.01,6.12ZM104.7,38.43l-1.94,2.9,2.61,1.8,1.93-2.89c0-.28-2.25-1.52-2.6-1.82ZM101.64,48.97l1.75-3.02-2.61-1.73-1.82,2.9,2.68,1.84ZM118.68,50.33v-2.77c0-1.19-1.7-2.75-2.83-2.98-1.57-.32-4.92-.07-6.69-.06-.22,0-.46-.17-.66-.12l-4.01,5.93h14.2ZM97.45,50.19c-.29-.08-.55-.25-.67.13h.68s0-.13,0-.13ZM33.06,53.87c-1.36.33-2.51,1.16-3.1,2.44-4.3,19.2-8.61,38.47-12.53,57.74.32,1.97,2,3.22,3.97,3.2h89.78c2.2-.17,3.5-1.12,4.28-3.16,4.65-19.23,9.75-38.42,13.9-57.75-.1-1.15-.82-2.04-1.89-2.44l-94.41-.03Z"
+                />
+              </svg>
+              <h3>Материалы</h3>
+              <p class="process-main">PDF, упражнения, бонусы</p>
+              <p class="muted">
+                Дополнительные материалы и видео будут доступны вам через Google
+                Drive; их нужно будет обязательно просматривать между занятиями.
+              </p>
+            </article>
+
+            <article class="process-card">
+              <svg
+                class="process-icon"
+                aria-hidden="true"
+                focusable="false"
+                viewBox="0 0 129.43 125.05"
+              >
+                <path
+                  d="M14.04,85.35c.96-.07,1.79.65,2.63.99,2.4.98,4.78,1.21,7.32.5,1.19-.33,2.85-1.54,3.92-1.51,2.83.09,7.7,3.01,9.55,4.98,2.73,2.91,4.95,8.83,4.31,12.68-.15.92-1.09,1.27-1.9,1.6-10.8,4.27-27.35,4.4-38.08-.13-1.24-.52-1.76-.99-1.78-2.37-.05-4.43,2.07-9.89,5.65-12.87,1.77-1.48,6.03-3.69,8.39-3.86ZM37.59,101.24c-.35-4.33-2.35-8.48-6.45-10.76-.75-.42-3.26-1.54-4.04-1.49-.49.03-2.11.74-2.9.91-2.55.53-4.85.43-7.36-.23-.57-.15-1.43-.65-1.96-.64-.95.01-3.39,1.1-4.25,1.59-4.03,2.28-5.93,6.3-6.31,10.57,9.34,3.22,19.79,3.69,29.41,1.2,1.3-.34,2.58-.76,3.86-1.14Z"
+                />
+                <path
+                  d="M101.47,85.35c1.16-.11,1.89.63,2.86,1.03,2.67,1.1,5.41,1.19,8.12.13,2.15-.84,1.94-1.54,4.61-.83,5.03,1.34,9.18,4.89,11,9.45.81,2.02,1.65,5.76,1.28,7.86-.22,1.25-2.8,1.91-3.96,2.28-10.82,3.45-22.3,3.4-33.18.16-1.86-.55-4.56-1.05-4.61-3.22-.1-4.09,1.82-9.3,4.86-12.29,1.91-1.87,6.26-4.29,9.02-4.56ZM125.01,101.23c.01-4.41-2.31-8.53-6.39-10.78-.79-.44-3-1.46-3.84-1.46-.37,0-2.23.75-2.88.89-2.6.57-4.91.46-7.47-.21-1.76-.46-1.42-.9-3.38-.29-5.69,1.77-8.66,6.26-9.17,11.69l.1.21c10.63,3.45,22.46,3.76,33.03-.04Z"
+                />
+                <path
+                  d="M56.78,22.68c1.64-.21,2.19.63,3.56,1.15,2.49.96,5,.99,7.51.08.75-.27,1.87-1.08,2.46-1.21,1.85-.41,5.74,1.43,7.29,2.43,4.68,3,7.17,8.01,7.47,13.25.12,2.03.04,2.65-2.01,3.43-11.21,4.27-24.28,4.3-35.68.68-1.33-.42-3.81-.94-4.06-2.44-.57-3.41,1.45-8.98,3.69-11.7,1.99-2.41,6.51-5.26,9.77-5.67ZM57.75,26.31c-.85.11-3.11,1.11-3.91,1.55-4.06,2.27-5.77,6.2-6.33,10.43l.11.23c10.01,3.37,21.01,3.69,31.16.62.71-.22,2.02-.37,1.99-1.13-.12-3.33-2.31-7.44-5.17-9.45-.95-.67-3.96-2.22-5.07-2.29-.61-.04-1.09.36-1.66.53-3.44,1-5.9.99-9.34,0-.67-.19-1.01-.59-1.77-.49Z"
+                />
+                <path
+                  d="M98.11,108.8c.67.62.86,1.64.57,2.45-.39,1.09-3.74,3.61-4.86,4.42-16.95,12.31-40.85,12.59-57.89.26-1.03-.75-4.75-3.61-5.14-4.55-.72-1.76.78-3.5,2.79-3.12,1.02.2,2.09,1.6,2.88,2.24,9.48,7.67,21.12,11.2,33.75,9.76,9.6-1.1,18.33-5.61,25.14-11.84.81-.39,2.1-.23,2.75.37Z"
+                />
+                <path
+                  d="M20.3,62.7c7.23-.47,12.6,5.76,12.14,12.2-.61,8.56-10.96,13.57-18.44,8.09-8.37-6.13-4.63-19.58,6.3-20.29ZM19.74,66.45c-8.04,1.02-8.35,13.7-.25,15.06,11.45,1.92,11.92-16.53.25-15.06Z"
+                />
+                <path
+                  d="M107.74,62.7c7.15-.52,12.74,5.65,12.28,12.07-.72,9.91-13.76,14.39-20.46,6.34-5.71-6.86-1.41-17.72,8.18-18.41ZM103.22,68.53c-3.44,3.4-2.73,9.77,1.67,12.15,7.75,4.19,14.72-5.78,9-12-2.77-3.02-7.76-3.03-10.67-.15Z"
+                />
+                <path
+                  d="M63.33.03c10.56-.71,15.96,11.46,9.49,18.67-4.71,5.24-13.26,5.09-17.65-.41C49.72,11.48,53.8.67,63.33.03ZM62.9,3.78c-8.88,1.12-8.09,16.07,2.17,15.1,9.25-.87,8.58-16.45-2.17-15.1Z"
+                />
+                <path
+                  d="M87.95,27.49c1.07,0,3.19,1.45,4.13,2.05,9.26,5.89,15.85,14.7,18.71,24.81.28.98.88,2.91.87,3.85-.02,2.18-3.1,2.86-4.29,1.02-2.1-10.83-8.31-19.98-17.94-26.31-.8-.53-2.95-1.53-3.36-2.18-.88-1.39.13-3.23,1.88-3.24Z"
+                />
+                <path
+                  d="M39.79,28.12c1.96-.37,3.41,1.71,2.38,3.25-.44.67-2.41,1.58-3.17,2.1-9.11,6.3-15.06,15.28-17.02,25.74-1.06,1.78-4.17,1.18-4.31-.76-.07-.98.6-3.19.88-4.23,2.59-9.36,8.93-17.97,17.24-23.72.72-.5,3.29-2.25,3.99-2.38Z"
+                />
+              </svg>
+              <h3>Комьюнити</h3>
+              <p class="process-main">Приватный Discord‑сервер</p>
+              <p class="muted">
+                Мы работаем в Discord, где ученики помогают друг другу, и есть
+                разные каналы: для тех, кто занимается, для девушек, для курса и
+                т.д.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="temoignages">
+        <div class="wrap">
+          <div class="section-lead">
+            <h2>Голоса студентов</h2>
+            <p class="muted">
+              Короткие голосовые от тех, кто уже прошёл программу и довёл проект
+              до результата.
+            </p>
+          </div>
+          <div class="voice-showcase">
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Андрей</span>
+                  <span class="voice-age">24 года</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:28</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Мария</span>
+                  <span class="voice-age">29 лет</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:19</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Рустам</span>
+                  <span class="voice-age">32 года</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:23</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="voice-showcase voice-extra" id="voice-extra">
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Екатерина</span>
+                  <span class="voice-age">27 лет</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:17</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Илья</span>
+                  <span class="voice-age">22 года</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:21</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="voice-card-shell">
+              <img
+                class="voice-avatar-thumb"
+                src="assets/avatar.png"
+                alt="Аватар студента"
+              />
+              <div class="voice-bubble">
+                <div class="voice-card-head">
+                  <span class="voice-name">Снежана</span>
+                  <span class="voice-age">31 год</span>
+                </div>
+                <article class="voice-card">
+                  <div class="voice-wrap" aria-label="Голосовое сообщение">
+                    <div class="voice-content">
+                      <div class="voice-meta">Аудио · 0:18</div>
+                      <div class="voice-note">
+                        <span class="voice-play" aria-hidden="true">▶</span>
+                        <div class="voice-wave" aria-hidden="true">
+                          <span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span><span class="wave-bar"></span
+                          ><span class="wave-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="voice-toggle">
+            <button
+              id="reviews-toggle"
+              class="voice-toggle-btn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="voice-extra"
+            >
+              <span class="chevron">▼</span>
+              <span class="voice-toggle-label">Показать остальные отзывы</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="wrap">
+          <div class="section-lead">
+            <h2>Мини-FAQ</h2>
+            <p class="muted">У вас есть вопросы?</p>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>1) Я полный новичок. Это точно для меня?</summary>
+              <p>
+                Да — если вы мотивированы и регулярны. Мы идём с нуля по важному
+                и учим пользоваться ИИ, чтобы двигаться быстро без потери
+                понимания. Требование: пройти
+                <a href="https://portal-umber-theta.vercel.app/">PORTAL</a> +
+                тест, чтобы вы не пришли «без базы» и не страдали на курсе.
+              </p>
+            </details>
+            <details>
+              <summary>2) Сколько времени мне реально нужно?</summary>
+              <p>
+                Это интенсив. Уроки — 2×2 часа в неделю. Но настоящая работа —
+                практика между занятиями (иначе копите отставание и не учитесь).
+                Если заранее знаете, что не сможете быть регулярны 3 месяца,
+                сейчас не время.
+              </p>
+            </details>
+            <details>
+              <summary>3) Есть ли ограничения по возрасту?</summary>
+              <p>
+                Нет, никаких ограничений. Если вы узнаёте себя в описаниях выше.
+              </p>
+            </details>
+            <details>
+              <summary>4) Я живу в России, могу ли я участвовать?</summary>
+              <p>
+                Да, но такие инструменты, как Discord, ChatGPT и способы оплаты,
+                в России недоступны. Они для нас обязательны для работы. Вы
+                можете участвовать, если самостоятельно найдёте способ, чтобы
+                эти инструменты работали там, где вы живёте.
+              </p>
+            </details>
+            <details>
+              <summary>5) Оплата: есть ли возврат?</summary>
+              <p>
+                Нет. Ни возвратов, ни отмен. Это осознанно: защищает моё время и
+                ваше. Если вы не решительны, рискуете потерять вложение —
+                поэтому подумайте хорошо перед оплатой. (Возможна оплата в 2
+                этапа.)
+              </p>
+            </details>
+          </div>
+          <div class="faq-cta">
+            <a class="btn ghost" href="#contact"
+              >Связаться, если есть вопросы</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="inscription">
+        <div class="wrap cta-block">
+          <div class="stack space">
+            <h2>Готовы включиться?</h2>
+            <p class="muted">
+              Это не «на попробовать». Это 3 месяца реальной работы.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="#inscription"
+              >Записаться в следующий поток</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact">
+      <div class="wrap stack">
+        <div class="actions">
+          <a class="btn ghost" href="mailto:tsaragch@gmail.com"
+            >tsaragch@gmail.com</a
+          >
+        </div>
+        <p class="muted">© <span id="y"></span> PilotNeuro</p>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const wrap = document.querySelector("[data-hero-logo]");
+        const svg = wrap?.querySelector(".hero-draw");
+        if (!wrap || !svg) return;
+
+        const clampLen = (v, min, max) => Math.max(min, Math.min(max, v));
+        const segments = svg.querySelectorAll(".cls-1");
+        const baseDelay = 90; // ms between strokes for fluid stagger
+        const jitter = 30; // slight randomness to avoid robotic timing
+        const colorDuration = 1250; // ms
+        let maxTime = 0;
+
+        segments.forEach((seg, index) => {
+          if (typeof seg.getTotalLength !== "function") return;
+          const len = seg.getTotalLength();
+          const dur = clampLen(len / 520, 0.55, 1.1);
+          const delay = index * baseDelay + Math.random() * jitter;
+
+          seg.style.setProperty("--len", len);
+          seg.style.setProperty("--dur", `${dur}s`);
+          seg.style.setProperty("--delay", `${delay}ms`);
+          seg.style.setProperty("--color-dur", `${colorDuration / 1000}s`);
+
+          maxTime = Math.max(maxTime, delay + Math.max(dur * 1000, colorDuration));
+        });
+
+        const swapTime = maxTime || 1200;
+        setTimeout(() => wrap.classList.add("is-filled"), swapTime + 260);
+      })();
+
+      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+      const rand = (min, max) => Math.random() * (max - min) + min;
+      const hexToRgb = (hex) => {
+        const h = hex.replace("#", "").trim();
+        const full =
+          h.length === 3
+            ? h
+                .split("")
+                .map((c) => c + c)
+                .join("")
+            : h;
+        const num = parseInt(full, 16);
+        return {
+          r: (num >> 16) & 255,
+          g: (num >> 8) & 255,
+          b: num & 255,
+        };
+      };
+      const parseColor = (c) => {
+        const t = c.trim();
+        if (t.startsWith("rgb")) {
+          const parts = t
+            .replace(/[rgba()\s]/g, "")
+            .split(",")
+            .map((n) => parseFloat(n));
+          return { r: parts[0] || 0, g: parts[1] || 0, b: parts[2] || 0 };
+        }
+        return hexToRgb(t);
+      };
+      const mixColor = (c1, c2, t) => {
+        const a = parseColor(c1);
+        const b = parseColor(c2);
+        const mix = (x, y) => Math.round(x + (y - x) * t);
+        return `rgb(${mix(a.r, b.r)}, ${mix(a.g, b.g)}, ${mix(a.b, b.b)})`;
+      };
+
+      /* Animation State Management */
+      const animators = new Map(); // Store animator instances for each video
+
+      class VideoAnimator {
+        constructor(video) {
+          this.video = video;
+          this.rafId = null;
+          this.state = "idle";
+        }
+
+        cancel() {
+          if (this.rafId) cancelAnimationFrame(this.rafId);
+        }
+
+        // Action: 0 -> End (Fast/Zip) -> Mid (Fluid)
+        activate() {
+          this.cancel();
+          this.state = "activating";
+
+          const duration = this.video.duration || 2;
+          const start = 0;
+          const peak = duration;
+          const end = duration * 0.6;
+
+          const phase1Duration = 600;
+          const phase2Duration = 800;
+          const startTime = performance.now();
+
+          const tick = (now) => {
+            const elapsed = now - startTime;
+
+            if (elapsed < phase1Duration) {
+              // Phase 1: Forward Fast (Zip)
+              const p = elapsed / phase1Duration;
+              const ease =
+                p < 0.5
+                  ? 16 * p * p * p * p * p
+                  : 1 - Math.pow(-2 * p + 2, 5) / 2;
+              this.video.currentTime = start + (peak - start) * ease;
+              this.rafId = requestAnimationFrame(tick);
+            } else if (elapsed < phase1Duration + phase2Duration) {
+              // Phase 2: Back to Mid Fluid
+              const p = (elapsed - phase1Duration) / phase2Duration;
+              const ease = 1 - Math.pow(1 - p, 3);
+              this.video.currentTime = peak - (peak - end) * ease;
+              this.rafId = requestAnimationFrame(tick);
+            } else {
+              this.video.currentTime = end;
+              this.state = "idle";
+            }
+          };
+
+          this.rafId = requestAnimationFrame(tick);
+        }
+
+        // Action: Current -> 0 (Fluid)
+        deactivate() {
+          this.cancel();
+          this.state = "deactivating";
+
+          const start = this.video.currentTime;
+          const end = 0;
+
+          const animDuration = 600; // 0.6s return
+          const startTime = performance.now();
+
+          const tick = (now) => {
+            const elapsed = now - startTime;
+            if (elapsed < animDuration) {
+              const p = elapsed / animDuration;
+              const ease = 1 - Math.pow(1 - p, 3);
+              this.video.currentTime = start - (start - end) * ease;
+              this.rafId = requestAnimationFrame(tick);
+            } else {
+              this.video.currentTime = end;
+              this.state = "idle";
+            }
+          };
+
+          this.rafId = requestAnimationFrame(tick);
+        }
+      }
+
+      // Initialize animators
+      function initAnimators() {
+        document.querySelectorAll(".nav-video").forEach((video) => {
+          if (video.readyState < 1) video.load();
+          const btn = video.closest(".step-nav-btn");
+          if (btn) {
+            animators.set(btn.id, new VideoAnimator(video));
+          }
+        });
+        const startAnim = animators.get("step-tab-1");
+        if (startAnim) startAnim.activate();
+      }
+
+      window.addEventListener("load", initAnimators);
+
+      /* Dynamic background: white -> theme by #resultats, then back to white after #deroule */
+      (() => {
+        const docStyle = getComputedStyle(document.documentElement);
+        const base = docStyle.getPropertyValue("--bg").trim() || "#e4e5e8";
+        const start =
+          docStyle.getPropertyValue("--bg-start").trim() || "#f7f5ef";
+        const resultBg = "#e2e3e7";
+        const resultSection = document.getElementById("resultats");
+        const derouleSection = document.getElementById("deroule");
+        const stepsNav = document.querySelector(".steps-nav");
+        if (!resultSection || !derouleSection) return;
+
+        const updateBg = () => {
+          const scrollY = window.scrollY;
+          const vh = window.innerHeight;
+          const resTop =
+            resultSection.getBoundingClientRect().top + window.scrollY;
+          const derTop =
+            derouleSection.getBoundingClientRect().top + window.scrollY;
+
+          // Phase 1: from top to resultats -> white to base
+          const phase1End = resTop - vh * 0.2;
+          const t1 = clamp((scrollY - 0) / Math.max(phase1End, 1), 0, 1);
+
+          // Phase 2: after deroule -> fade back to white over ~80vh
+          const phase2Start = derTop;
+          const phase2End = derTop + vh * 0.8;
+          const t2 = clamp(
+            (scrollY - phase2Start) / Math.max(phase2End - phase2Start, 1),
+            0,
+            1
+          );
+
+          // If before phase2 start, use t1; after, reverse towards white
+          const mixT = scrollY < phase2Start ? t1 : clamp(1 - t2, 0, 1);
+          let color = mixColor(start, base, mixT);
+
+          // Smoothly blend to the neutral background around the nav/video zone
+          if (stepsNav) {
+            const navRect = stepsNav.getBoundingClientRect();
+            const navTop = navRect.top + scrollY;
+            const navBottom = navTop + navRect.height;
+            const enterStart = navTop - vh * 0.65;
+            const enterFull = navTop - vh * 0.15;
+            const exitStart = navBottom - vh * 0.15;
+            const exitEnd = navBottom + vh * 0.45;
+
+            const blendIn = clamp(
+              (scrollY - enterStart) / Math.max(enterFull - enterStart, 1),
+              0,
+              1
+            );
+            const blendOut = clamp(
+              (exitEnd - scrollY) / Math.max(exitEnd - exitStart, 1),
+              0,
+              1
+            );
+            const navBlend = Math.min(blendIn, blendOut);
+            color = mixColor(color, resultBg, navBlend);
+          }
+
+          document.documentElement.style.setProperty("--bg-dynamic", color);
+        };
+
+        const onScroll = () => requestAnimationFrame(updateBg);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        updateBg();
+      })();
+
+      // Scroll-reactive titles
+      (() => {
+        const targetSections = [
+          "pourvous",
+          "resultats",
+          "deroule",
+          "temoignages",
+          "faq",
+        ];
+
+        const titles = targetSections
+          .map((id) => document.querySelector(`#${id} .section-lead h2`))
+          .filter(Boolean);
+
+        const wrapTitle = (el) => {
+          if (el.dataset.scrollWrapped) return;
+          const text = el.textContent.trim();
+          const frag = document.createDocumentFragment();
+          [...text].forEach((ch, idx) => {
+            const span = document.createElement("span");
+            span.className = "title-char";
+            span.dataset.index = idx;
+            span.textContent = ch === " " ? "\u00a0" : ch;
+            frag.appendChild(span);
+          });
+          el.textContent = "";
+          el.classList.add("scroll-title");
+          el.appendChild(frag);
+          el.dataset.scrollWrapped = "1";
+        };
+
+        titles.forEach(wrapTitle);
+
+        const updateTitleOpacity = () => {
+          const vh = window.innerHeight || 1;
+          const start = vh;
+          const end = vh / 2;
+
+          titles.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            let progress = 1 - (rect.top - end) / Math.max(start - end, 1);
+            progress = clamp(progress, 0, 1);
+
+            const chars = el.querySelectorAll(".title-char");
+            const total = chars.length || 1;
+
+            chars.forEach((span, idx) => {
+              const fill = clamp(progress * total - idx, 0, 1);
+              const opacity = 0.2 + 0.8 * fill;
+              span.style.opacity = opacity.toFixed(3);
+            });
+          });
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              updateTitleOpacity();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        updateTitleOpacity();
+      })();
+
+      // Toggle extra testimonials
+      (() => {
+        const btn = document.getElementById("reviews-toggle");
+        const extra = document.getElementById("voice-extra");
+        if (!btn || !extra) return;
+
+        let expanded = false;
+        const sync = () => {
+          extra.classList.toggle("show", expanded);
+          btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+          btn.classList.toggle("open", expanded);
+          const label = btn.querySelector(".voice-toggle-label");
+          if (label) {
+            label.textContent = expanded
+              ? "Скрыть остальные отзывы"
+              : "Показать остальные отзывы";
+          }
+        };
+
+        btn.addEventListener("click", () => {
+          expanded = !expanded;
+          sync();
+        });
+
+        sync();
+      })();
+
+      /* REMOVED startRandomScrub */
+      function _removed_startRandomScrub(video) {
+        return;
+        // Old body below...
+        const duration = video.duration || 0;
+        if (!duration) return;
+
+        const edge = 0.1 * duration;
+        let dir = 1;
+        let baseSpeed = rand(0.4, 0.8); // Slightly slower for elegance
+        let segmentStart = performance.now();
+        let segmentDuration = rand(2500, 5000); // Much longer movements (2.5s - 5s)
+        let dwellEnd = null;
+        let prev = null;
+
+        const scheduleNext = (now) => {
+          dir = Math.random() < 0.5 ? 1 : -1;
+          if (video.currentTime <= edge) dir = 1;
+          if (video.currentTime >= duration - edge) dir = -1;
+          baseSpeed = rand(0.4, 0.8);
+          segmentStart = now;
+          segmentDuration = rand(2500, 5000);
+          dwellEnd = null;
+        };
+
+        const tick = (ts) => {
+          if (!document.body.contains(video)) return;
+
+          // CHECK: Only animate if the video is inside an active step button
+          const btn = video.closest(".step-nav-btn");
+          const isActive = btn && btn.classList.contains("active");
+
+          if (!isActive) {
+            // If not active, keep the animation frame loop going but don't scrub the video
+            // This allows it to resume scrubbing immediately when it becomes active.
+            requestAnimationFrame(tick);
+            return;
+          }
+
+          if (!prev) prev = ts;
+          const dt = (ts - prev) / 1000;
+          prev = ts;
+
+          if (dwellEnd) {
+            if (ts >= dwellEnd) {
+              scheduleNext(ts);
+            } else {
+              requestAnimationFrame(tick);
+              return;
+            }
+          }
+
+          const progress = clamp((ts - segmentStart) / segmentDuration, 0, 1);
+          const currentEase = 1 - Math.pow(progress, 3); // Cubic ease out
+
+          if (video.currentTime <= edge) dir = 1;
+          if (video.currentTime >= duration - edge) dir = -1;
+
+          const nextTime = clamp(
+            video.currentTime + dir * baseSpeed * currentEase * dt,
+            0,
+            duration
+          );
+          video.currentTime = nextTime;
+
+          const hitEdge =
+            (nextTime <= edge && dir < 0) ||
+            (nextTime >= duration - edge && dir > 0);
+
+          if (progress >= 1 || hitEdge) {
+            dwellEnd = ts + rand(200, 600); // Short pause between long moves
+          }
+
+          requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+      }
+
+      document.getElementById("y").textContent = new Date().getFullYear();
+
+      /* Step Switch Logic */
+      let currentActiveStep = "step-tab-1";
+
+      function switchStep(stepNum) {
+        const newActiveId = `step-tab-${stepNum}`;
+
+        // If clicking already active: Replay activation?
+        if (currentActiveStep === newActiveId) {
+          const animator = animators.get(newActiveId);
+          if (animator) animator.activate();
+          return;
+        }
+
+        // Deactivate Old
+        if (currentActiveStep) {
+          const oldBtn = document.getElementById(currentActiveStep);
+          if (oldBtn) {
+            oldBtn.classList.remove("active");
+            oldBtn.setAttribute("aria-selected", "false");
+            const animator = animators.get(currentActiveStep);
+            if (animator) animator.deactivate();
+          }
+        }
+
+        // Activate New
+        currentActiveStep = newActiveId;
+        const newBtn = document.getElementById(newActiveId);
+        if (newBtn) {
+          newBtn.classList.add("active");
+          newBtn.setAttribute("aria-selected", "true");
+          const animator = animators.get(newActiveId);
+          if (animator) animator.activate();
+        }
+
+        // Update Slides Content
+        document.querySelectorAll(".step-slide").forEach((slide) => {
+          slide.classList.remove("active");
+        });
+        const activeSlide = document.getElementById(`step-panel-${stepNum}`);
+        if (activeSlide) {
+          activeSlide.classList.add("active");
+        }
+      }
+    </script>
+  </body>
+</html>
