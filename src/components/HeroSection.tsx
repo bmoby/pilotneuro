@@ -1,7 +1,6 @@
 /* Этот файл собирает HERO с логотипом, интро-видео и голосовым блоком.
    Он показывает статичный чёрный логотип PilotNeuro, короткий ролик и текст о курсе.
-   Он даёт возможность сразу послушать пример голосового сообщения и увидеть каску крупным планом.
-   После первого показа ролик бесконечно играет последние полсекунды туда-обратно. */
+   Он даёт возможность сразу послушать пример голосового сообщения и увидеть каску крупным планом. */
 
 "use client";
 
@@ -13,13 +12,6 @@ import styles from "./HeroSection.module.css";
 export default function HeroSection() {
   /* В этой ссылке держим элемент видео, чтобы запустить его без задержек. */
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
-  /* Здесь храним кадр requestAnimationFrame для пинг-понга. */
-  const pingPongFrameRef = useRef<number | null>(null);
-  /* Эти границы задают последние 0.5 секунды, которые гоняем туда-обратно. */
-  const pingPongStartRef = useRef(0);
-  const pingPongEndRef = useRef(0);
-  /* Здесь запоминаем момент старта цикла, чтобы шаг был плавным. */
-  const pingPongOriginRef = useRef<number | null>(null);
 
   /* Этот эффект принудительно стартует видео сразу, как только есть данные. */
   useEffect(() => {
@@ -42,75 +34,12 @@ export default function HeroSection() {
     return () => video.removeEventListener("loadeddata", startPlayback);
   }, []);
 
-  /* Эта функция гасит пинг-понг, когда он больше не нужен. */
-  const stopPingPong = () => {
-    if (pingPongFrameRef.current !== null) {
-      cancelAnimationFrame(pingPongFrameRef.current);
-      pingPongFrameRef.current = null;
-    }
-    pingPongOriginRef.current = null;
-  };
-
-  /* Эта функция гоняет последние 0.5 секунды ролика туда-обратно. */
-  const stepPingPong = () => {
-    const video = introVideoRef.current;
-    if (!video) {
-      stopPingPong();
-      return;
-    }
-
-    const start = pingPongStartRef.current;
-    const end = pingPongEndRef.current;
-    const span = Math.max(end - start, 0);
-    if (span === 0) {
-      stopPingPong();
-      return;
-    }
-
-    const now = performance.now();
-    if (pingPongOriginRef.current === null) {
-      pingPongOriginRef.current = now;
-    }
-
-    const elapsed = ((now - pingPongOriginRef.current) / 1000) % (span * 2);
-    const offset = elapsed <= span ? elapsed : span * 2 - elapsed;
-
-    video.currentTime = start + offset;
-    pingPongFrameRef.current = requestAnimationFrame(stepPingPong);
-  };
-
-  /* Эта функция запускает пинг-понг после первого полного показа ролика. */
-  const handleVideoFinish = () => {
-    const video = introVideoRef.current;
-    if (!video) return;
-
-    const duration = video.duration;
-    if (!Number.isFinite(duration) || duration <= 0) return;
-
-    stopPingPong();
-
-    pingPongStartRef.current = Math.max(duration - 0.5, 0);
-    pingPongEndRef.current = duration;
-    pingPongOriginRef.current = null;
-    video.pause();
-    video.currentTime = duration;
-
-    pingPongFrameRef.current = requestAnimationFrame(stepPingPong);
-  };
-
-  /* Этот эффект останавливает пинг-понг, если секция размонтирована. */
-  useEffect(() => {
-    return () => {
-      stopPingPong();
-    };
-  }, []);
-
   return (
     /* Этот блок формирует верхнюю секцию с логотипом и описанием. */
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={styles.wrap}>
         <div className={styles.heroBody}>
-          {/* Этот блок показывает короткое видео каски шириной 350px с автозапуском. */}
+          {/* Этот блок показывает компактное видео каски с автозапуском и без повторов. */}
           <div className={styles.heroMedia}>
             <video
               ref={introVideoRef}
@@ -120,7 +49,6 @@ export default function HeroSection() {
               playsInline
               autoPlay
               aria-label="Courte vidéo d'introduction sur le casque Formula"
-              onEnded={handleVideoFinish}
             >
               <source
                 src="/formula_helmet-intro-hvc1.mp4"

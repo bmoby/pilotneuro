@@ -54,9 +54,11 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: clamp(32px, 6vw, 88px);
-  padding: 2px clamp(32px, 6vw, 88px) 18px;
-  margin-inline: calc(clamp(32px, 6vw, 88px) * -1);
+  scroll-padding-inline: clamp(20px, 5vw, 32px);
+  padding: 2px clamp(20px, 5vw, 32px) 18px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   scrollbar-width: none;
