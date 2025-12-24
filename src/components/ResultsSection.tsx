@@ -25,8 +25,7 @@ const steps: Step[] = [
     id: "step-1",
     label: "4 недели",
     title: "Вы за рулём",
-    body:
-      "Вы понимаете, как работает веб, и больше не боитесь технических терминов. Вы можете делать простые сайты с помощью ИИ, но у вас ещё нет полного мастерства.",
+    body: "Вы понимаете, как работает веб, и больше не боитесь технических терминов. Вы можете делать простые сайты с помощью ИИ, но у вас ещё нет полного мастерства.",
     video: "/moto-icon-h264.mp4",
     placeholder: "/moto-icon.png",
   },
@@ -34,8 +33,7 @@ const steps: Step[] = [
     id: "step-2",
     label: "8 недель",
     title: "Вы пилот",
-    body:
-      "Вы прекрасно понимаете, как создавать сайт со всеми инструментами, которыми пользуются разработчики. Вы владеете ИИ и работаете чисто и структурно на любом масштабе проекта.",
+    body: "Вы прекрасно понимаете, как создавать сайт со всеми инструментами, которыми пользуются разработчики. Вы владеете ИИ и работаете чисто и структурно на любом масштабе проекта.",
     video: "/formula-icon-h264.mp4",
     placeholder: "/formula-icon.png",
   },
@@ -43,8 +41,7 @@ const steps: Step[] = [
     id: "step-3",
     label: "12 недель",
     title: "Вы боевой пилот",
-    body:
-      "Вы умеете видеть проблемы в жизни и бизнесе, предлагать решения, от которых сложно отказаться, и создавать индивидуальные продукты. Вы точно знаете, что и для кого нужно сделать.",
+    body: "Вы умеете видеть проблемы в жизни и бизнесе, предлагать решения, от которых сложно отказаться, и создавать индивидуальные продукты. Вы точно знаете, что и для кого нужно сделать.",
     video: "/avion-icon-h264.mp4",
     placeholder: "/avion-icon.png",
   },
@@ -64,32 +61,23 @@ function createAnimator(video: HTMLVideoElement) {
     cancel();
     state = "activating";
 
-    const duration = video.duration || 2;
-    const start = 0;
-    const peak = duration;
-    const end = duration * 0.6;
-
-    const phase1 = 600;
-    const phase2 = 800;
+    const clip = video.duration || 2;
+    const target = Math.min(clip * 0.6, clip || 0.5);
+    const startPoint = Math.min(video.currentTime || 0, target);
+    const durationMs = 500;
     const startTime = performance.now();
 
     const tick = (now: number) => {
-      const elapsed = now - startTime;
-
-      if (elapsed < phase1) {
-        const p = elapsed / phase1;
-        const ease = p < 0.5 ? 16 * p ** 5 : 1 - (-(2 * p - 2)) ** 5 / 32;
-        video.currentTime = start + (peak - start) * ease;
+      const elapsed = Math.min(durationMs, now - startTime);
+      const progress = elapsed / durationMs;
+      const ease = 1 - (1 - progress) ** 3;
+      video.currentTime = startPoint + (target - startPoint) * ease;
+      if (elapsed < durationMs) {
         rafId = requestAnimationFrame(tick);
-      } else if (elapsed < phase1 + phase2) {
-        const p = (elapsed - phase1) / phase2;
-        const ease = 1 - (1 - p) ** 3;
-        video.currentTime = peak - (peak - end) * ease;
-        rafId = requestAnimationFrame(tick);
-      } else {
-        video.currentTime = end;
-        state = "idle";
+        return;
       }
+      rafId = null;
+      state = "idle";
     };
 
     rafId = requestAnimationFrame(tick);
@@ -101,26 +89,33 @@ function createAnimator(video: HTMLVideoElement) {
 
     const start = video.currentTime;
     const end = 0;
-    const duration = 600;
+    const durationMs = 380;
     const startTime = performance.now();
 
     const tick = (now: number) => {
-      const elapsed = now - startTime;
-      if (elapsed < duration) {
-        const p = elapsed / duration;
-        const ease = 1 - (1 - p) ** 3;
-        video.currentTime = start - (start - end) * ease;
+      const elapsed = Math.min(durationMs, now - startTime);
+      const progress = elapsed / durationMs;
+      const ease = 1 - (1 - progress) ** 3;
+      video.currentTime = start - (start - end) * ease;
+      if (elapsed < durationMs) {
         rafId = requestAnimationFrame(tick);
-      } else {
-        video.currentTime = end;
-        state = "idle";
+        return;
       }
+      rafId = null;
+      state = "idle";
     };
 
     rafId = requestAnimationFrame(tick);
   };
 
-  return { activate, deactivate, cancel, get state() { return state; } };
+  return {
+    activate,
+    deactivate,
+    cancel,
+    get state() {
+      return state;
+    },
+  };
 }
 
 export default function ResultsSection() {
@@ -182,10 +177,16 @@ export default function ResultsSection() {
   };
 
   return (
-    <section className={styles.section} id="resultats" aria-labelledby="results-title">
+    <section
+      className={styles.section}
+      id="resultats"
+      aria-labelledby="results-title"
+    >
       <div className={styles.wrap}>
         <div className={styles.lead}>
-          <h2 className={styles.title} id="results-title">Ожидаемые результаты</h2>
+          <h2 className={styles.title} id="results-title">
+            Ожидаемые результаты
+          </h2>
           <p className={styles.muted}>
             Только индивидуальные решения, никаких шаблонов
           </p>
@@ -257,7 +258,10 @@ export default function ResultsSection() {
 
         <div className={styles.ctaRow}>
           <div className={styles.voiceArea}>
-            <VoiceMessage src="/avis/SHamil2.m4a" title="Message vocal — Résultats" />
+            <VoiceMessage
+              src="/avis/SHamil2.m4a"
+              title="Message vocal — Résultats"
+            />
           </div>
           <Link className={styles.ctaBtn} href="#deroule">
             Посмотреть программу подробно

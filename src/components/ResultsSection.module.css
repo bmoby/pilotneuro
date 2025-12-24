@@ -1,5 +1,12 @@
 .section {
   padding: clamp(80px, 12vw, 140px) 0 clamp(100px, 14vw, 180px);
+  background: linear-gradient(
+    180deg,
+    rgba(227, 230, 233, 0) 0%,
+    #e3e6e9 16%,
+    #e3e6e9 84%,
+    rgba(227, 230, 233, 0) 100%
+  );
 }
 
 .wrap {
