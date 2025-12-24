@@ -5,6 +5,7 @@
 import styles from "./page.module.css";
 import HeroSection from "../components/HeroSection";
 import FitSection from "../components/FitSection";
+import ResultsSection from "../components/ResultsSection";
 
 /* Этот компонент выводит только HERO с логотипом и голосовым сообщением. */
 export default function Home() {
@@ -14,6 +15,8 @@ export default function Home() {
       <HeroSection />
       {/* Этот блок добавляет секцию «Это для вас?» с карточками и голосовым. */}
       <FitSection />
+      {/* Этот блок показывает ожидаемые результаты и анимированные иконки. */}
+      <ResultsSection />
     </main>
   );
 }

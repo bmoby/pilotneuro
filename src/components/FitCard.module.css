@@ -1,0 +1,54 @@
+.card {
+  scroll-snap-align: start;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent 32%);
+  box-shadow: 0 6px 16px rgba(15, 17, 34, 0.04);
+  background: color-mix(in srgb, var(--card) 92%, #ffffff 8%);
+  padding: 28px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 12px;
+  min-height: 150px;
+  max-width: 320px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: none;
+  box-shadow: 0 6px 16px rgba(15, 17, 34, 0.04);
+  border-color: color-mix(in srgb, var(--line) 68%, transparent 32%);
+}
+
+.iconBox {
+  margin-bottom: 4px;
+  width: 120px;
+  height: 120px;
+  opacity: 0.85;
+}
+
+.cardText {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.cardTitle {
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--text);
+  max-width: 32ch;
+}
+
+.cardDetail {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 36ch;
+}

@@ -5,19 +5,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import VoiceMessage from "./VoiceMessage";
+import FitCard, { FitCardData } from "./FitCard";
 import styles from "./FitSection.module.css";
 
-type Card = {
-  title: string;
-  detail?: string;
-  icon?: string;
-  ariaLabel?: string;
-};
-
 /* В этом списке лежат пункты, где участие точно «да». */
-const fitYes: Card[] = [
+const fitYes: FitCardData[] = [
   {
     title: "ДА, ЕСЛИ",
     detail: "Готовы включиться всерьёз.",
@@ -48,7 +41,7 @@ const fitYes: Card[] = [
 ];
 
 /* В этом списке лежат пункты, где участие лучше отложить. */
-const fitNo: Card[] = [
+const fitNo: FitCardData[] = [
   {
     title: "НЕТ, ЕСЛИ",
     detail: "Нет времени или «просто посмотреть»",
@@ -151,6 +144,7 @@ export default function FitSection() {
           </p>
         </div>
 
+        {/* Здесь две ленты карточек и ниже голосовое сообщение. */}
         <div className={styles.stack}>
           <div className={`${styles.fitBlock} ${styles.fitYes}`}>
             <div
@@ -159,30 +153,7 @@ export default function FitSection() {
               aria-label="Подходит, если"
             >
               {fitYes.map((card) => (
-                <article
-                  key={card.title}
-                  className={styles.card}
-                  role="listitem"
-                  aria-label={card.ariaLabel}
-                >
-                  {card.icon ? (
-                    <div className={styles.iconBox}>
-                      <Image
-                        src={card.icon}
-                        alt=""
-                        width={120}
-                        height={120}
-                        priority={false}
-                      />
-                    </div>
-                  ) : null}
-                  <div className={styles.cardText}>
-                    <p className={styles.cardTitle}>{card.title}</p>
-                    {card.detail ? (
-                      <p className={styles.cardDetail}>{card.detail}</p>
-                    ) : null}
-                  </div>
-                </article>
+                <FitCard key={card.title} {...card} />
               ))}
             </div>
           </div>
@@ -194,30 +165,7 @@ export default function FitSection() {
               aria-label="Не подойдёт, если"
             >
               {fitNo.map((card) => (
-                <article
-                  key={card.title}
-                  className={styles.card}
-                  role="listitem"
-                  aria-label={card.ariaLabel}
-                >
-                  {card.icon ? (
-                    <div className={styles.iconBox}>
-                      <Image
-                        src={card.icon}
-                        alt=""
-                        width={120}
-                        height={120}
-                        priority={false}
-                      />
-                    </div>
-                  ) : null}
-                  <div className={styles.cardText}>
-                    <p className={styles.cardTitle}>{card.title}</p>
-                    {card.detail ? (
-                      <p className={styles.cardDetail}>{card.detail}</p>
-                    ) : null}
-                  </div>
-                </article>
+                <FitCard key={card.title} {...card} />
               ))}
             </div>
           </div>
