@@ -65,8 +65,6 @@ export default function VoiceMessage({
   const [isReady, setIsReady] = useState(false);
   /* Этот флаг сообщает, что воспроизведение не удалось. */
   const [hasError, setHasError] = useState(false);
-  /* Этот флаг отвечает за короткую приветственную анимацию полосок. */
-  const [intro, setIntro] = useState(true);
   /* В этом массиве лежат случайные параметры полосок, чтобы они не повторялись. */
   const bars = useMemo(() => buildWave(barCount, src), [barCount, src]);
   /* В этом массиве храним «живые» уровни громкости для каждой полоски. */
@@ -148,11 +146,6 @@ export default function VoiceMessage({
   }, [src]);
 
   /* Этот таймер отключает вступительную анимацию через секунду. */
-  useEffect(() => {
-    const timer = setTimeout(() => setIntro(false), 1300);
-    return () => clearTimeout(timer);
-  }, []);
-
   /* Эта функция запускает извлечение громкости и обновляет полоски в ритме аудио. */
   const startAnalyser = () => {
     const audio = audioRef.current;
@@ -294,17 +287,13 @@ export default function VoiceMessage({
               <span
                 key={index}
                 className={`${styles.bar} ${
-                  intro && !isPlaying ? styles.barIntro : ""
-                } ${isPlaying && !hasLiveLevel ? styles.barActive : ""}`}
+                  isPlaying && !hasLiveLevel ? styles.barActive : ""
+                }`}
                 style={{
                   height: `${bar.height}px`,
                   width: `${bar.width}px`,
                   transform: `scaleY(${scale.toFixed(3)})`,
                   background: bgColor,
-                  animationDelay:
-                    (!isPlaying && intro) || (!isPlaying && !hasLiveLevel)
-                      ? `${bar.delay}s`
-                      : undefined,
                   ["--dur" as string]: `${bar.duration}s`,
                   transition: hasLiveLevel
                     ? "transform 140ms ease"

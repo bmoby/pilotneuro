@@ -11,6 +11,8 @@
   display: grid;
   gap: 14px;
   margin-bottom: clamp(28px, 5vw, 44px);
+  text-align: center;
+  justify-items: center;
 }
 
 .title {
@@ -192,6 +194,12 @@
 
 .navBtnActive .stepLabel {
   color: var(--text);
+}
+
+@media (min-width: 960px) {
+  .lead {
+    justify-items: center;
+  }
 }
 
 /* Display */
