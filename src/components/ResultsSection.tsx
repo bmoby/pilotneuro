@@ -1,5 +1,5 @@
 /* Этот файл собирает секцию «Ожидаемые результаты».
-   Он повторяет блок из accueil.html: заголовок с анимацией букв, три иконки-видео и тексты этапов.
+   Он повторяет блок из accueil.html: статичный заголовок, три иконки-видео и тексты этапов.
    Он даёт человеку понять, чего он достигнет, и сразу перейти к программе. */
 
 "use client";
@@ -126,8 +126,6 @@ function createAnimator(video: HTMLVideoElement) {
 export default function ResultsSection() {
   /* В этом состоянии лежит текущий выбранный этап. */
   const [activeId, setActiveId] = useState(steps[0].id);
-  /* Здесь храним ссылку на заголовок, чтобы разбивать его на буквы. */
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
   /* Здесь храним все видео, чтобы запускать анимацию при выборе. */
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   /* Здесь держим менеджеры анимации для каждого ролика. */
@@ -136,65 +134,6 @@ export default function ResultsSection() {
   );
   /* Здесь запоминаем прошлый активный шаг, чтобы плавно выключать его. */
   const prevActiveRef = useRef<string | null>(steps[0].id);
-
-  /* Этот эффект готовит заголовок с посимвольным проявлением при скролле. */
-  useEffect(() => {
-    const el = titleRef.current;
-    if (!el || el.dataset.scrollWrapped) return;
-
-    const text = el.textContent?.trim() ?? "";
-    const frag = document.createDocumentFragment();
-    [...text].forEach((ch, idx) => {
-      const span = document.createElement("span");
-      span.className = styles.titleChar;
-      span.dataset.index = String(idx);
-      span.textContent = ch === " " ? "\u00a0" : ch;
-      frag.appendChild(span);
-    });
-    el.textContent = "";
-    el.classList.add(styles.scrollTitle);
-    el.appendChild(frag);
-    el.dataset.scrollWrapped = "1";
-
-    const clamp = (v: number, min: number, max: number) =>
-      Math.max(min, Math.min(max, v));
-
-    const updateOpacity = () => {
-      const vh = window.innerHeight || 1;
-      const start = vh;
-      const end = vh / 2;
-      const rect = el.getBoundingClientRect();
-      let progress = 1 - (rect.top - end) / Math.max(start - end, 1);
-      progress = clamp(progress, 0, 1);
-      const chars = el.querySelectorAll<HTMLElement>("span");
-      const total = chars.length || 1;
-      chars.forEach((span, idx) => {
-        const fill = clamp(progress * total - idx, 0, 1);
-        const opacity = 0.2 + 0.8 * fill;
-        span.style.opacity = opacity.toFixed(3);
-      });
-    };
-
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateOpacity();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    updateOpacity();
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
 
   /* Этот эффект подключает анимацию видеороликов. */
   useEffect(() => {
@@ -246,9 +185,7 @@ export default function ResultsSection() {
     <section className={styles.section} id="resultats" aria-labelledby="results-title">
       <div className={styles.wrap}>
         <div className={styles.lead}>
-          <h2 className={styles.title} ref={titleRef} id="results-title">
-            Ожидаемые результаты
-          </h2>
+          <h2 className={styles.title} id="results-title">Ожидаемые результаты</h2>
           <p className={styles.muted}>
             Только индивидуальные решения, никаких шаблонов
           </p>

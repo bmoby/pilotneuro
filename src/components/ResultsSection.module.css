@@ -21,18 +21,6 @@
   font-weight: 800;
 }
 
-.scrollTitle {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 0;
-}
-
-.titleChar {
-  display: inline-block;
-  opacity: 0.2;
-  transition: opacity 0.35s ease;
-}
-
 .muted {
   color: var(--muted);
 }
