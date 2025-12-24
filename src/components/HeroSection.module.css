@@ -24,7 +24,7 @@
 
 .heroTitle {
   margin: 0;
-  font-size: clamp(56px, 12vw, 96px);
+  font-size: clamp(32px, 7vw, 56px);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 800;
@@ -39,90 +39,11 @@
   display: inline-block;
 }
 
-.heroDraw {
-  --stroke: #0f1722;
-  --stroke-width: 1.6;
+.heroLogo {
   display: block;
-  width: clamp(260px, 90vw, 780px);
+  width: clamp(180px, 64vw, 420px);
   max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.05));
-  transition: opacity 0.3s ease-out;
-}
-
-@media (min-width: 960px) {
-  .heroDraw {
-    min-width: 500px;
-    width: clamp(500px, 38vw, 780px);
-  }
-}
-
-.heroDraw [data-trace-segment] {
-  fill: transparent;
-  stroke: var(--stroke);
-  stroke-width: var(--stroke-width);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: var(--len, 1200);
-  stroke-dashoffset: var(--len, 1200);
-  opacity: 0.9;
-  animation: hero-stroke var(--dur, 0.9s)
-      cubic-bezier(0.77, 0, 0.18, 1) forwards var(--delay, 0s),
-    hero-fade 1.05s ease-out forwards var(--delay, 0s),
-    hero-color var(--color-dur, 1.25s) ease-in-out forwards
-      var(--delay, 0s);
-}
-
-@keyframes hero-stroke {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes hero-fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes hero-color {
-  0% {
-    stroke: #ff0050;
-  }
-  30% {
-    stroke: #ffd500;
-  }
-  60% {
-    stroke: #00d08a;
-  }
-  85% {
-    stroke: #00a0ff;
-  }
-  100% {
-    stroke: #0f1722;
-  }
-}
-
-.heroFilled {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.35s ease-out 0.05s;
-}
-
-.isFilled .heroFilled {
-  opacity: 1;
-}
-
-.isFilled .heroDraw {
-  opacity: 0;
 }
 
 .lede {
