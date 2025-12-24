@@ -133,6 +133,17 @@
   margin: 0 auto;
 }
 
+.heroMedia {
+  width: min(350px, 92vw);
+  margin: 4px auto 0;
+}
+
+.heroVideo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .voiceArea {
   display: flex;
   justify-content: center;

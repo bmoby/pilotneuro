@@ -1,6 +1,6 @@
-/* Этот файл собирает HERO с логотипом и голосовым блоком.
-   Он показывает анимированный логотип PilotNeuro и короткий текст о курсе.
-   Он даёт возможность сразу послушать пример голосового сообщения. */
+/* Этот файл собирает HERO с логотипом, интро-видео и голосовым блоком.
+   Он показывает анимированный логотип PilotNeuro, короткий ролик и текст о курсе.
+   Он даёт возможность сразу послушать пример голосового сообщения и увидеть каску крупным планом. */
 
 "use client";
 
@@ -17,6 +17,8 @@ export default function HeroSection() {
   const [isLogoFilled, setIsLogoFilled] = useState(false);
   /* В этой ссылке держим сам SVG, чтобы настроить длины штрихов после загрузки. */
   const logoRef = useRef<SVGSVGElement | null>(null);
+  /* В этой ссылке держим элемент видео, чтобы запустить его без задержек. */
+  const introVideoRef = useRef<HTMLVideoElement | null>(null);
 
   /* Этот эффект запускает расчёт анимации обводки при первом рендере. */
   useEffect(() => {
@@ -57,6 +59,27 @@ export default function HeroSection() {
     );
 
     return () => window.clearTimeout(timer);
+  }, []);
+
+  /* Этот эффект принудительно стартует видео сразу, как только есть данные. */
+  useEffect(() => {
+    const video = introVideoRef.current;
+    if (!video) return;
+
+    const startPlayback = () => {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.catch(() => {});
+      }
+    };
+
+    if (video.readyState >= 2) {
+      startPlayback();
+      return;
+    }
+
+    video.addEventListener("loadeddata", startPlayback, { once: true });
+    return () => video.removeEventListener("loadeddata", startPlayback);
   }, []);
 
   return (
@@ -150,6 +173,32 @@ export default function HeroSection() {
                 />
               </span>
             </h1>
+          </div>
+
+          {/* Этот блок показывает короткое видео каски шириной 350px с автозапуском. */}
+          <div className={styles.heroMedia}>
+            <video
+              ref={introVideoRef}
+              className={styles.heroVideo}
+              preload="auto"
+              muted
+              playsInline
+              autoPlay
+              aria-label="Courte vidéo d'introduction sur le casque Formula"
+            >
+              <source
+                src="/formula_helmet-intro-hvc1.mp4"
+                type='video/mp4; codecs="hvc1"'
+              />
+              <source
+                src="/formula_helmet-intro-vp9.webm"
+                type='video/webm; codecs="vp9"'
+              />
+              <source
+                src="/formula_helmet-intro-h264.mp4"
+                type='video/mp4; codecs="avc1.42E01E"'
+              />
+            </video>
           </div>
 
           <p className={styles.lede}>
