@@ -57,25 +57,29 @@ export default function VoiceMessage({
   const barCount = 26;
   /* В этом объекте лежит аудио-элемент, чтобы управлять им напрямую. */
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
   /* Здесь храним, идёт ли сейчас загрузка. */
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   /* Здесь храним, идёт ли сейчас воспроизведение. */
   const [isPlaying, setIsPlaying] = useState(false);
   /* Этот флаг показывает, что файл уже готов к запуску. */
   const [isReady, setIsReady] = useState(false);
   /* Этот флаг сообщает, что воспроизведение не удалось. */
   const [hasError, setHasError] = useState(false);
+
   /* В этом массиве лежат случайные параметры полосок, чтобы они не повторялись. */
   const bars = useMemo(() => buildWave(barCount, src), [barCount, src]);
   /* В этом массиве храним «живые» уровни громкости для каждой полоски. */
   const [levels, setLevels] = useState<number[]>(() =>
     Array.from({ length: barCount }).map(() => 0)
   );
+
   /* Здесь лежат четыре мягких тона синего, чтобы цвет выглядел светлее. */
   const palette = useMemo(
     () => ["#5a8af3ff", "#477ed5ff", "#60a5fa", "#93c5fd"],
     []
   );
+
   /* Эти ссылки держат аудио-контекст и анализатор, чтобы извлекать громкость. */
   const audioCtxRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -85,74 +89,37 @@ export default function VoiceMessage({
     Array.from({ length: barCount }).map(() => 0)
   );
 
-  /* Этот эффект создаёт аудио-элемент, следит за событиями и убирает его при уходе. */
+  /* Этот эффект нужен только для очистки ресурсов при уходе со страницы. */
   useEffect(() => {
-    const audio = new Audio(src);
-    audio.preload = "auto";
-    audioRef.current = audio;
-
-    const handleLoadStart = () => {
-      setIsLoading(true);
-      setIsPlaying(false);
-      setIsReady(false);
-      setHasError(false);
-      setLevels((prev) => prev.map(() => 0));
-    };
-    const handleCanPlay = () => {
-      setIsReady(true);
-      setIsLoading(false);
-    };
-    const handlePlay = () => {
-      setIsPlaying(true);
-      setIsLoading(false);
-    };
-    const handlePause = () => {
-      setIsPlaying(false);
-      setLevels((prev) => prev.map(() => 0));
-    };
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setLevels((prev) => prev.map(() => 0));
-    };
-    const handleWaiting = () => setIsLoading(true);
-    const handleError = () => {
-      setHasError(true);
-      setIsLoading(false);
-      setIsPlaying(false);
-      setLevels((prev) => prev.map(() => 0));
-    };
-
-    audio.addEventListener("loadstart", handleLoadStart);
-    audio.addEventListener("canplaythrough", handleCanPlay);
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handleEnded);
-    audio.addEventListener("waiting", handleWaiting);
-    audio.addEventListener("error", handleError);
-    audio.load();
-
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
-      audio.removeEventListener("loadstart", handleLoadStart);
-      audio.removeEventListener("canplaythrough", handleCanPlay);
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener("waiting", handleWaiting);
-      audio.removeEventListener("error", handleError);
-      audioRef.current = null;
+      const audio = audioRef.current;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        audioRef.current = null;
+      }
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close().catch(() => { });
+        audioCtxRef.current = null;
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
-  }, [src]);
+  }, []);
 
-  /* Этот таймер отключает вступительную анимацию через секунду. */
   /* Эта функция запускает извлечение громкости и обновляет полоски в ритме аудио. */
   const startAnalyser = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (!audioCtxRef.current) {
-      const ctx = new AudioContext();
+      // Создаем контекст только по требованию
+      const AudioContextClass =
+        window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      const ctx = new AudioContextClass();
       const source = ctx.createMediaElementSource(audio);
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 128;
@@ -168,7 +135,7 @@ export default function VoiceMessage({
 
     const ctx = audioCtxRef.current;
     if (ctx?.state === "suspended") {
-      ctx.resume().catch(() => {});
+      ctx.resume().catch(() => { });
     }
 
     const analyser = analyserRef.current;
@@ -220,17 +187,75 @@ export default function VoiceMessage({
     return undefined;
   }, [isPlaying, bars.length]);
 
+  /* Инициализация аудио и обработчиков событий */
+  const initializeAudio = () => {
+    if (audioRef.current) return audioRef.current;
+
+    const audio = new Audio(src);
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    const handleLoadStart = () => {
+      setIsLoading(true);
+      // Removed setIsPlaying(false) here to prevent overwriting playing state during race condition
+      setIsReady(false);
+      setHasError(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleCanPlay = () => {
+      setIsReady(true);
+      setIsLoading(false);
+    };
+    const handlePlay = () => {
+      setIsPlaying(true);
+      setIsLoading(false);
+    };
+    const handlePause = () => {
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+    const handleWaiting = () => setIsLoading(true);
+    const handleError = () => {
+      setHasError(true);
+      setIsLoading(false);
+      setIsPlaying(false);
+      setLevels((prev) => prev.map(() => 0));
+    };
+
+    audio.addEventListener("loadstart", handleLoadStart);
+    audio.addEventListener("canplaythrough", handleCanPlay);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("waiting", handleWaiting);
+    audio.addEventListener("error", handleError);
+
+    return audio;
+  };
+
   /* Эта функция запускает звук или ставит его на паузу. */
   const handleToggle = async () => {
-    const audio = audioRef.current;
-    if (!audio || hasError) return;
+    if (hasError) return;
+
+    // Сначала получаем (или создаём) аудио
+    let audio = audioRef.current;
+    if (!audio) {
+      // Ставим Loading сразу, чтобы показать реакцию на клик
+      setIsLoading(true);
+      audio = initializeAudio();
+    }
 
     if (isPlaying) {
       audio.pause();
       return;
     }
 
-    if (!isReady) {
+    // Если аудио уже есть, оно может быть не готово
+    if (audio.readyState < 2) {
       setIsLoading(true);
     }
 
@@ -245,7 +270,6 @@ export default function VoiceMessage({
 
   return (
     <div className={styles.shell} role="group" aria-label={title}>
-      {/* Этот блок показывает название сообщения и короткий статус при загрузке/ошибке. */}
       <div className={styles.header}>
         <div className={styles.label}>
           <span className={styles.title}>{title}</span>
@@ -260,7 +284,6 @@ export default function VoiceMessage({
         ) : null}
       </div>
 
-      {/* Этот блок объединяет кнопку и визуализацию волн. */}
       <div className={styles.player}>
         <button
           type="button"
@@ -286,9 +309,8 @@ export default function VoiceMessage({
             return (
               <span
                 key={index}
-                className={`${styles.bar} ${
-                  isPlaying && !hasLiveLevel ? styles.barActive : ""
-                }`}
+                className={`${styles.bar} ${isPlaying && !hasLiveLevel ? styles.barActive : ""
+                  }`}
                 style={{
                   height: `${bar.height}px`,
                   width: `${bar.width}px`,
