@@ -12,26 +12,19 @@ export default function HeroSection() {
     <section className={styles.hero}>
       <div className={styles.wrap}>
         <div className={styles.heroBody}>
-          <div className={styles.heroHead}>
-            {/* LOGO TEXTUEL: Чистый, простой, эффективный. */}
-            <div className={styles.brandName}>PILOT NEURO</div>
+          {/* LOGO TEXTUEL */}
+          <div className={styles.brandName}>PILOT NEURO</div>
 
-            <h1 className={styles.heroTitle}>
-              Научитесь создавать <br />
-              с Искусственным Интеллектом
-            </h1>
-          </div>
-
-          <p className={styles.lede}>
-            Уникальный курс для освоения инструментов ИИ и создания собственных
-            веб-продуктов в рекордные сроки.
-          </p>
-
-          {/* Этот блок показывает компактное видео каски с автозапуском. */}
-          {/* Вся логика видео вынесена в клиентский компонент HeroVideo. */}
+          {/* VIDEO */}
           <HeroVideo />
 
-          {/* Этот блок ставит голосовое сообщение точно по центру. */}
+          {/* TITRE */}
+          <h1 className={styles.heroTitle}>
+            Научитесь создавать <br />
+            с Искусственным Интеллектом
+          </h1>
+
+          {/* VOICE MESSAGE */}
           <div
             className={styles.voiceArea}
             aria-label="Пример голосового сообщения"

@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  padding: clamp(64px, 9vw, 110px) 0 clamp(90px, 12vw, 140px);
+  padding: clamp(64px, 9vw, 110px) 0 clamp(40px, 6vw, 80px);
 }
 
 .wrap {
@@ -18,9 +18,8 @@
 }
 
 .heroHead {
-  display: grid;
-  gap: 24px;
-  align-items: center;
+  /* Removed as elements are flattened */
+  display: contents;
 }
 
 .brandName {
@@ -29,41 +28,26 @@
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  /* Wide tracking for premium feel */
   color: var(--accent);
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  /* Reset margin as gap controls spacing now */
 }
 
 .heroTitle {
-  margin: 0;
   font-size: clamp(36px, 8vw, 64px);
-  /* Slightly refined scale */
   line-height: 1.1;
   letter-spacing: -0.04em;
-  /* Tighter tracking for headlines */
   font-weight: 800;
   color: var(--text);
   margin: 0;
   max-width: 20ch;
 }
 
-
-
-.lede {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 52ch;
-  margin: 0 auto;
-}
-
-
-
 .voiceArea {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .srOnly {
