@@ -20,8 +20,7 @@ export default function HeroSection() {
 
           {/* TITRE */}
           <h1 className={styles.heroTitle}>
-            Научитесь создавать <br />
-            с Искусственным Интеллектом
+            Станьте архитектором решений на базе ИИ
           </h1>
 
           {/* VOICE MESSAGE */}

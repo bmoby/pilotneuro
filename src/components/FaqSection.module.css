@@ -1,0 +1,105 @@
+.section {
+    padding: 80px 0 120px;
+}
+
+.wrap {
+    width: min(1240px, 100% - clamp(32px, 6vw, 88px));
+    margin-inline: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 60ch;
+    margin-inline: auto;
+}
+
+.title {
+    margin-bottom: 16px;
+    font-size: clamp(32px, 6vw, 48px);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.faqList {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin-inline: auto;
+    border-top: 1px solid var(--line);
+}
+
+.details {
+    border-bottom: 1px solid var(--line);
+}
+
+.details[open] .summary {
+    padding-bottom: 12px;
+}
+
+.summary {
+    padding: 24px 0;
+    cursor: pointer;
+    list-style: none;
+    /* Hide default marker */
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.summary::-webkit-details-marker {
+    display: none;
+}
+
+.summary:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.content {
+    padding-bottom: 24px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 65ch;
+}
+
+.content a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Custom Icon for summary if desired, or simple text is fine as per "exactly as is" */
+/* The example HTML had simple text. I will stick to clean text. */
+
+.cta {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.btnGhost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--text);
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.btnGhost:hover {
+    transform: scale(1.02);
+}

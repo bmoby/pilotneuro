@@ -8,6 +8,7 @@ import FitSection from "../components/FitSection";
 import ResultsSection from "../components/ResultsSection";
 import StudentVoicesSection from "../components/StudentVoicesSection";
 import CourseFlowSection from "../components/CourseFlowSection";
+import FaqSection from "../components/FaqSection";
 
 /* Этот компонент выводит только HERO с логотипом и голосовым сообщением. */
 export default function Home() {
@@ -23,6 +24,8 @@ export default function Home() {
       <StudentVoicesSection />
       {/* Этот блок описывает, как проходит курс: ритм, записи и формат. */}
       <CourseFlowSection />
+      {/* Этот блок отвечает на частые вопросы. */}
+      <FaqSection />
     </main>
   );
 }
