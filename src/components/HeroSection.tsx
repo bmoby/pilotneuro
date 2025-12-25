@@ -16,6 +16,59 @@ export default function HeroSection() {
   /* Здесь держим второй ролик, чтобы сразу показать бесконечную версию. */
   const loopVideoRef = useRef<HTMLVideoElement | null>(null);
 
+  /* Этот эффект заставляет Safari на телефонах не блокировать автоматический старт. */
+  useEffect(() => {
+    const intro = introVideoRef.current;
+    const loop = loopVideoRef.current;
+    if (!intro || !loop) return;
+
+    intro.muted = true;
+    loop.muted = true;
+    intro.playsInline = true;
+    loop.playsInline = true;
+    intro.setAttribute("muted", "true");
+    loop.setAttribute("muted", "true");
+    intro.setAttribute("playsinline", "true");
+    loop.setAttribute("playsinline", "true");
+    intro.setAttribute("webkit-playsinline", "true");
+    loop.setAttribute("webkit-playsinline", "true");
+
+    const unlockPlayback = () => {
+      const introPlay = intro.play();
+      if (introPlay && typeof introPlay.then === "function") {
+        introPlay.catch(() => {});
+      }
+      const loopPlay = loop.play();
+      if (loopPlay && typeof loopPlay.then === "function") {
+        loopPlay
+          .then(() => {
+            loop.pause();
+            loop.currentTime = 0;
+          })
+          .catch(() => {});
+      } else {
+        loop.pause();
+        loop.currentTime = 0;
+      }
+    };
+
+    unlockPlayback();
+
+    const handleFirstTap = () => {
+      unlockPlayback();
+      document.removeEventListener("touchstart", handleFirstTap);
+      document.removeEventListener("click", handleFirstTap);
+    };
+
+    document.addEventListener("touchstart", handleFirstTap, { once: true });
+    document.addEventListener("click", handleFirstTap, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", handleFirstTap);
+      document.removeEventListener("click", handleFirstTap);
+    };
+  }, []);
+
   /* Этот эффект принудительно стартует видео сразу, как только есть данные. */
   useEffect(() => {
     const video = introVideoRef.current;
