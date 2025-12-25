@@ -1,0 +1,55 @@
+.heroMedia {
+    width: clamp(280px, 52vw, 480px);
+    margin: 2px auto 0;
+    position: relative;
+    display: grid;
+}
+
+.heroMedia::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: none;
+}
+
+.heroVideo {
+    width: 100%;
+    height: auto;
+    display: block;
+    -webkit-mask-image: radial-gradient(ellipse at center,
+            rgba(0, 0, 0, 1) 62%,
+            rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(ellipse at center,
+            rgba(0, 0, 0, 1) 62%,
+            rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+.heroVideoLoop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.heroVideoVisible {
+    opacity: 1;
+}
+
+.heroVideoHidden {
+    opacity: 0;
+}
+
+@media (max-width: 767px) {
+    .heroMedia {
+        width: 350px;
+        max-width: 100%;
+    }
+}
