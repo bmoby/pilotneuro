@@ -43,7 +43,6 @@
   --flow-pad: var(--pad, 28px);
   scroll-padding-inline: var(--flow-pad);
   padding: 2px var(--flow-pad) 18px;
-  margin-inline: calc(var(--flow-pad) * -1);
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;

@@ -99,7 +99,7 @@ export default function VoiceMessage({
         audioRef.current = null;
       }
       if (audioCtxRef.current) {
-        audioCtxRef.current.close().catch(() => { });
+        audioCtxRef.current.close().catch(() => {});
         audioCtxRef.current = null;
       }
       if (rafRef.current) {
@@ -116,6 +116,7 @@ export default function VoiceMessage({
     if (!audioCtxRef.current) {
       // Создаем контекст только по требованию
       const AudioContextClass =
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         window.AudioContext || (window as any).webkitAudioContext;
       if (!AudioContextClass) return;
 
@@ -135,7 +136,7 @@ export default function VoiceMessage({
 
     const ctx = audioCtxRef.current;
     if (ctx?.state === "suspended") {
-      ctx.resume().catch(() => { });
+      ctx.resume().catch(() => {});
     }
 
     const analyser = analyserRef.current;
@@ -309,8 +310,9 @@ export default function VoiceMessage({
             return (
               <span
                 key={index}
-                className={`${styles.bar} ${isPlaying && !hasLiveLevel ? styles.barActive : ""
-                  }`}
+                className={`${styles.bar} ${
+                  isPlaying && !hasLiveLevel ? styles.barActive : ""
+                }`}
                 style={{
                   height: `${bar.height}px`,
                   width: `${bar.width}px`,
