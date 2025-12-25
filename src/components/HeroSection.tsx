@@ -1,7 +1,7 @@
 /* Этот файл собирает HERO с логотипом, интро-видео и голосовым блоком.
    Он показывает статичный чёрный логотип PilotNeuro, короткий ролик и текст о курсе.
    Он даёт возможность сразу послушать пример голосового сообщения и увидеть каску крупным планом.
-   Он подставляет облегчённое видео на телефонах, чтобы оно стартовало быстрее. */
+   Он подставляет облегчённое видео на телефонах, чтобы оно стартовало быстрее, и после конца плавно включает петлю. */
 
 "use client";
 
@@ -13,6 +13,8 @@ import styles from "./HeroSection.module.css";
 export default function HeroSection() {
   /* В этой ссылке держим элемент видео, чтобы запустить его без задержек. */
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
+  /* Здесь держим второй ролик, чтобы сразу показать бесконечную версию. */
+  const loopVideoRef = useRef<HTMLVideoElement | null>(null);
 
   /* Этот эффект принудительно стартует видео сразу, как только есть данные. */
   useEffect(() => {
@@ -35,6 +37,48 @@ export default function HeroSection() {
     return () => video.removeEventListener("loadeddata", startPlayback);
   }, []);
 
+  /* Этот эффект плавно включает зацикленную часть без вспышек после интро. */
+  useEffect(() => {
+    const intro = introVideoRef.current;
+    const loop = loopVideoRef.current;
+    if (!intro || !loop) return;
+
+    let loopReady = loop.readyState >= 2;
+    let introEnded = false;
+
+    const startLoop = () => {
+      loop.classList.add(styles.heroVideoVisible);
+      const loopPlay = loop.play();
+      if (loopPlay && typeof loopPlay.then === "function") {
+        loopPlay.catch(() => {});
+      }
+      intro.classList.add(styles.heroVideoHidden);
+    };
+
+    const markLoopReady = () => {
+      loopReady = true;
+      if (introEnded) {
+        startLoop();
+      }
+    };
+
+    if (!loopReady) {
+      loop.addEventListener("loadeddata", markLoopReady, { once: true });
+    }
+
+    const swapToLoop = () => {
+      introEnded = true;
+      if (!loopReady) return;
+      startLoop();
+    };
+
+    intro.addEventListener("ended", swapToLoop);
+    return () => {
+      intro.removeEventListener("ended", swapToLoop);
+      loop.removeEventListener("loadeddata", markLoopReady);
+    };
+  }, []);
+
   return (
     /* Этот блок формирует верхнюю секцию с логотипом и описанием. */
     <section className={styles.hero} aria-labelledby="hero-title">
@@ -53,21 +97,6 @@ export default function HeroSection() {
             >
               {/* Сначала отдаём мобильные версии, чтобы телефон тратил меньше трафика. */}
               <source
-                media="(max-width: 767px)"
-                src="/two_helmets_mobile-intro-hvc1.mp4"
-                type='video/mp4; codecs="hvc1"'
-              />
-              <source
-                media="(max-width: 767px)"
-                src="/two_helmets_mobile-intro-vp9.webm"
-                type='video/webm; codecs="vp9"'
-              />
-              <source
-                media="(max-width: 767px)"
-                src="/two_helmets_mobile-intro-h264.mp4"
-                type='video/mp4; codecs="avc1.42E01E"'
-              />
-              <source
                 src="/two_helmets-intro-hvc1.mp4"
                 type='video/mp4; codecs="hvc1"'
               />
@@ -77,6 +106,44 @@ export default function HeroSection() {
               />
               <source
                 src="/two_helmets-intro-h264.mp4"
+                type='video/mp4; codecs="avc1.42E01E"'
+              />
+            </video>
+            {/* Этот второй ролик загружается заранее и крутится бесконечно после первого. */}
+            <video
+              ref={loopVideoRef}
+              className={`${styles.heroVideo} ${styles.heroVideoLoop}`}
+              preload="auto"
+              muted
+              playsInline
+              loop
+              aria-label="Suite en boucle sur le casque Formula"
+            >
+              <source
+                media="(max-width: 767px)"
+                src="/two_helmets_mobile_loop-intro-hvc1.mp4"
+                type='video/mp4; codecs="hvc1"'
+              />
+              <source
+                media="(max-width: 767px)"
+                src="/two_helmets_mobile_loop-intro-vp9.webm"
+                type='video/webm; codecs="vp9"'
+              />
+              <source
+                media="(max-width: 767px)"
+                src="/two_helmets_mobile_loop-intro-h264.mp4"
+                type='video/mp4; codecs="avc1.42E01E"'
+              />
+              <source
+                src="/two_helmets_loop-intro-hvc1.mp4"
+                type='video/mp4; codecs="hvc1"'
+              />
+              <source
+                src="/two_helmets_loop-intro-vp9.webm"
+                type='video/webm; codecs="vp9"'
+              />
+              <source
+                src="/two_helmets_loop-intro-h264.mp4"
                 type='video/mp4; codecs="avc1.42E01E"'
               />
             </video>
