@@ -1,12 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap");
 
 :root {
-  --bg: #e8e7e4;
-  --text: #0f1722;
-  --muted: #5a6473;
-  --line: #d6d9df;
-  --accent: #0f1722;
-  --accent-contrast: #e4e5e8;
+  /* Palette Minimaliste & Épurée */
+  --bg: #F5F5F7;
+  /* Fond très clair, style "papier" premium */
+  --text: #1D1D1F;
+  /* Noir adouci pour le texte principal */
+  --muted: #86868B;
+  /* Gris neutre pour les textes secondaires */
+  --line: #D2D2D7;
+  /* Lignes de séparation subtiles */
+  --accent: #000000;
+  /* Noir pur pour les actions/boutons */
+  --accent-contrast: #FFFFFF;
+
+  /* Spacing system (optional usage in components) */
+  --space-unit: 8px;
 }
 
 * {
@@ -15,16 +24,16 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
   margin: 0;
-  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-  background: var(--bg-dynamic, var(--bg));
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  line-height: 1.75;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
 a {

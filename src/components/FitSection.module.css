@@ -1,5 +1,5 @@
 .section {
-  padding: clamp(68px, 10vw, 120px) 0 clamp(78px, 12vw, 140px);
+  padding: clamp(80px, 10vw, 120px) 0 clamp(80px, 10vw, 120px);
 }
 
 .wrap {

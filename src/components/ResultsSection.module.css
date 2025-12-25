@@ -1,6 +1,6 @@
 .section {
   padding: clamp(80px, 12vw, 140px) 0 clamp(100px, 14vw, 180px);
-  background: #e2e5e8;
+  background: var(--bg);
 }
 
 .wrap {
@@ -80,77 +80,59 @@
   overflow: hidden;
   position: relative;
   --nav-top-fade: linear-gradient(180deg, transparent 0%, black 1%, black 100%);
-  clip-path: polygon(
-    var(--nav-corner-cut) 0,
-    calc(100% - var(--nav-corner-cut)) 0,
-    100% var(--nav-corner-cut),
-    100% calc(100% - var(--nav-corner-cut)),
-    calc(100% - var(--nav-corner-cut)) 100%,
-    var(--nav-corner-cut) 100%,
-    0 calc(100% - var(--nav-corner-cut)),
-    0 var(--nav-corner-cut)
-  );
+  clip-path: polygon(var(--nav-corner-cut) 0,
+      calc(100% - var(--nav-corner-cut)) 0,
+      100% var(--nav-corner-cut),
+      100% calc(100% - var(--nav-corner-cut)),
+      calc(100% - var(--nav-corner-cut)) 100%,
+      var(--nav-corner-cut) 100%,
+      0 calc(100% - var(--nav-corner-cut)),
+      0 var(--nav-corner-cut));
   -webkit-mask-image: var(--nav-top-fade),
-    radial-gradient(
-      circle at 0 0,
+    radial-gradient(circle at 0 0,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 100% 0,
+      black 120%),
+    radial-gradient(circle at 100% 0,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
+      black 120%),
+    radial-gradient(circle at 100% 100%,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 0 100%,
+      black 120%),
+    radial-gradient(circle at 0 100%,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    );
+      black 120%);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   -webkit-mask-composite: source-in, source-in, source-in, source-in;
   mask-image: var(--nav-top-fade),
-    radial-gradient(
-      circle at 0 0,
+    radial-gradient(circle at 0 0,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 100% 0,
+      black 120%),
+    radial-gradient(circle at 100% 0,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
+      black 120%),
+    radial-gradient(circle at 100% 100%,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    ),
-    radial-gradient(
-      circle at 0 100%,
+      black 120%),
+    radial-gradient(circle at 0 100%,
       transparent 0,
       transparent var(--nav-corner-cut),
       black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%
-    );
+      black 120%);
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
   mask-mode: alpha;

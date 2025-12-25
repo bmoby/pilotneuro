@@ -1,5 +1,5 @@
 .section {
-  padding: clamp(74px, 11vw, 130px) 0 clamp(88px, 13vw, 150px);
+  padding: clamp(80px, 10vw, 120px) 0 clamp(80px, 10vw, 120px);
 }
 
 .wrap {
@@ -61,7 +61,7 @@
   border-radius: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 -1px 0 rgba(15, 17, 21, 0.06);
-  background: var(--card, color-mix(in srgb, var(--bg) 82%, #ffffff 18%));
+  background: #FFFFFF;
   padding: 34px;
   display: grid;
   align-content: start;
@@ -101,9 +101,4 @@
   line-height: 1.7;
   font-size: 15px;
   margin-top: 18px;
-}
-
-@media (min-width: 1024px) {
-  .rail {
-  }
 }

@@ -3,7 +3,7 @@
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, var(--line) 68%, transparent 32%);
   box-shadow: 0 6px 16px rgba(15, 17, 34, 0.04);
-  background: color-mix(in srgb, var(--card) 92%, #ffffff 8%);
+  background: #FFFFFF;
   padding: 28px 24px;
   display: grid;
   grid-template-columns: 1fr;

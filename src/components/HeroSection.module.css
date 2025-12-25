@@ -10,7 +10,8 @@
 
 .heroBody {
   display: grid;
-  gap: clamp(20px, 4vw, 40px);
+  gap: clamp(32px, 5vw, 60px);
+  /* Increased gap for airiness */
   align-items: center;
   justify-items: center;
   text-align: center;
@@ -18,33 +19,35 @@
 
 .heroHead {
   display: grid;
-  gap: 18px;
+  gap: 24px;
   align-items: center;
+}
+
+.brandName {
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  /* Wide tracking for premium feel */
+  color: var(--accent);
+  margin-bottom: 8px;
 }
 
 .heroTitle {
   margin: 0;
-  font-size: clamp(32px, 7vw, 56px);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  font-size: clamp(36px, 8vw, 64px);
+  /* Slightly refined scale */
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  /* Tighter tracking for headlines */
   font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
+  color: var(--text);
+  margin: 0;
+  max-width: 20ch;
 }
 
-.logoWrap {
-  position: relative;
-  display: inline-block;
-}
 
-.heroLogo {
-  display: block;
-  width: clamp(180px, 64vw, 420px);
-  max-width: 100%;
-  height: auto;
-}
 
 .lede {
   color: var(--muted);
