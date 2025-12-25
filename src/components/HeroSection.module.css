@@ -55,7 +55,7 @@
 }
 
 .heroMedia {
-  width: clamp(180px, 52vw, 480px);
+  width: clamp(280px, 52vw, 480px);
   margin: 2px auto 0;
   position: relative;
 }
