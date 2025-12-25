@@ -107,48 +107,22 @@
   animation: playPulse var(--dur, 1.35s) ease-in-out infinite;
 }
 
-.loading {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text);
-  animation: pulseDot 0.9s ease-in-out infinite alternate;
-}
-
-@keyframes playPulse {
-  0% {
-    transform: translateY(0) scaleY(0.85);
-  }
-
-  40% {
-    transform: translateY(-3px) scaleY(1.2);
-  }
-
-  70% {
-    transform: translateY(-1px) scaleY(0.95);
-  }
-
-  100% {
-    transform: translateY(0) scaleY(0.9);
-  }
-}
-
-@keyframes pulseDot {
-  from {
-    transform: scale(0.85);
-    opacity: 0.6;
-  }
-
+@keyframes spin {
   to {
-    transform: scale(1.1);
-    opacity: 1;
+    transform: rotate(360deg);
   }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--text);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: block;
+}
+
+.loadingState {
+  cursor: wait;
 }

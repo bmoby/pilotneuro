@@ -66,6 +66,11 @@ export default function VoiceMessage({
   const [isReady, setIsReady] = useState(false);
   /* Этот флаг сообщает, что воспроизведение не удалось. */
   const [hasError, setHasError] = useState(false);
+  /* Флаг для минимальной длительности спиннера (минимум 1 оборот - 800мс) */
+  const [isMinimumLoading, setIsMinimumLoading] = useState(false);
+
+  /* Показывать спиннер если идет реальная загрузка ИЛИ если еще не прошло минимальное время */
+  const showSpinner = isLoading || isMinimumLoading;
 
   /* В этом массиве лежат случайные параметры полосок, чтобы они не повторялись. */
   const bars = useMemo(() => buildWave(barCount, src), [barCount, src]);
@@ -198,7 +203,10 @@ export default function VoiceMessage({
 
     const handleLoadStart = () => {
       setIsLoading(true);
-      // Removed setIsPlaying(false) here to prevent overwriting playing state during race condition
+      // Стартуем минимальную анимацию
+      setIsMinimumLoading(true);
+      setTimeout(() => setIsMinimumLoading(false), 800);
+
       setIsReady(false);
       setHasError(false);
       setLevels((prev) => prev.map(() => 0));
@@ -247,6 +255,9 @@ export default function VoiceMessage({
     if (!audio) {
       // Ставим Loading сразу, чтобы показать реакцию на клик
       setIsLoading(true);
+      setIsMinimumLoading(true);
+      setTimeout(() => setIsMinimumLoading(false), 800);
+
       audio = initializeAudio();
     }
 
@@ -258,6 +269,8 @@ export default function VoiceMessage({
     // Если аудио уже есть, оно может быть не готово
     if (audio.readyState < 2) {
       setIsLoading(true);
+      setIsMinimumLoading(true);
+      setTimeout(() => setIsMinimumLoading(false), 800);
     }
 
     try {
@@ -275,11 +288,6 @@ export default function VoiceMessage({
         <div className={styles.label}>
           <span className={styles.title}>{title}</span>
         </div>
-        {isLoading && !hasError ? (
-          <div className={styles.loading} aria-live="polite">
-            <span className={styles.dot} aria-hidden="true" />
-          </div>
-        ) : null}
         {hasError ? (
           <div className={styles.note}>Lecture impossible</div>
         ) : null}
@@ -288,40 +296,46 @@ export default function VoiceMessage({
       <div className={styles.player}>
         <button
           type="button"
-          className={styles.control}
+          className={`${styles.control} ${showSpinner ? styles.loadingState : ""}`}
           onClick={handleToggle}
-          disabled={hasError}
+          disabled={hasError || showSpinner}
           aria-pressed={isPlaying}
           aria-label={isPlaying ? "Mettre sur pause" : "Lire le message vocal"}
+          data-loading={showSpinner}
         >
-          <span aria-hidden="true" className={styles.icon}>
-            {isPlaying ? (
-              /* PAUSE ICON: Minimalist two bars */
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect x="3" y="2" width="2.5" height="10" rx="1" />
-                <rect x="8.5" y="2" width="2.5" height="10" rx="1" />
-              </svg>
-            ) : (
-              /* PLAY ICON: Minimalist triangle */
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.5547 6.16016C12.2214 6.54506 12.2214 7.45494 11.5547 7.83984L4.05469 12.1697C3.38802 12.5546 2.55469 12.0997 2.55469 11.3299L2.55469 2.67013C2.55469 1.90033 3.38802 1.44539 4.05469 1.83029L11.5547 6.16016Z"
-                />
-              </svg>
-            )}
-          </span>
+          {showSpinner ? (
+            /* Spinner instead of Icon when loading */
+            <span className={styles.spinner} />
+          ) : (
+            <span aria-hidden="true" className={styles.icon}>
+              {isPlaying ? (
+                /* PAUSE ICON: Minimalist two bars */
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="3" y="2" width="2.5" height="10" rx="1" />
+                  <rect x="8.5" y="2" width="2.5" height="10" rx="1" />
+                </svg>
+              ) : (
+                /* PLAY ICON: Minimalist triangle */
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.5547 6.16016C12.2214 6.54506 12.2214 7.45494 11.5547 7.83984L4.05469 12.1697C3.38802 12.5546 2.55469 12.0997 2.55469 11.3299L2.55469 2.67013C2.55469 1.90033 3.38802 1.44539 4.05469 1.83029L11.5547 6.16016Z"
+                  />
+                </svg>
+              )}
+            </span>
+          )}
         </button>
 
         <div className={styles.wave} aria-hidden="true">
