@@ -46,7 +46,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--text) 10%, #ffffff 90%);
+  background: transparent;
+  border: 1px solid var(--text);
   color: var(--text);
   font-weight: 700;
   font-size: 15px;
@@ -54,14 +55,16 @@
   cursor: pointer;
   transition: transform 140ms ease;
   box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .icon {
-  font-size: 15px;
-  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 14px;
+  height: 14px;
 }
 
 .control:hover {
@@ -72,11 +75,13 @@
   opacity: 0.35;
   cursor: not-allowed;
   transform: none;
+  border-color: var(--muted);
 }
 
 .controlPlaying {
-  background: color-mix(in srgb, var(--text) 88%, #ffffff 12%);
-  color: var(--accent-contrast);
+  background: transparent;
+  border-color: var(--text);
+  color: var(--text);
 }
 
 .wave {
@@ -122,12 +127,15 @@
   0% {
     transform: translateY(0) scaleY(0.85);
   }
+
   40% {
     transform: translateY(-3px) scaleY(1.2);
   }
+
   70% {
     transform: translateY(-1px) scaleY(0.95);
   }
+
   100% {
     transform: translateY(0) scaleY(0.9);
   }
@@ -138,6 +146,7 @@
     transform: scale(0.85);
     opacity: 0.6;
   }
+
   to {
     transform: scale(1.1);
     opacity: 1;

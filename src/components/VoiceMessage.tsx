@@ -99,7 +99,7 @@ export default function VoiceMessage({
         audioRef.current = null;
       }
       if (audioCtxRef.current) {
-        audioCtxRef.current.close().catch(() => {});
+        audioCtxRef.current.close().catch(() => { });
         audioCtxRef.current = null;
       }
       if (rafRef.current) {
@@ -136,7 +136,7 @@ export default function VoiceMessage({
 
     const ctx = audioCtxRef.current;
     if (ctx?.state === "suspended") {
-      ctx.resume().catch(() => {});
+      ctx.resume().catch(() => { });
     }
 
     const analyser = analyserRef.current;
@@ -295,7 +295,32 @@ export default function VoiceMessage({
           aria-label={isPlaying ? "Mettre sur pause" : "Lire le message vocal"}
         >
           <span aria-hidden="true" className={styles.icon}>
-            {isPlaying ? "⏸" : "▶"}
+            {isPlaying ? (
+              /* PAUSE ICON: Minimalist two bars */
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="3" y="2" width="2.5" height="10" rx="1" />
+                <rect x="8.5" y="2" width="2.5" height="10" rx="1" />
+              </svg>
+            ) : (
+              /* PLAY ICON: Minimalist triangle */
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.5547 6.16016C12.2214 6.54506 12.2214 7.45494 11.5547 7.83984L4.05469 12.1697C3.38802 12.5546 2.55469 12.0997 2.55469 11.3299L2.55469 2.67013C2.55469 1.90033 3.38802 1.44539 4.05469 1.83029L11.5547 6.16016Z"
+                />
+              </svg>
+            )}
           </span>
         </button>
 
@@ -310,9 +335,8 @@ export default function VoiceMessage({
             return (
               <span
                 key={index}
-                className={`${styles.bar} ${
-                  isPlaying && !hasLiveLevel ? styles.barActive : ""
-                }`}
+                className={`${styles.bar} ${isPlaying && !hasLiveLevel ? styles.barActive : ""
+                  }`}
                 style={{
                   height: `${bar.height}px`,
                   width: `${bar.width}px`,
