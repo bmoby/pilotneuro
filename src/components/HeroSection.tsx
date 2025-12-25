@@ -51,15 +51,15 @@ export default function HeroSection() {
               aria-label="Courte vidéo d'introduction sur le casque Formula"
             >
               <source
-                src="/formula_helmet-intro-hvc1.mp4"
+                src="/two_helmets-intro-hvc1.mp4"
                 type='video/mp4; codecs="hvc1"'
               />
               <source
-                src="/formula_helmet-intro-vp9.webm"
+                src="/two_helmets-intro-vp9.webm"
                 type='video/webm; codecs="vp9"'
               />
               <source
-                src="/formula_helmet-intro-h264.mp4"
+                src="/two_helmets-intro-h264.mp4"
                 type='video/mp4; codecs="avc1.42E01E"'
               />
             </video>
