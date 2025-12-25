@@ -61,8 +61,7 @@ function createAnimator(video: HTMLVideoElement) {
     cancel();
     state = "activating";
 
-    const clip = video.duration || 2;
-    const target = Math.min(clip * 0.6, clip || 0.5);
+    const target = video.duration;
     const startPoint = Math.min(video.currentTime || 0, target);
     const durationMs = 500;
     const startTime = performance.now();
@@ -199,9 +198,8 @@ export default function ResultsSection() {
               <button
                 key={step.id}
                 id={`${step.id}-tab`}
-                className={`${styles.navBtn} ${
-                  activeId === step.id ? styles.navBtnActive : ""
-                }`}
+                className={`${styles.navBtn} ${activeId === step.id ? styles.navBtnActive : ""
+                  }`}
                 role="tab"
                 aria-selected={activeId === step.id}
                 aria-controls={`${step.id}-panel`}
@@ -243,9 +241,8 @@ export default function ResultsSection() {
                 id={`${step.id}-panel`}
                 role="tabpanel"
                 aria-labelledby={`${step.id}-tab`}
-                className={`${styles.slide} ${
-                  activeId === step.id ? styles.slideActive : ""
-                }`}
+                className={`${styles.slide} ${activeId === step.id ? styles.slideActive : ""
+                  }`}
               >
                 <div className={styles.slideBody}>
                   <h3>{step.title}</h3>

@@ -74,69 +74,10 @@
 .iconWrap {
   width: 90px;
   height: 90px;
-  --nav-corner-cut: 16px;
-  --nav-corner-softness: 10px;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  --nav-top-fade: linear-gradient(180deg, transparent 0%, black 1%, black 100%);
-  clip-path: polygon(var(--nav-corner-cut) 0,
-      calc(100% - var(--nav-corner-cut)) 0,
-      100% var(--nav-corner-cut),
-      100% calc(100% - var(--nav-corner-cut)),
-      calc(100% - var(--nav-corner-cut)) 100%,
-      var(--nav-corner-cut) 100%,
-      0 calc(100% - var(--nav-corner-cut)),
-      0 var(--nav-corner-cut));
-  -webkit-mask-image: var(--nav-top-fade),
-    radial-gradient(circle at 0 0,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 100% 0,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 100% 100%,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 0 100%,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-composite: source-in, source-in, source-in, source-in;
-  mask-image: var(--nav-top-fade),
-    radial-gradient(circle at 0 0,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 100% 0,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 100% 100%,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%),
-    radial-gradient(circle at 0 100%,
-      transparent 0,
-      transparent var(--nav-corner-cut),
-      black calc(var(--nav-corner-cut) + var(--nav-corner-softness)),
-      black 120%);
-  mask-repeat: no-repeat;
-  mask-size: 100% 100%;
-  mask-mode: alpha;
-  mask-composite: intersect, intersect, intersect, intersect;
+  background: transparent;
 }
 
 .navVideo {
