@@ -1,0 +1,123 @@
+.section {
+    padding: 80px 0 120px;
+}
+
+.wrap {
+    width: min(1240px, 100% - clamp(32px, 6vw, 88px));
+    margin-inline: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 60ch;
+    margin-inline: auto;
+}
+
+.title {
+    margin-bottom: 16px;
+    font-size: clamp(32px, 6vw, 48px);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Mobile Layout: Centered Stack */
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 500px;
+    margin-inline: auto;
+}
+
+/* Desktop Layout: 2 Columns */
+/* Desktop Layout: 2 Columns - Tighter Spacing */
+@media (min-width: 860px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+        /* Reduced gap */
+        row-gap: 40px;
+        align-items: start;
+        max-width: 800px;
+        /* Reduced width to bring columns closer */
+    }
+}
+
+.card {
+    background: transparent;
+    border-radius: 0;
+    padding: 24px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+    transition: transform 0.2s ease;
+    margin-inline: auto;
+    /* Center within grid column if smaller */
+}
+
+/* Separator line (Mobile only) */
+.card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    /* Short separator */
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.card:last-child::after {
+    display: none;
+}
+
+/* Hide separators on desktop and use grid gap instead */
+@media (min-width: 860px) {
+    .card::after {
+        display: none;
+    }
+
+    .card {
+        padding: 0;
+        /* Align tightly in grid */
+    }
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: center;
+    /* Center name */
+    width: 100%;
+}
+
+.name {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.3;
+    margin-left: 0;
+    text-align: center;
+}
+
+/* Ensure voice message fits its content (waveform) */
+.card> :last-child {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+}

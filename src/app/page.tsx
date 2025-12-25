@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import HeroSection from "../components/HeroSection";
 import FitSection from "../components/FitSection";
 import ResultsSection from "../components/ResultsSection";
+import StudentVoicesSection from "../components/StudentVoicesSection";
 import CourseFlowSection from "../components/CourseFlowSection";
 
 /* Этот компонент выводит только HERO с логотипом и голосовым сообщением. */
@@ -18,6 +19,8 @@ export default function Home() {
       <FitSection />
       {/* Этот блок показывает ожидаемые результаты и анимированные иконки. */}
       <ResultsSection />
+      {/* Этот блок показывает отзывы реальных студентов. */}
+      <StudentVoicesSection />
       {/* Этот блок описывает, как проходит курс: ритм, записи и формат. */}
       <CourseFlowSection />
     </main>
