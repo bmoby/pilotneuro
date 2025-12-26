@@ -49,11 +49,15 @@ export default function CtaSection() {
     const handleRegister = () => {
         if (!canRegister) return;
         // Logique d'inscription à ajouter ici (redirection, modal, etc.)
-        alert("Redirection vers le paiement...");
+        alert("Переход к оплате...");
     };
 
     return (
         <section className={styles.ctaSection}>
+            <h2 className={styles.ctaTitle}>
+                ВРЕМЯ ДЕЙСТВОВАТЬ
+            </h2>
+
             {/* VIDÉO INTELLIGENTE */}
             <div className={styles.videoWrapper}>
                 <video
@@ -62,7 +66,7 @@ export default function CtaSection() {
                     muted
                     playsInline
                     poster="/formula_helmet-intro-first.png"
-                    aria-label="Casque Formula animation finale"
+                    aria-label="Анимация шлема Formula"
                 >
                     {/* Ordre de préférence des formats */}
                     <source src="/formula_helmet-intro-hvc1.mp4" type='video/mp4; codecs="hvc1"' />
@@ -76,24 +80,52 @@ export default function CtaSection() {
                     <label className={styles.checkboxLabel}>
                         <input
                             type="checkbox"
-                            className={styles.inputCheckbox}
+                            className={styles.visuallyHidden}
                             checked={readAll}
                             onChange={(e) => setReadAll(e.target.checked)}
                         />
+                        <div className={styles.customCheckbox}>
+                            <svg
+                                className={styles.checkboxIcon}
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </div>
                         <span>
-                            J'ai lu l'intégralité du contenu plus haut en détail.
+                            Я внимательно изучил(а) всю информацию выше.
                         </span>
                     </label>
 
                     <label className={styles.checkboxLabel}>
                         <input
                             type="checkbox"
-                            className={styles.inputCheckbox}
+                            className={styles.visuallyHidden}
                             checked={noQuestions}
                             onChange={(e) => setNoQuestions(e.target.checked)}
                         />
+                        <div className={styles.customCheckbox}>
+                            <svg
+                                className={styles.checkboxIcon}
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </div>
                         <span>
-                            Je n'ai pas de questions, je veux faire partie de l'équipe.
+                            У меня нет вопросов, я хочу попасть в команду.
                         </span>
                     </label>
                 </div>
@@ -103,7 +135,7 @@ export default function CtaSection() {
                     disabled={!canRegister}
                     onClick={handleRegister}
                 >
-                    S'INSCRIRE
+                    ЗАПИСАТЬСЯ
                 </button>
             </div>
         </section>

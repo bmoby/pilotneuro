@@ -66,39 +66,54 @@
 }
 
 /* Custom Checkbox */
-.inputCheckbox {
-    appearance: none;
-    -webkit-appearance: none;
+/* Custom Checkbox */
+.visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.customCheckbox {
     width: 24px;
     height: 24px;
     border: 2px solid var(--line);
     border-radius: 6px;
-    margin: 0;
-    display: grid;
-    place-content: center;
-    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background-color: transparent;
+    flex-shrink: 0;
 }
 
-.inputCheckbox::before {
-    content: "";
-    width: 12px;
-    height: 12px;
-    transform: scale(0);
-    transition: 0.2s transform ease-in-out;
-    background-color: var(--accent-contrast);
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px transparent;
-    /* Smooth edge */
+.checkboxIcon {
+    width: 14px;
+    height: 14px;
+    color: var(--accent-contrast);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.inputCheckbox:checked {
+/* Checked State */
+.visuallyHidden:checked+.customCheckbox {
     border-color: var(--accent);
     background-color: var(--accent);
 }
 
-.inputCheckbox:checked::before {
+.visuallyHidden:checked+.customCheckbox .checkboxIcon {
+    opacity: 1;
     transform: scale(1);
+}
+
+/* Focus State for accessibility */
+.visuallyHidden:focus-visible+.customCheckbox {
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 /* --- BUTTON --- */
