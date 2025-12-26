@@ -187,10 +187,7 @@ export default function HeroVideo() {
                     src="/two_helmets-intro-hvc1.mp4"
                     type='video/mp4; codecs="hvc1"'
                 />
-                <source
-                    src="/two_helmets-intro-vp9.webm"
-                    type='video/webm; codecs="vp9"'
-                />
+
                 <source
                     src="/two_helmets-intro-h264.mp4"
                     type='video/mp4; codecs="avc1.42E01E"'
@@ -207,27 +204,8 @@ export default function HeroVideo() {
                 aria-label="Suite en boucle sur le casque Formula"
             >
                 <source
-                    media="(max-width: 767px)"
-                    src="/two_helmets_mobile_loop-intro-hvc1.mp4"
-                    type='video/mp4; codecs="hvc1"'
-                />
-                <source
-                    media="(max-width: 767px)"
-                    src="/two_helmets_mobile_loop-intro-vp9.webm"
-                    type='video/webm; codecs="vp9"'
-                />
-                <source
-                    media="(max-width: 767px)"
-                    src="/two_helmets_mobile_loop-intro-h264.mp4"
-                    type='video/mp4; codecs="avc1.42E01E"'
-                />
-                <source
                     src="/two_helmets_loop-intro-hvc1.mp4"
                     type='video/mp4; codecs="hvc1"'
-                />
-                <source
-                    src="/two_helmets_loop-intro-vp9.webm"
-                    type='video/webm; codecs="vp9"'
                 />
                 <source
                     src="/two_helmets_loop-intro-h264.mp4"
