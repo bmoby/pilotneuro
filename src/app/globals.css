@@ -58,7 +58,8 @@ h2,
 h3 {
   margin: 0;
   letter-spacing: -0.02em;
-  font-weight: 800;
+  font-weight: 600;
+  /* Reduced from 800 for cleaner look */
   color: var(--text);
 }
 
