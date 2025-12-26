@@ -9,6 +9,7 @@ import ResultsSection from "../components/ResultsSection";
 import StudentVoicesSection from "../components/StudentVoicesSection";
 import CourseFlowSection from "../components/CourseFlowSection";
 import FaqSection from "../components/FaqSection";
+import CtaSection from "../components/CtaSection";
 
 /* Этот компонент выводит только HERO с логотипом и голосовым сообщением. */
 export default function Home() {
@@ -26,6 +27,8 @@ export default function Home() {
       <CourseFlowSection />
       {/* Этот блок отвечает на частые вопросы. */}
       <FaqSection />
+      {/* FINAL CTA: Video auto-play + Checkboxes */}
+      <CtaSection />
     </main>
   );
 }

@@ -1,0 +1,136 @@
+.ctaSection {
+    width: 100%;
+    padding: clamp(60px, 10vw, 120px) 24px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    overflow: hidden;
+}
+
+/* --- VIDEO WRAPPER --- */
+.videoWrapper {
+    width: 100%;
+    max-width: 320px;
+    /* Plus petit comme demandé */
+    aspect-ratio: 1;
+    /* Carré ou adapté selon la vidéo */
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    /* Optionnel: effet glass/ombre si désiré */
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+    mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* --- FORM --- */
+.formContainer {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.checkboxLabel {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 16px;
+    align-items: start;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    user-select: none;
+    transition: opacity 0.2s;
+}
+
+.checkboxLabel:hover {
+    opacity: 0.8;
+}
+
+/* Custom Checkbox */
+.inputCheckbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    margin: 0;
+    display: grid;
+    place-content: center;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.inputCheckbox::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    transform: scale(0);
+    transition: 0.2s transform ease-in-out;
+    background-color: var(--accent-contrast);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px transparent;
+    /* Smooth edge */
+}
+
+.inputCheckbox:checked {
+    border-color: var(--accent);
+    background-color: var(--accent);
+}
+
+.inputCheckbox:checked::before {
+    transform: scale(1);
+}
+
+/* --- BUTTON --- */
+.submitButton {
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    border: none;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.submitButton:disabled {
+    background: var(--line);
+    color: var(--muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.submitButton:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:not(:disabled):active {
+    transform: scale(0.98);
+}
