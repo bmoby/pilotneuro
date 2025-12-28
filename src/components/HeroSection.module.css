@@ -4,7 +4,7 @@
 }
 
 .wrap {
-  width: min(1240px, 100% - clamp(32px, 6vw, 88px));
+  width: min(1240px, 100% - clamp(48px, 8vw, 96px));
   margin-inline: auto;
 }
 

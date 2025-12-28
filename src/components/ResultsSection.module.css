@@ -1,10 +1,10 @@
 .section {
-  padding: clamp(80px, 12vw, 140px) 0 clamp(100px, 14vw, 180px);
+  padding: clamp(60px, 8vw, 100px) 0 clamp(60px, 8vw, 100px);
   background: var(--bg);
 }
 
 .wrap {
-  width: min(1240px, 100% - clamp(32px, 6vw, 88px));
+  width: min(1240px, 100% - clamp(48px, 8vw, 96px));
   margin-inline: auto;
 }
 

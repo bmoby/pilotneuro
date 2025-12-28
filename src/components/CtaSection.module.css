@@ -1,6 +1,6 @@
 .ctaSection {
     width: 100%;
-    padding: clamp(60px, 10vw, 120px) 24px;
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 40px);
     background: var(--bg);
     display: flex;
     flex-direction: column;
