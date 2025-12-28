@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       {/* Этот тег помечает язык документа и служит корнем разметки. */}
-      <body>
+      <body suppressHydrationWarning={true}>
         {/* Этот блок выводит всё содержимое текущей страницы. */}
         {children}
       </body>

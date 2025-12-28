@@ -46,8 +46,8 @@
     cursor: pointer;
     list-style: none;
     /* Hide default marker */
-    font-weight: 500;
-    /* Reduced from 700 */
+    font-weight: 600;
+    /* Standardized to 600 */
     font-size: 18px;
     position: relative;
     display: flex;

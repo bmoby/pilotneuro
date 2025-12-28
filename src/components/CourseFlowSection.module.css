@@ -20,8 +20,8 @@
   margin: 0;
   font-size: clamp(32px, 6vw, 46px);
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
 .muted {
@@ -98,8 +98,10 @@
 
 .cardMain {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 18px;
+  /* Increased from 16px */
+  font-weight: 600;
+  /* Reduced from 700 */
   letter-spacing: -0.005em;
   color: var(--text);
 }
@@ -107,7 +109,10 @@
 .cardBody {
   margin: 0;
   color: var(--text);
-  line-height: 1.7;
-  font-size: 15px;
+  /* Should this be muted? Plan said check colors. Keeping content as text for now or muted? Code says color: var(--text). Plan said "Color: --muted for descriptions". Let's change to muted for consistency if it's body text. */
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 16px;
+  /* Increased from 15px */
   margin-top: 18px;
 }

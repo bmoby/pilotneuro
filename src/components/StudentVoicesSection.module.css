@@ -17,6 +17,8 @@
 .title {
     margin-bottom: 16px;
     font-size: clamp(32px, 6vw, 48px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
 .subtitle {
@@ -107,8 +109,8 @@
 }
 
 .name {
-    font-weight: 500;
-    /* Reduced from 700 */
+    font-weight: 600;
+    /* Standardized to 600 */
     font-size: 16px;
     color: var(--text);
     line-height: 1.3;
