@@ -9,7 +9,6 @@ export type FitCardData = {
   title: string;
   detail?: string;
   icon?: string;
-  customIcon?: React.ReactNode;
   ariaLabel?: string;
   id?: string; // Utile pour identifier la carte spécifique dans le parent
 };
@@ -21,18 +20,13 @@ export default function FitCard({
   title,
   detail,
   icon,
-  customIcon,
   ariaLabel,
 }: FitCardProps) {
   return (
     <article className={styles.card} role="listitem" aria-label={ariaLabel}>
-      {customIcon ? (
+      {icon ? (
         <div className={styles.iconBox}>
-          {customIcon}
-        </div>
-      ) : icon ? (
-        <div className={styles.iconBox}>
-          <Image src={icon} alt="" width={120} height={120} priority={false} />
+          <Image src={icon} alt="" width={150} height={150} priority={false} />
         </div>
       ) : null}
       <div className={styles.cardText}>

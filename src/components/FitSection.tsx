@@ -2,12 +2,10 @@
    Он показывает статичный заголовок и две ленты карточек с условиями участия.
    Он даёт человеку быстро понять, подходит ему курс или нет, и послушать голосовое. */
 
-"use client";
 
-import { useEffect, useRef, useState } from "react";
+
 import VoiceMessage from "./VoiceMessage";
 import FitCard, { FitCardData } from "./FitCard";
-import PingPongVideo from "./PingPongVideo";
 import styles from "./FitSection.module.css";
 
 /* В этом списке лежат пункты, где участие точно «да». */
@@ -15,9 +13,8 @@ const fitYes: FitCardData[] = [
   {
     title: "ДА, ЕСЛИ",
     detail: "Готовы включиться всерьёз.",
-    // icon: "/goodsvg.svg", // Remplacé par la vidéo
+    icon: "/golight.png",
     ariaLabel: "Подходит",
-    id: "good",
   },
   {
     title: "Вы хотите перейти в сферу IT",
@@ -47,9 +44,8 @@ const fitNo: FitCardData[] = [
   {
     title: "НЕТ, ЕСЛИ",
     detail: "Нет времени или «просто посмотреть»",
-    // icon: "/bad.svg", // Remplacé par la vidéo
+    icon: "/stoplight.png",
     ariaLabel: "Не подходит",
-    id: "bad",
   },
   {
     title: "У вас нет времени",
@@ -73,63 +69,8 @@ const fitNo: FitCardData[] = [
 ];
 
 export default function FitSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [sequenceStep, setSequenceStep] = useState(0);
-
-  // Dérivé de l'étape de séquençage
-  // 1: Good, 2: Bad, 3: Stop
-  const activeVideo =
-    (sequenceStep === 1) ? "good" :
-      (sequenceStep === 2) ? "bad" : null;
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Démarrer la séquence si on est à 0
-            setSequenceStep((prev) => (prev === 0 ? 1 : prev));
-          } else {
-            // Reset quand on sort de l'écran pour pouvoir rejouer au retour
-            setSequenceStep(0);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const handleGoodComplete = () => {
-    // Étape 1 (Good) -> Étape 2 (Bad)
-    setSequenceStep((prev) => prev + 1);
-  };
-
-  const handleBadComplete = () => {
-    // Étape 2 (Bad) -> Étape 3 (Stop)
-    setSequenceStep((prev) => prev + 1);
-  };
-
-  const goodVideoSources = [
-    { src: "/goodvideo-intro-hvc1.mp4", type: 'video/mp4; codecs="hvc1"' },
-    { src: "/goodvideo-intro-h264.mp4", type: 'video/mp4; codecs="avc1.42E01E"' },
-  ];
-
-  const badVideoSources = [
-    { src: "/badvideo-intro-hvc1.mp4", type: 'video/mp4; codecs="hvc1"' },
-    { src: "/badvideo-intro-h264.mp4", type: 'video/mp4; codecs="avc1.42E01E"' },
-  ];
-
   return (
-    <section className={styles.section} id="pourvous" aria-labelledby="fit-title" ref={sectionRef}>
+    <section className={styles.section} id="pourvous" aria-labelledby="fit-title">
       <div className={styles.wrap}>
         <div className={styles.lead}>
           <h2 className={styles.title} id="fit-title">Это для вас?</h2>
@@ -146,25 +87,9 @@ export default function FitSection() {
               role="list"
               aria-label="Подходит, если"
             >
-              {fitYes.map((card) => {
-                if (card.id === "good") {
-                  return (
-                    <FitCard
-                      key={card.title}
-                      {...card}
-                      customIcon={
-                        <PingPongVideo
-                          sources={goodVideoSources}
-                          poster="/goodvideo-intro-poster.png"
-                          isActive={activeVideo === "good"}
-                          onComplete={handleGoodComplete}
-                        />
-                      }
-                    />
-                  );
-                }
-                return <FitCard key={card.title} {...card} />;
-              })}
+              {fitYes.map((card) => (
+                <FitCard key={card.title} {...card} />
+              ))}
             </div>
           </div>
 
@@ -174,25 +99,9 @@ export default function FitSection() {
               role="list"
               aria-label="Не подойдёт, если"
             >
-              {fitNo.map((card) => {
-                if (card.id === "bad") {
-                  return (
-                    <FitCard
-                      key={card.title}
-                      {...card}
-                      customIcon={
-                        <PingPongVideo
-                          sources={badVideoSources}
-                          poster="/badvideo-intro-poster.png"
-                          isActive={activeVideo === "bad"}
-                          onComplete={handleBadComplete}
-                        />
-                      }
-                    />
-                  );
-                }
-                return <FitCard key={card.title} {...card} />;
-              })}
+              {fitNo.map((card) => (
+                <FitCard key={card.title} {...card} />
+              ))}
             </div>
           </div>
 
