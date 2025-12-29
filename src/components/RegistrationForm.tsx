@@ -6,30 +6,31 @@
 
 import { useState, FormEvent } from "react";
 import styles from "./RegistrationForm.module.css";
+import { supabase } from "../lib/supabaseClient";
 
 interface FormData {
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
     phone: string;
     whatsapp: string;
     address: string;
     city: string;
     country: string;
-    paymentPlan: "1x" | "2x" | "3x";
+    paymentplan: "1x" | "2x" | "3x";
 }
 
 export default function RegistrationForm() {
     const [formData, setFormData] = useState<FormData>({
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         email: "",
         phone: "",
         whatsapp: "",
         address: "",
         city: "",
         country: "",
-        paymentPlan: "1x",
+        paymentplan: "1x",
     });
 
     // Checkbox states
@@ -45,8 +46,8 @@ export default function RegistrationForm() {
     // Note: WhatsApp is marked as "SI DIFFERENT" in requirements, so it implies optional if same as phone, 
     // but let's make it optional regardless or just fill it. "WHATSAPP SI DIFFEREND" -> let's treat as optional.
     const isFormValid =
-        formData.firstName.trim() !== "" &&
-        formData.lastName.trim() !== "" &&
+        formData.firstname.trim() !== "" &&
+        formData.lastname.trim() !== "" &&
         formData.email.trim() !== "" &&
         formData.phone.trim() !== "" &&
         formData.address.trim() !== "" &&
@@ -67,12 +68,39 @@ export default function RegistrationForm() {
         if (!isFormValid) return;
 
         setLoading(true);
-        // Simulation d'envoi
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setLoading(false);
 
-        // Replace with real logic later
-        alert("Спасибо за заявку! Мы свяжемся с вами в ближайшее время.");
+        try {
+            const { data, error } = await supabase
+                .from('registrations')
+                .insert([
+                    {
+                        firstname: formData.firstname,
+                        lastname: formData.lastname,
+                        email: formData.email,
+                        phone: formData.phone,
+                        whatsapp: formData.whatsapp,
+                        address: formData.address,
+                        city: formData.city,
+                        country: formData.country,
+                        paymentplan: formData.paymentplan,
+                    },
+                ])
+                .select();
+
+            if (error) {
+                throw error;
+            }
+
+            alert("Спасибо за заявку! Мы свяжемся с вами в ближайшее время.");
+            // Reset form or redirect?
+            // window.location.href = "/"; // Optional
+
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("Произошла ошибка при отправке. Пожалуйста, попробуйте позже.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -83,18 +111,18 @@ export default function RegistrationForm() {
                 <label className={styles.label}>Личные данные</label>
                 <input
                     type="text"
-                    name="lastName"
+                    name="lastname"
                     placeholder="Фамилия (Nom)"
-                    value={formData.lastName}
+                    value={formData.lastname}
                     onChange={handleChange}
                     className={styles.input}
                     required
                 />
                 <input
                     type="text"
-                    name="firstName"
+                    name="firstname"
                     placeholder="Имя (Prénom)"
-                    value={formData.firstName}
+                    value={formData.firstname}
                     onChange={handleChange}
                     className={styles.input}
                     required
@@ -171,12 +199,12 @@ export default function RegistrationForm() {
                 <label className={styles.label}>Вариант оплаты</label>
                 <div className={styles.paymentOptions}>
                     {/* Option 1 */}
-                    <label className={`${styles.radioLabel} ${formData.paymentPlan === "1x" ? styles.selected : ""}`}>
+                    <label className={`${styles.radioLabel} ${formData.paymentplan === "1x" ? styles.selected : ""}`}>
                         <input
                             type="radio"
-                            name="paymentPlan"
+                            name="paymentplan"
                             value="1x"
-                            checked={formData.paymentPlan === "1x"}
+                            checked={formData.paymentplan === "1x"}
                             onChange={(e) => setFormData(prev => ({ ...prev, paymentPlan: "1x" }))}
                             className={styles.radioInput}
                         />
@@ -190,13 +218,13 @@ export default function RegistrationForm() {
                     </label>
 
                     {/* Option 2 */}
-                    <label className={`${styles.radioLabel} ${formData.paymentPlan === "2x" ? styles.selected : ""}`}>
+                    <label className={`${styles.radioLabel} ${formData.paymentplan === "2x" ? styles.selected : ""}`}>
                         <input
                             type="radio"
-                            name="paymentPlan"
+                            name="paymentplan"
                             value="2x"
-                            checked={formData.paymentPlan === "2x"}
-                            onChange={(e) => setFormData(prev => ({ ...prev, paymentPlan: "2x" }))}
+                            checked={formData.paymentplan === "2x"}
+                            onChange={(e) => setFormData(prev => ({ ...prev, paymentplan: "2x" }))}
                             className={styles.radioInput}
                         />
                         <div className={styles.customRadio}>
@@ -209,13 +237,13 @@ export default function RegistrationForm() {
                     </label>
 
                     {/* Option 3 */}
-                    <label className={`${styles.radioLabel} ${formData.paymentPlan === "3x" ? styles.selected : ""}`}>
+                    <label className={`${styles.radioLabel} ${formData.paymentplan === "3x" ? styles.selected : ""}`}>
                         <input
                             type="radio"
-                            name="paymentPlan"
+                            name="paymentplan"
                             value="3x"
-                            checked={formData.paymentPlan === "3x"}
-                            onChange={(e) => setFormData(prev => ({ ...prev, paymentPlan: "3x" }))}
+                            checked={formData.paymentplan === "3x"}
+                            onChange={(e) => setFormData(prev => ({ ...prev, paymentplan: "3x" }))}
                             className={styles.radioInput}
                         />
                         <div className={styles.customRadio}>
