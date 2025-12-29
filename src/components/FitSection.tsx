@@ -106,7 +106,7 @@ export default function FitSection() {
           </div>
 
           <div className={styles.voiceArea}>
-            <VoiceMessage src="/avis/Aslan.m4a" title="Message vocal — Aslan" />
+            <VoiceMessage src="/vocals/02.m4a" title="Message vocal — Aslan" />
           </div>
         </div>
       </div>

@@ -13,8 +13,9 @@ export default function CtaSection() {
     // États pour les checkbox
     const [readAll, setReadAll] = useState(false);
     const [noQuestions, setNoQuestions] = useState(false);
+    const [finalChoice, setFinalChoice] = useState(false);
 
-    const canRegister = readAll && noQuestions;
+    const canRegister = readAll && noQuestions && finalChoice;
 
     // Gestion de la lecture vidéo au scroll
     useEffect(() => {
@@ -74,6 +75,13 @@ export default function CtaSection() {
                 </video>
             </div>
 
+            {/* NEW: Price Display */}
+            <div className={styles.priceContainer}>
+                <div className={styles.priceValue}>1200 €</div>
+                <div className={styles.installmentPrice}>400 € / мес (x3)</div>
+                <div className={styles.priceSub}>Оплата: 1, 2 или 3 платежа</div>
+            </div>
+
             {/* FORMULAIRE DE VALIDATION */}
             <div className={styles.formContainer}>
                 <div className={styles.checkboxGroup}>
@@ -128,6 +136,44 @@ export default function CtaSection() {
                             У меня нет вопросов, я хочу попасть в команду.
                         </span>
                     </label>
+
+                    {/* NEW: Final Choice Checkbox */}
+                    <label className={styles.checkboxLabel}>
+                        <input
+                            type="checkbox"
+                            className={styles.visuallyHidden}
+                            checked={finalChoice}
+                            onChange={(e) => setFinalChoice(e.target.checked)}
+                        />
+                        <div className={styles.customCheckbox}>
+                            <svg
+                                className={styles.checkboxIcon}
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M20.707 5.293a1 1 0 010 1.414l-11 11a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 15.586 19.293 5.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </div>
+                        <div className={styles.checkboxContent}>
+                            <span>
+                                Я подтверждаю: моё решение окончательное.
+                            </span>
+                            <span className={styles.checkboxNote}>
+                                Мы ценим время друг друга.
+                            </span>
+                        </div>
+                    </label>
+                </div>
+
+                {/* NEW: Warning Note */}
+                <div className={styles.impulseWarning}>
+                    Только узнали обо мне? Подождите день. <br />
+                    Не делайте импульсивных покупок.
                 </div>
 
                 <button
@@ -138,6 +184,6 @@ export default function CtaSection() {
                     ЗАПИСАТЬСЯ
                 </button>
             </div>
-        </section>
+        </section >
     );
 }

@@ -5,7 +5,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import VoiceMessage from "./VoiceMessage";
 import styles from "./ResultsSection.module.css";
@@ -256,13 +255,10 @@ export default function ResultsSection() {
         <div className={styles.ctaRow}>
           <div className={styles.voiceArea}>
             <VoiceMessage
-              src="/avis/SHamil2.m4a"
+              src="/vocals/03.m4a"
               title="Message vocal — Résultats"
             />
           </div>
-          <Link className={styles.ctaBtn} href="#deroule">
-            Посмотреть программу подробно
-          </Link>
         </div>
       </div>
     </section>

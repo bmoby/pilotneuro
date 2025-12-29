@@ -10,29 +10,29 @@ import styles from "./StudentVoicesSection.module.css";
 /* Список студентов и их аудио-файлов (маппинг на существующие файлы в /public/avis). */
 const voices = [
     {
-        name: "Андрей",
-        src: "/avis/Musa.m4a", // Placeholder mapping
-        duration: "0:28",
-    },
-    {
-        name: "Мария",
+        name: "Аслан",
         src: "/avis/Aslan.m4a", // Placeholder mapping
         duration: "0:19",
     },
     {
-        name: "Рустам",
+        name: "Муса",
+        src: "/avis/Musa.m4a", // Placeholder mapping
+        duration: "0:28",
+    },
+    {
+        name: "Шамиль",
         src: "/avis/Shamil.m4a", // Placeholder mapping
         duration: "0:23",
     },
     {
-        name: "Екатерина",
-        src: "/avis/SHamil2.m4a", // Placeholder mapping
-        duration: "0:17",
-    },
-    {
-        name: "Илья",
+        name: "Ибрагим",
         src: "/avis/ibra.m4a", // Placeholder mapping
         duration: "0:21",
+    },
+    {
+        name: "Шамиль-",
+        src: "/avis/SHamil2.m4a", // Placeholder mapping
+        duration: "0:17",
     },
 ];
 

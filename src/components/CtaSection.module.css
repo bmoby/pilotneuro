@@ -150,3 +150,70 @@
 .submitButton:not(:disabled):active {
     transform: scale(0.98);
 }
+
+/* --- PRICE INFO --- */
+.priceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.priceValue {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.installmentPrice {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    opacity: 0.9;
+    margin-top: 4px;
+}
+
+.priceSub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+    opacity: 0.6;
+    margin-top: 2px;
+}
+
+/* --- NOTES & WARNINGS --- */
+.checkboxContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.checkboxNote {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.impulseWarning {
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    margin-bottom: 8px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .priceValue {
+        font-size: 36px;
+    }
+}
