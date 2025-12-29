@@ -15,6 +15,11 @@ export default function HeroSection() {
           {/* LOGO TEXTUEL */}
           <div className={styles.brandName}>PILOT NEURO</div>
 
+          {/* LIMITED SPOTS BADGE */}
+          <div className={styles.limitBadge}>
+            Набор ограничен: 30 мест
+          </div>
+
           {/* VIDEO */}
           <HeroVideo />
 
