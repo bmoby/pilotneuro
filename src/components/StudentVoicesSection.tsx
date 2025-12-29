@@ -43,8 +43,7 @@ export default function StudentVoicesSection() {
                 <div className={styles.header}>
                     <h2 className={styles.title}>Голоса студентов</h2>
                     <p className={styles.subtitle}>
-                        Короткие голосовые от тех, кто уже прошёл программу и довёл проект
-                        до результата.
+                        Короткие голосовые от тех, кто уже прошёл программу
                     </p>
                 </div>
 
