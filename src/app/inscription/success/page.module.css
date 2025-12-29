@@ -1,0 +1,80 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.iconWrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--accent-contrast);
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+}
+
+.message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+.warningBox {
+    margin-top: 10px;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.homeButton {
+    margin-top: 20px;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 100px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.homeButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+}

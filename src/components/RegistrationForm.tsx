@@ -90,9 +90,8 @@ export default function RegistrationForm() {
                 throw error;
             }
 
-            alert("Спасибо за заявку! Мы свяжемся с вами в ближайшее время.");
-            // Reset form or redirect?
-            // window.location.href = "/"; // Optional
+            // Redirect to success page
+            window.location.href = "/inscription/success";
 
         } catch (error) {
             console.error("Error submitting form:", error);
