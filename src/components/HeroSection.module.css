@@ -47,6 +47,20 @@
   margin-top: -8px;
 }
 
+.promoBadge {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid #1C5926;
+  border-radius: 100px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #1C5926;
+  margin-top: -8px;
+}
+
 .heroTitle {
   font-size: clamp(36px, 8vw, 64px);
   line-height: 1.1;

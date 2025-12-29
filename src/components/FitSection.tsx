@@ -74,9 +74,13 @@ export default function FitSection() {
       <div className={styles.wrap}>
         <div className={styles.lead}>
           <h2 className={styles.title} id="fit-title">Это для вас?</h2>
+          <div className={styles.voiceArea}>
+            <VoiceMessage src="/vocals/02.m4a" title="Message vocal — Aslan" />
+          </div>
           <p className={styles.lede}>
             Внимательно прочитайте, если не хотите потерять деньги и время
           </p>
+
         </div>
 
         {/* Здесь две ленты карточек и ниже голосовое сообщение. */}
@@ -105,9 +109,7 @@ export default function FitSection() {
             </div>
           </div>
 
-          <div className={styles.voiceArea}>
-            <VoiceMessage src="/vocals/02.m4a" title="Message vocal — Aslan" />
-          </div>
+
         </div>
       </div>
     </section>

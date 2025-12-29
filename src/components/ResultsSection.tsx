@@ -185,6 +185,14 @@ export default function ResultsSection() {
           <h2 className={styles.title} id="results-title">
             Ожидаемые результаты
           </h2>
+          <div className={styles.ctaRow}>
+            <div className={styles.voiceArea}>
+              <VoiceMessage
+                src="/vocals/03.m4a"
+                title="Message vocal — Résultats"
+              />
+            </div>
+          </div>
           <p className={styles.muted}>
             Только индивидуальные решения, никаких шаблонов
           </p>
@@ -249,15 +257,6 @@ export default function ResultsSection() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        <div className={styles.ctaRow}>
-          <div className={styles.voiceArea}>
-            <VoiceMessage
-              src="/vocals/03.m4a"
-              title="Message vocal — Résultats"
-            />
           </div>
         </div>
       </div>
