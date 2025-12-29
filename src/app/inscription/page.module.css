@@ -1,0 +1,77 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+    z-index: 10;
+}
+
+.backButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.heroWrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.flagsImage {
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.pageTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pageSubtitle {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+@media (max-width: 768px) {
+    .pageTitle {
+        font-size: 1.6rem;
+    }
+}

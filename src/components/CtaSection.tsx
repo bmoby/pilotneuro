@@ -5,6 +5,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./CtaSection.module.css";
 
 export default function CtaSection() {
@@ -47,10 +48,11 @@ export default function CtaSection() {
         };
     }, []);
 
+    const router = useRouter();
+
     const handleRegister = () => {
         if (!canRegister) return;
-        // Logique d'inscription à ajouter ici (redirection, modal, etc.)
-        alert("Переход к оплате...");
+        router.push("/inscription");
     };
 
     return (
