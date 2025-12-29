@@ -84,8 +84,7 @@ export default function RegistrationForm() {
                         country: formData.country,
                         paymentplan: formData.paymentplan,
                     },
-                ])
-                .select();
+                ]);
 
             if (error) {
                 throw error;
@@ -205,7 +204,7 @@ export default function RegistrationForm() {
                             name="paymentplan"
                             value="1x"
                             checked={formData.paymentplan === "1x"}
-                            onChange={(e) => setFormData(prev => ({ ...prev, paymentPlan: "1x" }))}
+                            onChange={(e) => setFormData(prev => ({ ...prev, paymentplan: "1x" }))}
                             className={styles.radioInput}
                         />
                         <div className={styles.customRadio}>
