@@ -25,7 +25,7 @@ export default function HeroSection() {
 
           {/* TITRE */}
           <h1 className={styles.heroTitle}>
-            Станьте архитектором ИИ веб решений
+            КУРС АРХИТЕКТОР <br />ИИ ВЕБ РЕШЕНИЙ
           </h1>
 
           {/* VOICE MESSAGE */}
@@ -47,6 +47,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }

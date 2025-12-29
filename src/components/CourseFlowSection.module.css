@@ -18,10 +18,11 @@
 
 .title {
   margin: 0;
-  font-size: clamp(32px, 6vw, 46px);
+  font-size: clamp(24px, 5vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.02em;
-  font-weight: 600;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .muted {
