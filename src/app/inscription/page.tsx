@@ -1,6 +1,4 @@
-/* Эта страница содержит форму регистрации на курс.
-   Она показывает небольшое видео-интро и саму форму с полями.
-   Она адаптирована для мобильных устройств. */
+"use client";
 
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -16,11 +14,20 @@ export default function InscriptionPage() {
             </Link>
 
             <div className={styles.heroWrapper}>
-                <img
-                    src="/flags.png"
-                    alt="Flags"
-                    className={styles.flagsImage}
-                />
+                <div className={styles.videoWrapper}>
+                    <video
+                        className={styles.video}
+                        autoPlay
+                        muted
+                        playsInline
+                        /* No loop, so it will freeze on last frame */
+                        poster="/formula_helmet-intro-first.png"
+                        aria-label="Анимация шлема Formula"
+                    >
+                        <source src="/formula_helmet-intro-hvc1.mp4" type='video/mp4; codecs="hvc1"' />
+                        <source src="/formula_helmet-intro-h264.mp4" type='video/mp4; codecs="avc1.42E01E"' />
+                    </video>
+                </div>
                 <h1 className={styles.pageTitle}>Регистрация</h1>
                 <p className={styles.pageSubtitle}>
                     Заполните форму ниже, чтобы забронировать свое место в PilotNeuro.

@@ -15,7 +15,7 @@
 
 .label {
     font-size: 0.9rem;
-    color: #aaa;
+    color: var(--muted);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -25,20 +25,19 @@
 .input {
     width: 100%;
     padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #fff;
+    border: 1px solid var(--line);
     border-radius: 16px;
-    color: #fff;
+    color: var(--text);
     font-size: 1rem;
     outline: none;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    /* Removed backdrop-filter as now opaque white or transparent */
 }
 
 .input:focus {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
 .paymentOptions {
@@ -51,21 +50,20 @@
     display: flex;
     align-items: center;
     padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #fff;
+    border: 1px solid var(--line);
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .radioLabel:hover {
-    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--muted);
 }
 
 .radioLabel.selected {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .radioInput {
@@ -80,7 +78,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--line);
     margin-right: 15px;
     position: relative;
     display: flex;
@@ -90,13 +88,13 @@
 }
 
 .radioLabel.selected .customRadio {
-    border-color: #fff;
+    border-color: var(--accent);
 }
 
 .radioDot {
     width: 10px;
     height: 10px;
-    background-color: #fff;
+    background-color: var(--accent);
     border-radius: 50%;
     opacity: 0;
     transform: scale(0);
@@ -116,12 +114,12 @@
 .paymentTitle {
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
 }
 
 .paymentSub {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--muted);
     margin-top: 2px;
 }
 
@@ -138,7 +136,7 @@
     gap: 12px;
     cursor: pointer;
     font-size: 0.95rem;
-    color: #ccc;
+    color: var(--text);
     line-height: 1.4;
 }
 
@@ -152,27 +150,27 @@
     flex-shrink: 0;
     width: 24px;
     height: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--line);
     border-radius: 8px;
     /* Slightly rounded squares */
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    background: rgba(255, 255, 255, 0.05);
+    background: #fff;
     margin-top: 1px;
     /* visual alignment with text */
 }
 
 .checkboxLabel input:checked+.customCheckbox {
-    background: #fff;
-    border-color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .checkboxIcon {
     width: 16px;
     height: 16px;
-    color: #000;
+    color: var(--accent-contrast);
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.2s ease;
@@ -187,8 +185,8 @@
     margin-top: 20px;
     width: 100%;
     padding: 20px;
-    background: #fff;
-    color: #000;
+    background: var(--accent);
+    color: var(--accent-contrast);
     border: none;
     border-radius: 16px;
     font-size: 1.1rem;
@@ -201,7 +199,7 @@
 
 .submitButton:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .submitButton:active:not(:disabled) {
@@ -211,8 +209,8 @@
 .submitButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: #555;
-    color: #888;
+    background: var(--line);
+    color: var(--muted);
 }
 
 .formError {
