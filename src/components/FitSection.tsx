@@ -13,8 +13,6 @@ const fitYes: FitCardData[] = [
   {
     title: "ДА, ЕСЛИ",
     detail: "Готовы включиться всерьёз.",
-    icon: "/golight.png",
-    ariaLabel: "Подходит",
   },
   {
     title: "Вы хотите перейти в сферу IT",
@@ -44,8 +42,6 @@ const fitNo: FitCardData[] = [
   {
     title: "НЕТ, ЕСЛИ",
     detail: "Нет времени или «просто посмотреть»",
-    icon: "/stoplight.png",
-    ariaLabel: "Не подходит",
   },
   {
     title: "У вас нет времени",
