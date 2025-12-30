@@ -11,7 +11,7 @@ export default function KerbSeparator() {
 
             <div className={styles.accent}>
                 <div className={`${styles.dash} ${styles.red}`} />
-                <div className={`${styles.dash} ${styles.white}`} />
+                <div className={`${styles.dash} ${styles.yellow}`} />
                 <div className={`${styles.dash} ${styles.red}`} />
             </div>
 

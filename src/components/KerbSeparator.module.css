@@ -43,7 +43,8 @@
     /* Tiny glow */
 }
 
-.white {
-    background-color: #ffffff;
-    opacity: 0.8;
+.yellow {
+    background-color: #ffcc00;
+    opacity: 0.9;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
 }

@@ -17,7 +17,7 @@ export default function HeroSection() {
 
           {/* LIMITED SPOTS BADGE */}
           <div className={styles.promoBadge}>
-            Набор ограничен: 30 мест
+            Набор 30 мест
           </div>
 
           {/* VIDEO */}
@@ -43,7 +43,7 @@ export default function HeroSection() {
 
           {/* DATE BADGE */}
           <div className={styles.promoBadge} style={{ marginTop: "16px", marginBottom: "8px" }}>
-            Старт курса: 23 марта 2026
+            Старт 23 марта 2026
           </div>
         </div>
       </div>
