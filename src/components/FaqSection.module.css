@@ -16,7 +16,9 @@
 
 .title {
     margin-bottom: 16px;
-    font-size: clamp(32px, 6vw, 48px);
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .subtitle {

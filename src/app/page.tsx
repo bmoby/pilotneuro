@@ -4,6 +4,7 @@
 
 import styles from "./page.module.css";
 import HeroSection from "../components/HeroSection";
+import KerbSeparator from "../components/KerbSeparator";
 import FitSection from "../components/FitSection";
 import ResultsSection from "../components/ResultsSection";
 import StudentVoicesSection from "../components/StudentVoicesSection";
@@ -17,16 +18,30 @@ export default function Home() {
     <main className={styles.page}>
       {/* Этот блок вставляет готовую HERO-секцию с анимированным логотипом. */}
       <HeroSection />
+
+      {/* Разделитель Minimal (Yellow/White Dash) */}
+      <KerbSeparator />
+
       {/* Этот блок добавляет секцию «Это для вас?» с карточками и голосовым. */}
       <FitSection />
+      <KerbSeparator />
+
       {/* Этот блок показывает ожидаемые результаты и анимированные иконки. */}
       <ResultsSection />
+      <KerbSeparator />
+
       {/* Этот блок показывает отзывы реальных студентов. */}
       <StudentVoicesSection />
+      <KerbSeparator />
+
       {/* Этот блок описывает, как проходит курс: ритм, записи и формат. */}
       <CourseFlowSection />
+      <KerbSeparator />
+
       {/* Этот блок отвечает на частые вопросы. */}
       <FaqSection />
+      <KerbSeparator />
+
       {/* FINAL CTA: Video auto-play + Checkboxes */}
       <CtaSection />
     </main>

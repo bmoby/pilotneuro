@@ -33,7 +33,7 @@ export default function InscriptionPage() {
                     Заполните форму ниже, чтобы забронировать свое место в PilotNeuro.
                 </p>
                 <div className={styles.infoBadge}>
-                    Старт курса: 23 марта 2026
+                    Старт 23 марта 2026
                 </div>
             </div>
 

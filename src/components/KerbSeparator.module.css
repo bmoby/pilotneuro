@@ -1,0 +1,50 @@
+/* Separator container */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    padding: 60px 0;
+    opacity: 0.6;
+    /* Subtle overall */
+}
+
+/* The fading lines */
+.line {
+    height: 1px;
+    width: 120px;
+    background: linear-gradient(90deg, transparent, var(--muted, #888));
+    border-radius: 1px;
+}
+
+.lineRight {
+    transform: scaleX(-1);
+    /* Mirror the gradient */
+}
+
+/* The central accent group */
+.accent {
+    display: flex;
+    gap: 4px;
+}
+
+/* The minimalist kerb dashes */
+.dash {
+    width: 18px;
+    height: 4px;
+    border-radius: 1px;
+    transform: skewX(-30deg);
+}
+
+.red {
+    background-color: #cc0000;
+    box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
+    /* Tiny glow */
+}
+
+.yellow {
+    background-color: #ffcc00;
+    opacity: 0.9;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+}

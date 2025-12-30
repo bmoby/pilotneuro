@@ -16,8 +16,8 @@ export default function HeroSection() {
           <div className={styles.brandName}>PILOT NEURO</div>
 
           {/* LIMITED SPOTS BADGE */}
-          <div className={styles.limitBadge}>
-            Набор ограничен: 30 мест
+          <div className={styles.promoBadge}>
+            Набор 30 мест
           </div>
 
           {/* VIDEO */}
@@ -25,7 +25,7 @@ export default function HeroSection() {
 
           {/* TITRE */}
           <h1 className={styles.heroTitle}>
-            Станьте архитектором решений на базе ИИ
+            КУРС АРХИТЕКТОР <br />ИИ ВЕБ РЕШЕНИЙ
           </h1>
 
           {/* VOICE MESSAGE */}
@@ -33,20 +33,20 @@ export default function HeroSection() {
             className={styles.voiceArea}
             aria-label="Пример голосового сообщения"
           >
-            <VoiceMessage src="/vocals/01.m4a" title="Голосовое сообщение — Муса" />
+            <VoiceMessage src="/vocals/01.m4a" title="Голосовое сообщение — Tsarag" />
           </div>
 
           {/* DESCRIPTION DU COURS */}
           <p className={styles.heroDescription}>
-            Это не просто курсы программирования, это подготовка разработчиков нового поколения. Вы научитесь использовать ИИ, чтобы создавать сложные решения быстрее и дешевле любых конкурентов. Моя цель не просто научить, а отобрать лучших из вас в свою команду архитекторов для работы над реальными проектами.
+            Не просто курсы, а отбор в команду. Мы готовим разработчиков нового поколения, создающих решения с ИИ быстрее конкурентов. Моя цель сформировать группу архитекторов решений.
           </p>
 
           {/* DATE BADGE */}
-          <div className={styles.limitBadge} style={{ marginTop: "16px", marginBottom: "8px" }}>
-            Старт курса: 23 марта 2026
+          <div className={styles.promoBadge} style={{ marginTop: "16px", marginBottom: "8px" }}>
+            Старт 23 марта 2026
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
