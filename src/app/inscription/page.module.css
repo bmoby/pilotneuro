@@ -86,14 +86,14 @@
 .infoBadge {
     display: inline-block;
     padding: 6px 16px;
-    border: 1px solid var(--accent);
+    border: 1px solid #1C5926;
     border-radius: 100px;
-    color: var(--accent);
+    color: #ffffff;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    background: rgba(255, 255, 255, 0.05);
+    background: #1C5926;
     margin-bottom: 20px;
 }
 
