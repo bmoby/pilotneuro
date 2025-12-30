@@ -1,10 +1,10 @@
 .card {
   scroll-snap-align: start;
   border-radius: 18px;
-  border-radius: 18px;
+
   /* border: 1px solid color-mix(in srgb, var(--line) 68%, transparent 32%);Removed border */
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-  /* background: #FFFFFF; Removed background */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #FFFFFF;
   padding: 28px 24px;
   display: grid;
   grid-template-columns: 1fr;
