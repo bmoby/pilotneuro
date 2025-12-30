@@ -71,7 +71,7 @@ export default function FitSection() {
         <div className={styles.lead}>
           <h2 className={styles.title} id="fit-title">Это для вас?</h2>
           <div className={styles.voiceArea}>
-            <VoiceMessage src="/vocals/02.m4a" title="Message vocal — Aslan" />
+            <VoiceMessage src="/vocals/02.m4a" title="Голосовое сообщение — Tsarag" />
           </div>
           <p className={styles.lede}>
             Внимательно прочитайте, если не хотите потерять деньги и время

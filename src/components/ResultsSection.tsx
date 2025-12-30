@@ -189,7 +189,7 @@ export default function ResultsSection() {
             <div className={styles.voiceArea}>
               <VoiceMessage
                 src="/vocals/03.m4a"
-                title="Message vocal — Résultats"
+                title="Голосовое сообщение — Tsarag"
               />
             </div>
           </div>

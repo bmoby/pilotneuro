@@ -284,14 +284,13 @@ export default function VoiceMessage({
 
   return (
     <div className={styles.shell} role="group" aria-label={title}>
-      <div className={styles.header}>
-        <div className={styles.label}>
-          <span className={styles.title}>{title}</span>
-        </div>
-        {hasError ? (
+      <span className={styles.title}>{title}</span>
+
+      {hasError && (
+        <div className={styles.header}>
           <div className={styles.note}>Lecture impossible</div>
-        ) : null}
-      </div>
+        </div>
+      )}
 
       <div className={styles.player}>
         <button
@@ -365,6 +364,7 @@ export default function VoiceMessage({
             );
           })}
         </div>
+
       </div>
     </div>
   );

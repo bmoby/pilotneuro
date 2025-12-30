@@ -50,9 +50,7 @@ export default function StudentVoicesSection() {
                 <div className={styles.grid}>
                     {voices.map((voice) => (
                         <article key={voice.name} className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <span className={styles.name}>{voice.name}</span>
-                            </div>
+
                             <VoiceMessage src={voice.src} title={`Голосовое сообщение — ${voice.name}`} />
                         </article>
                     ))}

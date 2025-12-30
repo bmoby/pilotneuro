@@ -33,7 +33,7 @@ export default function HeroSection() {
             className={styles.voiceArea}
             aria-label="Пример голосового сообщения"
           >
-            <VoiceMessage src="/vocals/01.m4a" title="Голосовое сообщение — Муса" />
+            <VoiceMessage src="/vocals/01.m4a" title="Голосовое сообщение — Tsarag" />
           </div>
 
           {/* DESCRIPTION DU COURS */}
