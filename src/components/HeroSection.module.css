@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  padding: clamp(64px, 9vw, 110px) 0 clamp(40px, 6vw, 80px);
+  padding: clamp(64px, 9vw, 110px) 0 clamp(60px, 8vw, 100px);
 }
 
 .wrap {
