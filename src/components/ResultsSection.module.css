@@ -1,6 +1,5 @@
 .section {
-  padding: clamp(60px, 8vw, 100px) 0 clamp(60px, 8vw, 100px);
-  background: var(--bg);
+  padding: clamp(30px, 5vw, 60px) 0 clamp(30px, 5vw, 60px);
 }
 
 .wrap {
@@ -218,10 +217,7 @@
   font-size: 16px;
 }
 
-.ctaBtn:hover {
-  transform: scale(1.03);
-  box-shadow: none;
-}
+
 
 .ctaBtn:focus-visible {
   outline: 2px solid rgba(15, 17, 21, 0.25);

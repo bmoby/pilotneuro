@@ -91,7 +91,7 @@ export default function FaqSection() {
 
                 {/* Кнопка связи */}
                 <div className={styles.cta}>
-                    <a className={styles.btnGhost} href="#contact">
+                    <a className={styles.btnGhost} href="https://t.me/tsarag_ch_group" target="_blank" rel="noopener noreferrer">
                         Связаться, если есть вопросы
                     </a>
                 </div>

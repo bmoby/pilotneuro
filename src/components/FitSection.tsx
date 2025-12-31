@@ -13,27 +13,39 @@ const fitYes: FitCardData[] = [
   {
     title: "ДА, ЕСЛИ",
     detail: "Готовы включиться всерьёз.",
+    imageSrc: "/lines/first/01.png",
+    bottomOffset: -40,
   },
   {
     title: "Хотите в IT",
     detail: "Вам интересно, и вы любите компьютер",
+    imageSrc: "/lines/first/02.png",
+    bottomOffset: -40,
   },
   {
     title: "Хотите работать на себя",
     detail: "Общаетесь, слушаете, адаптируетесь к клиентам",
+    imageSrc: "/lines/first/03.png",
+    bottomOffset: -10,
   },
   {
     title: "Готовы адаптироваться",
     detail:
       "Постоянно учитесь и меняете привычки",
+    imageSrc: "/lines/first/04.png",
+    bottomOffset: -10,
   },
   {
     title: "Вы доступны",
     detail: "10–14 часов в неделю, 3 месяца",
+    imageSrc: "/lines/first/05.png",
+    bottomOffset: -20,
   },
   {
     title: "Нравится создавать",
     detail: "Смешиваете идеи, создаёте с ИИ",
+    imageSrc: "/lines/first/06.png",
+    bottomOffset: -10,
   },
 ];
 
@@ -42,25 +54,35 @@ const fitNo: FitCardData[] = [
   {
     title: "НЕТ, ЕСЛИ",
     detail: "Нет времени или «просто посмотреть»",
+    imageSrc: "/lines/second/01.png",
+    bottomOffset: -30,
   },
   {
     title: "Нет времени",
     detail:
       "Обучение интенсивное, требует работы",
+    imageSrc: "/lines/second/02.png",
+    bottomOffset: 0,
   },
   {
     title: "Хотите диплом",
     detail:
       "Это не для работы в компании",
+    imageSrc: "/lines/second/03.png",
+    bottomOffset: -35,
   },
   {
     title: "Не общительны",
     detail: "Не любите команду и общение",
+    imageSrc: "/lines/second/04.png",
+    bottomOffset: 0,
   },
   {
     title: "Не терпеливы",
     detail:
       "Не готовы тестировать и переделывать",
+    imageSrc: "/lines/second/05.png",
+    bottomOffset: 0,
   },
 ];
 
@@ -73,15 +95,14 @@ export default function FitSection() {
           <div className={styles.voiceArea}>
             <VoiceMessage src="/vocals/02.m4a" title="Голосовое сообщение — Tsarag" />
           </div>
-          <p className={styles.lede}>
-            Внимательно прочитайте, если не хотите потерять деньги и время
-          </p>
-
         </div>
 
         {/* Здесь две ленты карточек и ниже голосовое сообщение. */}
         <div className={styles.stack}>
           <div className={`${styles.fitBlock} ${styles.fitYes}`}>
+            <p className={styles.rowTitle}>
+              Для обучения нужно соответствовать всем пунктам.
+            </p>
             <div
               className={styles.carousel}
               role="list"
@@ -94,6 +115,9 @@ export default function FitSection() {
           </div>
 
           <div className={`${styles.fitBlock} ${styles.fitNo}`}>
+            <p className={styles.rowTitle}>
+              Читайте внимательно: иначе потеряете время и деньги.
+            </p>
             <div
               className={styles.carousel}
               role="list"

@@ -61,6 +61,10 @@ function createAnimator(video: HTMLVideoElement) {
     state = "activating";
 
     const target = video.duration;
+    if (!Number.isFinite(target)) {
+      state = "idle";
+      return;
+    }
     const startPoint = Math.min(video.currentTime || 0, target);
     const durationMs = 500;
     const startTime = performance.now();
