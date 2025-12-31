@@ -71,9 +71,7 @@
     transition: opacity 0.2s;
 }
 
-.checkboxLabel:hover {
-    opacity: 0.8;
-}
+
 
 /* Custom Checkbox */
 /* Custom Checkbox */
@@ -152,10 +150,7 @@
     transform: scale(0.98);
 }
 
-.submitButton:not(:disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+
 
 .submitButton:not(:disabled):active {
     transform: scale(0.98);

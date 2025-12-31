@@ -70,9 +70,7 @@
   height: 14px;
 }
 
-.control:hover {
-  transform: scale(1.03);
-}
+
 
 .control:disabled {
   opacity: 0.35;

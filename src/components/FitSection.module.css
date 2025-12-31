@@ -43,7 +43,7 @@
 
 .stack {
   display: grid;
-  gap: 32px;
+  gap: 60px;
 }
 
 .fitBlock {
@@ -106,12 +106,20 @@
 
 @media (min-width: 960px) {
   .stack {
-    gap: 36px;
+    gap: 80px;
   }
 }
 
 @media (min-width: 960px) {
   .lead {
     justify-items: center;
+  }
+
+  .rowTitle {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 30px;
+    padding-bottom: 10px;
   }
 }

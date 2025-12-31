@@ -217,10 +217,7 @@
   font-size: 16px;
 }
 
-.ctaBtn:hover {
-  transform: scale(1.03);
-  box-shadow: none;
-}
+
 
 .ctaBtn:focus-visible {
   outline: 2px solid rgba(15, 17, 21, 0.25);

@@ -57,9 +57,7 @@
     transition: all 0.2s ease;
 }
 
-.radioLabel:hover {
-    border-color: var(--muted);
-}
+
 
 .radioLabel.selected {
     border-color: var(--accent);
@@ -197,10 +195,7 @@
     letter-spacing: 1px;
 }
 
-.submitButton:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+
 
 .submitButton:active:not(:disabled) {
     transform: translateY(0);

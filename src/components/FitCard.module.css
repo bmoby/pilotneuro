@@ -27,10 +27,7 @@
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card:hover {
-  transform: none;
-  box-shadow: 0 6px 16px rgba(15, 17, 34, 0.06);
-}
+
 
 .contentWrapper {
   z-index: 2;
@@ -62,7 +59,7 @@
 }
 
 .cardTitle {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.25;
   letter-spacing: -0.01em;
   font-weight: 800;
@@ -73,7 +70,7 @@
 .cardDetail {
   margin: 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 1.5;
   max-width: 100%;

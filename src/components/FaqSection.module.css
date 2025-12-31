@@ -102,7 +102,3 @@
     text-decoration: none;
     transition: transform 0.2s ease;
 }
-
-.btnGhost:hover {
-    transform: scale(1.02);
-}
