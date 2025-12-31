@@ -181,6 +181,7 @@ export default function HeroVideo() {
                 playsInline
                 autoPlay
                 aria-label="Courte vidéo d'introduction sur le casque Formula"
+                poster="/hero-poster.jpg"
             >
                 {/* Сначала отдаём мобильные версии, чтобы телефон тратил меньше трафика. */}
                 <source
