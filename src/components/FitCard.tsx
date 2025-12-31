@@ -9,8 +9,10 @@ export type FitCardData = {
   title: string;
   detail?: string;
   icon?: string;
+  imageSrc?: string; // Image décorative en bas
+  bottomOffset?: number; // Décalage manuel en pixels
   ariaLabel?: string;
-  id?: string; // Utile pour identifier la carte spécifique dans le parent
+  id?: string;
 };
 
 type FitCardProps = FitCardData;
@@ -20,19 +22,41 @@ export default function FitCard({
   title,
   detail,
   icon,
+  imageSrc,
+  bottomOffset = 0,
   ariaLabel,
 }: FitCardProps) {
   return (
     <article className={styles.card} role="listitem" aria-label={ariaLabel}>
-      {icon ? (
-        <div className={styles.iconBox}>
-          <Image src={icon} alt="" width={150} height={150} priority={false} />
+      {/* Контент карточки (текст + иконка если есть) */}
+      <div className={styles.contentWrapper}>
+        {icon ? (
+          <div className={styles.iconBox}>
+            <Image src={icon} alt="" width={150} height={150} priority={false} />
+          </div>
+        ) : null}
+        <div className={styles.cardText}>
+          <p className={styles.cardTitle}>{title}</p>
+          {detail ? <p className={styles.cardDetail}>{detail}</p> : null}
         </div>
-      ) : null}
-      <div className={styles.cardText}>
-        <p className={styles.cardTitle}>{title}</p>
-        {detail ? <p className={styles.cardDetail}>{detail}</p> : null}
       </div>
+
+      {/* Декоративное изображение внизу */}
+      {imageSrc && (
+        <div
+          className={styles.imageContainer}
+          style={{ bottom: `${bottomOffset}px` } as React.CSSProperties}
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            width={0}
+            height={0}
+            sizes="100vw"
+            className={styles.cardImage}
+          />
+        </div>
+      )}
     </article>
   );
 }
