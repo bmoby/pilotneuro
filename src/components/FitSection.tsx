@@ -95,15 +95,14 @@ export default function FitSection() {
           <div className={styles.voiceArea}>
             <VoiceMessage src="/vocals/02.m4a" title="Голосовое сообщение — Tsarag" />
           </div>
-          <p className={styles.lede}>
-            Внимательно прочитайте, если не хотите потерять деньги и время
-          </p>
-
         </div>
 
         {/* Здесь две ленты карточек и ниже голосовое сообщение. */}
         <div className={styles.stack}>
           <div className={`${styles.fitBlock} ${styles.fitYes}`}>
+            <p className={styles.rowTitle}>
+              Для обучения нужно соответствовать всем пунктам.
+            </p>
             <div
               className={styles.carousel}
               role="list"
@@ -116,6 +115,9 @@ export default function FitSection() {
           </div>
 
           <div className={`${styles.fitBlock} ${styles.fitNo}`}>
+            <p className={styles.rowTitle}>
+              Читайте внимательно: иначе потеряете время и деньги.
+            </p>
             <div
               className={styles.carousel}
               role="list"
