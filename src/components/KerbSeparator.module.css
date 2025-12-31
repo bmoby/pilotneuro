@@ -14,7 +14,7 @@
 .line {
     height: 1px;
     width: 120px;
-    background: linear-gradient(90deg, transparent, var(--muted, #888));
+    background: linear-gradient(90deg, transparent, #1C5926);
     border-radius: 1px;
 }
 
