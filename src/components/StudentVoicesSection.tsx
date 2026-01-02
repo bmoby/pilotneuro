@@ -34,6 +34,11 @@ const voices = [
         src: "/avis/SHamil2.m4a", // Placeholder mapping
         duration: "00:57",
     },
+    {
+        name: "Axmad",
+        src: "/avis/Axmad.m4a",
+        duration: "00:00", // Update duration based on actual file later if needed
+    },
 ];
 
 export default function StudentVoicesSection() {

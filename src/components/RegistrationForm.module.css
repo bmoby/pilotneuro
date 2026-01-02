@@ -214,3 +214,43 @@
     margin-top: 5px;
     margin-left: 5px;
 }
+
+/* NEW QUESTION STYLES */
+.questionBlock {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.questionText {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    margin: 0;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.detailsGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subQuestions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 5px;
+    padding-left: 5px;
+    border-left: 2px solid var(--line);
+    padding-left: 15px;
+}
