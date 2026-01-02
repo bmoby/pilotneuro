@@ -7,6 +7,7 @@
 import { useState, FormEvent } from "react";
 import styles from "./RegistrationForm.module.css";
 import { supabase } from "../lib/supabaseClient";
+import { sendGAEvent } from "@next/third-parties/google";
 
 interface FormData {
     firstname: string;
@@ -82,15 +83,42 @@ export default function RegistrationForm() {
         hasAccess;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+
+        // Track radio/checkbox interactions immediately (engagement)
+        if (type === "radio" || type === "checkbox") {
+            sendGAEvent('event', 'form_interaction', {
+                field: name,
+                type: type,
+                value: value,
+                checked: checked
+            });
+        }
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        if (value.trim() !== "") {
+            sendGAEvent('event', 'form_field_complete', {
+                field: name
+            });
+        }
     };
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        if (!isFormValid) return;
+        if (!isFormValid) {
+            sendGAEvent('event', 'form_validation_error', {
+                missing_fields: "Check required fields"
+            });
+            return;
+        }
 
         setLoading(true);
+        sendGAEvent('event', 'form_submit_attempt', {
+            payment_plan: formData.paymentplan
+        });
 
         try {
             const { data, error } = await supabase
@@ -122,6 +150,11 @@ export default function RegistrationForm() {
                 throw error;
             }
 
+            // Track success
+            sendGAEvent('event', 'form_submit_success', {
+                payment_plan: formData.paymentplan
+            });
+
             // Redirect to success page
             window.location.href = "/inscription/success";
 
@@ -145,6 +178,7 @@ export default function RegistrationForm() {
                     placeholder="Фамилия (Nom)"
                     value={formData.lastname}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                     required
                 />
@@ -154,6 +188,7 @@ export default function RegistrationForm() {
                     placeholder="Имя (Prénom)"
                     value={formData.firstname}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                     required
                 />
@@ -168,6 +203,7 @@ export default function RegistrationForm() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                     required
                 />
@@ -177,6 +213,7 @@ export default function RegistrationForm() {
                     placeholder="Номер телефона"
                     value={formData.phone}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                     required
                 />
@@ -186,6 +223,7 @@ export default function RegistrationForm() {
                     placeholder="WhatsApp (если отличается)"
                     value={formData.whatsapp}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                 />
             </div>
@@ -199,6 +237,7 @@ export default function RegistrationForm() {
                     placeholder="Улица, дом, квартира"
                     value={formData.address}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={styles.input}
                     required
                 />
@@ -209,6 +248,7 @@ export default function RegistrationForm() {
                         placeholder="Город"
                         value={formData.city}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         className={styles.input}
                         required
                     />
@@ -218,6 +258,7 @@ export default function RegistrationForm() {
                         placeholder="Страна"
                         value={formData.country}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         className={styles.input}
                         required
                     />
@@ -332,6 +373,7 @@ export default function RegistrationForm() {
                                 placeholder="Ваша профессия"
                                 value={formData.profession}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 className={styles.input}
                                 required
                             />
@@ -341,6 +383,7 @@ export default function RegistrationForm() {
                                 placeholder="Часов работы в неделю"
                                 value={formData.work_hours}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 className={styles.input}
                                 required
                             />
@@ -383,6 +426,7 @@ export default function RegistrationForm() {
                                 placeholder="На кого учитесь?"
                                 value={formData.study_field}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 className={styles.input}
                                 required
                             />
