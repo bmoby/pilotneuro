@@ -35,16 +35,6 @@
     height: 4px;
     border-radius: 1px;
     transform: skewX(-30deg);
-}
-
-.red {
-    background-color: #cc0000;
-    box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
-    /* Tiny glow */
-}
-
-.yellow {
-    background-color: #ffcc00;
-    opacity: 0.9;
-    box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.15);
+    /* Light gray visible on light bg */
 }
